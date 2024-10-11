@@ -26,3 +26,7 @@ body {
 .editable:hover {
   background-color: #f0f4f8;
 }
+
+.MuiButton-root {
+  transition: 0.15s;
+}
