@@ -16,7 +16,7 @@ import React, { useEffect, useState } from "react";
 import { Requirement } from "@/types/requirement";
 import { saveRequirement } from "@/lib/actions-requirement";
 import { generateRequirementId } from "@/lib/mapping";
-import { useUserContext } from "../UserProvider";
+import { useUserContext } from "../../context/userContext";
 
 type UseTemplateModalProps = {
 	open: boolean;

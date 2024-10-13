@@ -1,5 +1,5 @@
 "use client";
-import { useUserContext } from "@/components/UserProvider";
+import { useUserContext } from "@/context/userContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Card, Stack, Typography, Button, Box } from "@mui/joy";
 import React, { useState } from "react";

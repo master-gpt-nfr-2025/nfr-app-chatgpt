@@ -7,7 +7,7 @@ import { Button, FormControl, IconButton, Input, Snackbar, Stack, Tooltip, Typog
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { moveToTrash, restoreFromTrash, updateRequirement as updateRequirementDB } from "@/lib/actions-requirement";
-import { useUserContext } from "../UserProvider";
+import { useUserContext } from "../../context/userContext";
 
 type RequirementCardProps = {
 	initialRequirement: Requirement;

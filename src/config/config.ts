@@ -4,4 +4,9 @@ const CONFIG = {
 	},
 };
 
-export { CONFIG };
+const GOOGLE = {
+	clientId: process.env.GOOGLE_CLIENT_ID,
+	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+};
+
+export { CONFIG, GOOGLE };

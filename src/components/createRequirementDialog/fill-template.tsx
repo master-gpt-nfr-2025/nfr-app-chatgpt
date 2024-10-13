@@ -2,7 +2,7 @@
 import { Requirement } from "@/types/requirement";
 import { Button, Chip, FormControl, FormHelperText, FormLabel, Input, Snackbar, Stack, Typography } from "@mui/joy";
 import React, { useState } from "react";
-import { useUserContext } from "../UserProvider";
+import { useUserContext } from "../../context/userContext";
 import { saveRequirement } from "@/lib/actions-requirement";
 import ParsedRequirementText from "../ui/parsed-requirement-text";
 import RequirementFields from "../ui/requirement-fields";

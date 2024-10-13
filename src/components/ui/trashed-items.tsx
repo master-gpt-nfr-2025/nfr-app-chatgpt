@@ -1,5 +1,5 @@
 "use client";
-import { TrashedItemType } from "@/app/trash/page";
+import { TrashedItemType } from "@/app/(secured)/trash/page";
 import { removeRequirement, restoreFromTrash } from "@/lib/actions-requirement";
 import { Icon } from "@iconify/react";
 import { Button, Stack, Table, Typography, IconButton, Snackbar, Box } from "@mui/joy";

@@ -4,7 +4,7 @@
 import React, { useState } from "react";
 import { Modal, Input, Button, DialogContent, DialogTitle, FormControl, ModalDialog } from "@mui/joy";
 import { createUser } from "@/lib/actions-user";
-import { useUserContext } from "../UserProvider";
+import { useUserContext } from "../../context/userContext";
 
 interface NamePopupProps {
 	onComplete: () => void;

@@ -1,7 +1,7 @@
 // components/UserHandler.tsx
 "use client";
 import React, { useEffect, useState } from "react";
-import { UserProvider } from "./UserProvider";
+import { UserProvider } from "../context/userContext";
 import { NamePopup } from "./ui/name-popup";
 import Cookies from "js-cookie";
 

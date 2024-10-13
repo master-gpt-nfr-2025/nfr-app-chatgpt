@@ -1,4 +1,5 @@
 import { Requirement, RequirementElement } from "@/types/requirement";
+import { genSaltSync, hashSync } from "bcrypt-ts";
 
 const parseRequirement = (requirement: Requirement): string => {
 	const parseContent = (content: RequirementElement[]): string => {
@@ -60,4 +61,11 @@ function getInitials(input: string): string {
 	return (words[0][0] + words[1][0]).toUpperCase();
 }
 
-export { parseRequirement, getInitials };
+function saltAndHashPassword(password: string): string {
+	const salt = genSaltSync(10);
+	const hash = hashSync(password, salt);
+
+	return `${salt}:${hash}`;
+}
+
+export { parseRequirement, getInitials, saltAndHashPassword };

@@ -14,7 +14,7 @@ import {
 import { Box, Input, Select, Option, Button, List, ListItem, ListItemButton, Chip, ChipDelete, Stack } from "@mui/joy";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getMatchingRequirements } from "@/lib/actions-requirement";
-import { useUserContext } from "../UserProvider";
+import { useUserContext } from "../../context/userContext";
 import { AddRounded, CloseRounded } from "@mui/icons-material";
 import ContentEditable from "react-contenteditable";
 import sanitizeHtml from "sanitize-html";
