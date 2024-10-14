@@ -1,5 +1,5 @@
 "use server";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 
 type LoginFormData = {
 	action: "credentials" | "google";
@@ -12,6 +12,8 @@ export async function doSocialLogin(formData: LoginFormData) {
 	if (action === "google") {
 		await signIn(action, { redirectTo: "/" });
 	}
-	console.log("doSocialLogin", action);
-	// Handle the social login logic here
+}
+
+export async function doLogout() {
+	await signOut({ redirectTo: "/" });
 }

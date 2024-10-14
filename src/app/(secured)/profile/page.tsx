@@ -1,18 +1,11 @@
-"use client";
-import { useUserContext } from "@/context/userContext";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { Card, Stack, Typography, Button, Box } from "@mui/joy";
-import React, { useState } from "react";
+import { auth } from "@/auth";
+import LogoutButton from "@/components/ui/logout-button";
+import { Card, Stack, Typography, Box } from "@mui/joy";
+import React from "react";
 
-const Profile = () => {
-	const { user, logout } = useUserContext();
-	const [loading, setLoading] = useState(false);
-	const handleLogout = () => {
-		setLoading(true);
-		logout();
-		setLoading(false);
-		window.location.reload();
-	};
+const Profile = async () => {
+	const session = await auth();
+
 	return (
 		<Stack gap={2}>
 			<Typography level="h3">Profil</Typography>
@@ -21,22 +14,14 @@ const Profile = () => {
 				<Card variant="plain">
 					<Stack gap={0}>
 						<Typography level="title-md">Nazwa użytkownika</Typography>
-						<Typography level="h4">{user?.name}</Typography>
+						<Typography level="h4">{session?.user?.name}</Typography>
 					</Stack>
 
 					<Stack gap={0}>
-						<Typography level="title-md">ID</Typography>
-						<Typography level="h4">{user?.id}</Typography>
+						<Typography level="title-md">Email</Typography>
+						<Typography level="h4">{session?.user?.email}</Typography>
 					</Stack>
-					<Button
-						color="primary"
-						onClick={handleLogout}
-						sx={{ maxWidth: 150 }}
-						endDecorator={<Icon icon="ph:sign-out-bold" />}
-						loading={loading}
-					>
-						Wyloguj
-					</Button>
+					<LogoutButton />
 				</Card>
 			</Box>
 		</Stack>

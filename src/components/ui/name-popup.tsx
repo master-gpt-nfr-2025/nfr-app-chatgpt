@@ -24,8 +24,8 @@ export function NamePopup({ onComplete }: NamePopupProps) {
 		setLoading(true);
 		e.preventDefault();
 		if (name) {
-			const user = await createUser(name);
-			setUserStorage(user.id, user.name);
+			const user = await createUser(name, "test@test.example", name);
+			setUserStorage(user?.id, user?.username);
 			setOpen(false);
 			onComplete();
 		}

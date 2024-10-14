@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { doSocialLogin } from "@/actions/auth";
-import { CONFIG, GOOGLE } from "@/config/config";
 
 const loginSchema = z.object({
 	email: z.string().email("Niepoprawny adres email").min(3, "Email powinien mieć co najmniej 3 znaki"),
