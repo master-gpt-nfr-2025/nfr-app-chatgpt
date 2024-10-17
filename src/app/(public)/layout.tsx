@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
-import { Box, Typography } from "@mui/joy";
+import { Box, Snackbar, Typography } from "@mui/joy";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -70,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 							backgroundImage: "url(/login.jpg)",
 						}}
 					/>
+					{/* <Snackbar ></Snackbar> */}
 				</UserHandler>
 			</body>
 		</html>

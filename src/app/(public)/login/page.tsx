@@ -1,11 +1,12 @@
 "use client";
 import { Box, Button, Checkbox, Divider, FormControl, FormHelperText, FormLabel, Input, Link, Stack, Typography } from "@mui/joy";
-import React from "react";
+import React, { useState } from "react";
 import GoogleIcon from "../google-icon";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { doSocialLogin } from "@/actions/auth";
+import { doCredentialsLogin, doSocialLogin } from "@/actions/auth";
+import { redirect, useRouter } from "next/navigation";
 
 const loginSchema = z.object({
 	email: z.string().email("Niepoprawny adres email").min(3, "Email powinien mieć co najmniej 3 znaki"),
@@ -13,7 +14,7 @@ const loginSchema = z.object({
 	persistent: z.boolean(),
 });
 
-type LoginData = z.infer<typeof loginSchema>;
+export type LoginData = z.infer<typeof loginSchema>;
 
 const Login = () => {
 	const {
@@ -28,8 +29,27 @@ const Login = () => {
 		},
 	});
 
-	const onSubmit = (data: LoginData) => {
-		console.log("Form submitted:", data);
+	const router = useRouter();
+
+	const [error, setError] = useState<string | null>(null);
+	const [loading, setLoading] = useState<boolean>(false);
+
+	const onSubmit = async (data: LoginData) => {
+		try {
+			setLoading(true);
+			const response = await doCredentialsLogin(data);
+			if (response.error) {
+				setError(response.error as string);
+				return;
+			} else {
+				router.replace("/");
+			}
+		} catch (error) {
+			console.error(error);
+			setError("Błąd logowania");
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -69,7 +89,6 @@ const Login = () => {
 					</Typography>
 				</Stack>
 			</Stack>
-
 			<Stack sx={{ gap: 4, mt: 1 }}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<FormControl required error>
@@ -82,6 +101,11 @@ const Login = () => {
 						<Input type="password" {...register("password")} error={!!errors.password} />
 						<FormHelperText>{errors.password?.message}</FormHelperText>
 					</FormControl>
+					{!!error && (
+						<Typography level="body-sm" textColor={"danger.500"}>
+							{error}
+						</Typography>
+					)}
 					<Stack sx={{ gap: 4, mt: 2 }}>
 						<Box
 							sx={{
@@ -95,13 +119,13 @@ const Login = () => {
 								Nie pamiętasz hasła?
 							</Link>
 						</Box>
-						<Button type="submit" fullWidth name="action" value="credentials">
+						<Button type="submit" fullWidth name="action" value="credentials" loading={loading}>
 							Zaloguj się
 						</Button>
 					</Stack>
 				</form>
 				<Divider>lub</Divider>
-				<Button onClick={() => doSocialLogin({ action: "google" })} variant="soft" color="neutral" fullWidth startDecorator={<GoogleIcon />}>
+				<Button onClick={() => doSocialLogin("google")} variant="soft" color="neutral" fullWidth startDecorator={<GoogleIcon />}>
 					Kontynuuj z Google
 				</Button>
 			</Stack>

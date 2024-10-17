@@ -3,7 +3,10 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 import { GOOGLE } from "@/config/config";
-import { createUser } from "./lib/actions-user";
+
+import User from "@/models/user.model";
+import { compare } from "bcrypt-ts";
+import { register } from "./actions/register";
 
 export const {
 	handlers: { GET, POST },
@@ -23,12 +26,46 @@ export const {
 				},
 			},
 		}),
+		CredentialsProvider({
+			name: "Credentials",
+			id: "credentials",
+			credentials: {
+				email: { label: "Email", type: "text" },
+				password: { label: "Password", type: "password" },
+			},
+			async authorize(credentials) {
+				if (
+					!credentials?.email ||
+					!credentials?.password ||
+					typeof credentials.email !== "string" ||
+					typeof credentials.password !== "string"
+				) {
+					throw new Error("Nieprawidłowe dane uwierzytelniające");
+				}
+
+				const user = await User.findOne({ email: credentials.email }).select("+password");
+
+				if (!user) {
+					throw new Error("Ups! Niepoprawny email lub hasło");
+				}
+				const isMatch = await compare(credentials.password, user.password);
+
+				if (!isMatch) {
+					throw new Error("Ups! Niepoprawny email lub hasło");
+				}
+
+				return { email: user.email, name: user.name, role: user.role };
+			},
+		}),
 	],
+	session: {
+		strategy: "jwt",
+	},
 	callbacks: {
 		async signIn({ user, account }) {
 			if (account?.provider === "google") {
 				try {
-					await createUser(user.name!, user.email!, user.name!);
+					await register(user.email!, user.name!);
 				} catch (error) {
 					console.error(error);
 				}
