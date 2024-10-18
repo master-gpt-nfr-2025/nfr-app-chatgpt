@@ -1,9 +1,9 @@
-import { UserHandler } from "@/components/UserHandler";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
 import { Box, Snackbar, Typography } from "@mui/joy";
+import { SessionHandler } from "../../context/session-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +15,8 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
-				<UserHandler>
+			<SessionHandler>
+				<body className={inter.className}>
 					<Box
 						sx={{
 							width: { xs: "100%", md: "50vw" },
@@ -70,9 +70,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 							backgroundImage: "url(/login.jpg)",
 						}}
 					/>
-					{/* <Snackbar ></Snackbar> */}
-				</UserHandler>
-			</body>
+				</body>
+			</SessionHandler>
 		</html>
 	);
 }

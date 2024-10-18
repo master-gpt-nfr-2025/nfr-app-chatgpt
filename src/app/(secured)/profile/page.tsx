@@ -21,6 +21,14 @@ const Profile = async () => {
 						<Typography level="title-md">Email</Typography>
 						<Typography level="h4">{session?.user?.email}</Typography>
 					</Stack>
+					<Stack gap={0}>
+						<Typography level="title-md">ID</Typography>
+						<Typography level="h4">{session?.user?.id}</Typography>
+					</Stack>
+					<Stack gap={0}>
+						<Typography level="title-md">Rola</Typography>
+						<Typography level="h4">{session?.user?.role}</Typography>
+					</Stack>
 					<LogoutButton />
 				</Card>
 			</Box>

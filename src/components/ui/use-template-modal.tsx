@@ -16,7 +16,7 @@ import React, { useEffect, useState } from "react";
 import { Requirement } from "@/types/requirement";
 import { saveRequirement } from "@/lib/actions-requirement";
 import { generateRequirementId } from "@/lib/mapping";
-import { useUserContext } from "../../context/userContext";
+import { useSession } from "next-auth/react";
 
 type UseTemplateModalProps = {
 	open: boolean;
@@ -34,7 +34,8 @@ const UseTemplateModal = ({ open, setOpen, requirement, setReqId, setSnackbar }:
 	const [error, setError] = useState<boolean>(false);
 	const [errorText, setErrorText] = useState<string>("");
 
-	const { user } = useUserContext();
+	const session = useSession();
+	const user = session.data?.user;
 
 	const handleCloseModal = (e: any, reason: string) => {
 		if (reason === "backdropClick") {
@@ -59,7 +60,7 @@ const UseTemplateModal = ({ open, setOpen, requirement, setReqId, setSnackbar }:
 		requirement.name = name;
 		requirement.createdAt = new Date();
 		requirement.createdThrough = "catalogue";
-		if (user) {
+		if (user?.id) {
 			requirement.createdBy = user.id;
 		}
 

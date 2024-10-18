@@ -7,7 +7,7 @@ import { Button, FormControl, IconButton, Input, Snackbar, Stack, Tooltip, Typog
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { moveToTrash, restoreFromTrash, updateRequirement as updateRequirementDB } from "@/lib/actions-requirement";
-import { useUserContext } from "../../context/userContext";
+import { useSession } from "next-auth/react";
 
 type RequirementCardProps = {
 	initialRequirement: Requirement;
@@ -23,7 +23,8 @@ type SnackbarState = {
 
 const RequirementCard = ({ initialRequirement }: RequirementCardProps) => {
 	const { requirement, parsedText, updateRequirement, resetRequirement } = useRequirementData(initialRequirement);
-	const { user } = useUserContext();
+	const session = useSession();
+	const user = session.data?.user;
 
 	const [edit, setEdit] = useState<boolean>(false);
 	const [editedName, setEditedName] = useState<string>(requirement.name);

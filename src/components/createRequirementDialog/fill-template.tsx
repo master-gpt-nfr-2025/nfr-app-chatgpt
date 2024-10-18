@@ -2,7 +2,6 @@
 import { Requirement } from "@/types/requirement";
 import { Button, Chip, FormControl, FormHelperText, FormLabel, Input, Snackbar, Stack, Typography } from "@mui/joy";
 import React, { useState } from "react";
-import { useUserContext } from "../../context/userContext";
 import { saveRequirement } from "@/lib/actions-requirement";
 import ParsedRequirementText from "../ui/parsed-requirement-text";
 import RequirementFields from "../ui/requirement-fields";
@@ -10,6 +9,7 @@ import { useRequirementData } from "@/hooks/useRequirementData";
 import DialogNavigationButtons from "../ui/dialog-navigation-buttons";
 import { useRouter } from "next/navigation";
 import { CheckRounded } from "@mui/icons-material";
+import { useSession } from "next-auth/react";
 
 type FillTemplateProps = {
 	initialRequirement: Requirement;
@@ -18,8 +18,9 @@ type FillTemplateProps = {
 
 const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps) => {
 	const { requirement, parsedText, updateRequirement } = useRequirementData(initialRequirement);
-	const { user } = useUserContext();
 	const router = useRouter();
+	const session = useSession();
+	const user = session.data?.user;
 
 	const [loading, setLoading] = useState<boolean>(false);
 	const [error, setError] = useState<boolean>(false);
@@ -46,8 +47,8 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 		requirement.name = name;
 		requirement.createdAt = new Date();
 		requirement.createdThrough = "creator";
-		if (user) {
-			requirement.createdBy = user.id;
+		if (user?.id) {
+			requirement.createdBy = user?.id;
 		}
 		try {
 			const createdRequirementID = await saveRequirement(requirement, user?.id);

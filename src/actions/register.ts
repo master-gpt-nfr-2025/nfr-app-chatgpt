@@ -17,13 +17,15 @@ export async function register(email: string, name: string, password?: string, r
 			if (!user) {
 				return { error: "Nie udało się zarejestrować użytkownika" };
 			}
-			return { success: true, user: { id: user._id, name: user.name, email: user.email, role: user.role } };
+			const savedUser = await user.save();
+			return { success: true, user: { id: savedUser._id, name: savedUser.name, email: savedUser.email, role: savedUser.role } };
 		} else {
 			const user = await User.create({ name, email, role });
 			if (!user) {
 				return { error: "Nie udało się zarejestrować użytkownika" };
 			}
-			return { success: true, user: { id: user._id, name: user.name, email: user.email, role: user.role } };
+			const savedUser = await user.save();
+			return { success: true, user: { id: savedUser._id, name: savedUser.name, email: savedUser.email, role: savedUser.role } };
 		}
 	} catch (error) {
 		console.warn("Failed to create user:", error);

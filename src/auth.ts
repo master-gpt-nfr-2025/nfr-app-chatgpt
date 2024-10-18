@@ -54,7 +54,7 @@ export const {
 					throw new Error("Ups! Niepoprawny email lub hasło");
 				}
 
-				return { email: user.email, name: user.name, role: user.role };
+				return { email: user.email, name: user.name, role: user.role, id: user._id.toString() };
 			},
 		}),
 	],
@@ -62,6 +62,16 @@ export const {
 		strategy: "jwt",
 	},
 	callbacks: {
+		async session({ session }) {
+			const sessionUser = await User.findOne({ email: session.user.email });
+			if (sessionUser) {
+				session.user.id = sessionUser._id.toString();
+				session.user.role = sessionUser.role;
+				return session;
+			} else {
+				throw new Error("Wystąpił błąd podczas logowania");
+			}
+		},
 		async signIn({ user, account }) {
 			if (account?.provider === "google") {
 				try {
@@ -72,5 +82,8 @@ export const {
 			}
 			return true;
 		},
+	},
+	pages: {
+		signIn: "/login",
 	},
 });

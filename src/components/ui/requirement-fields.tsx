@@ -14,11 +14,11 @@ import {
 import { Box, Input, Select, Option, Button, List, ListItem, ListItemButton, Chip, ChipDelete, Stack } from "@mui/joy";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getMatchingRequirements } from "@/lib/actions-requirement";
-import { useUserContext } from "../../context/userContext";
 import { AddRounded, CloseRounded } from "@mui/icons-material";
 import ContentEditable from "react-contenteditable";
 import sanitizeHtml from "sanitize-html";
 import { useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 type RequirementFieldsProps = {
 	requirement: Requirement;
@@ -322,7 +322,8 @@ const RequirementFields = React.memo(({ requirement, updateRequirement }: Requir
 		const [showSuggestions, setShowSuggestions] = useState(false);
 		const inputRef = useRef<HTMLInputElement>(null);
 		const debounceTimerRef = useRef<NodeJS.Timeout | null>(null);
-		const { user } = useUserContext();
+		const session = useSession();
+		const user = session.data?.user;
 
 		const isReferenceEmpty = !field.refElementID && !field.refElementCustomID && !field.refElementName;
 
