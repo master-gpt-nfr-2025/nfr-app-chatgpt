@@ -9,4 +9,8 @@ const GOOGLE = {
 	clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 };
 
-export { CONFIG, GOOGLE };
+const JWT = {
+	secret: process.env.AUTH_SECRET,
+};
+
+export { CONFIG, GOOGLE, JWT };

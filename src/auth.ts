@@ -62,15 +62,17 @@ export const {
 		strategy: "jwt",
 	},
 	callbacks: {
-		async session({ session }) {
-			const sessionUser = await User.findOne({ email: session.user.email });
-			if (sessionUser) {
-				session.user.id = sessionUser._id.toString();
-				session.user.role = sessionUser.role;
-				return session;
-			} else {
-				throw new Error("Wystąpił błąd podczas logowania");
+		async session({ session, token }) {
+			if (session.user) {
+				const sessionUser = await User.findOne({ email: session.user.email });
+				if (sessionUser) {
+					session.user.id = sessionUser._id.toString();
+					session.user.role = sessionUser.role;
+				} else {
+					throw new Error("User not found in database");
+				}
 			}
+			return session;
 		},
 		async signIn({ user, account }) {
 			if (account?.provider === "google") {
@@ -81,6 +83,10 @@ export const {
 				}
 			}
 			return true;
+		},
+		authorized: async ({ auth }) => {
+			// Logged in users are authenticated, otherwise redirect to login page
+			return !!auth;
 		},
 	},
 	pages: {
