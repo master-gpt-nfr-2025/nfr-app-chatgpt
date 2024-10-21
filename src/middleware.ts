@@ -2,7 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import { JWT } from "./config/config";
 
+const PUBLIC_FILE = /\.(.*)$/;
+
 export async function middleware(req: NextRequest) {
+	if (PUBLIC_FILE.test(req.nextUrl.pathname)) {
+		return NextResponse.next();
+	}
+
 	const token = await getToken({ req, secret: JWT.secret });
 
 	if (!token && req.nextUrl.pathname !== "/login" && req.nextUrl.pathname !== "/signup") {

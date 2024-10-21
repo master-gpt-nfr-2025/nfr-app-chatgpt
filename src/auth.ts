@@ -62,7 +62,7 @@ export const {
 		strategy: "jwt",
 	},
 	callbacks: {
-		async session({ session, token }) {
+		async session({ session }) {
 			if (session.user) {
 				const sessionUser = await User.findOne({ email: session.user.email });
 				if (sessionUser) {
