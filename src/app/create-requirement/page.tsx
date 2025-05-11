@@ -4,12 +4,17 @@ import SelectCategory from "@/components/createRequirementDialog/select-category
 import SelectTemplate from "@/components/createRequirementDialog/select-template";
 import { CreateRequirementForm } from "@/context/createRequirementDialogContext";
 import { fetchCategories } from "@/lib/actions-categories";
-import { fetchCustomTemplateForSubcategory, fetchTemplateDetails, fetchTemplatesForSubcategory } from "@/lib/actions-templates";
-import { Box } from "@mui/joy";
+import {
+	fetchCustomTemplateForSubcategory,
+	fetchTemplateDetails,
+	fetchTemplatesForSubcategory,
+} from "@/lib/actions-templates";
+import { Box, Button } from "@mui/joy";
 import React, { useEffect, useRef, useState } from "react";
 import { mapTemplate } from "@/lib/mapping";
 import { Requirement } from "@/types/requirement";
 import { useSearchParams } from "next/navigation";
+import AiValidationModal from "@/components/AiValidationModal";
 
 export type CategoryType = {
 	_id: string;
@@ -34,8 +39,11 @@ const CreateRequirement = () => {
 	const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
 	const [templateFields, setTemplateFields] = useState<Requirement | null>(null);
 
-	const searchParams = useSearchParams();
+	const [modalOpen, setModalOpen] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const [validationResult, setValidationResult] = useState("");
 
+	const searchParams = useSearchParams();
 	const customRequirement = searchParams.get("custom") === "true";
 
 	const handleSubcategorySelect = (subcategory: { subcategoryId: string; subcategoryName: string } | null) => {
@@ -80,6 +88,29 @@ const CreateRequirement = () => {
 		};
 		fetchTemplate();
 	}, [selectedTemplate]);
+
+	const handleValidate = async () => {
+		if (!templateFields) return;
+
+		setModalOpen(true);
+		setLoading(true);
+		setValidationResult("");
+
+		const response = await fetch("/api/validate", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				systemDescription:
+					"StudentDeal is a web-based platform designed for university students and partner enterprises...",
+				actors: ["Guest", "Student", "Entrepreneur", "Admin", "payments.com", "eUniversity system"],
+				requirement: `${templateFields.name ?? "Unnamed Requirement"}: ${templateFields.content ?? ""}`,
+			}),
+		});
+
+		const data = await response.json();
+		setValidationResult(data.analysis ?? data.error ?? "No result");
+		setLoading(false);
+	};
 
 	const steps = [
 		<SelectCategory
@@ -128,14 +159,36 @@ const CreateRequirement = () => {
 	];
 
 	return (
-		<Box
-			sx={{
-				minHeight: "calc(100vh - 88px - 11.5rem)",
-			}}
-		>
-			<CreateRequirementForm custom={customRequirement}>{customRequirement ? stepsCustom : steps}</CreateRequirementForm>
-		</Box>
-	);
-};
+  <Box
+    sx={{
+      minHeight: "calc(100vh - 88px - 11.5rem)",
+      display: "flex",
+      flexDirection: "column",
+      gap: 2,
+    }}
+  >
+    <CreateRequirementForm custom={customRequirement}>
+      {(customRequirement ? stepsCustom : steps).filter(Boolean) as React.ReactElement[]}
+    </CreateRequirementForm>
+
+    {templateFields && (
+      <Button
+        onClick={handleValidate}
+        color="primary"
+        sx={{ mt: 2, width: "fit-content" }}
+      >
+        Validate with AI
+      </Button>
+    )}
+
+    <AiValidationModal
+      open={modalOpen}
+      onClose={() => setModalOpen(false)}
+      loading={loading}
+      result={validationResult}
+    />
+  </Box>
+);
+}
 
 export default CreateRequirement;
