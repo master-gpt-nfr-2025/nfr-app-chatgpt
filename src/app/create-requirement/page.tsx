@@ -91,26 +91,43 @@ const CreateRequirement = () => {
 
 	const handleValidate = async () => {
 		if (!templateFields) return;
-
+	
+		console.log("🔍 Starting validation request...");
+		console.log("📦 Requirement name:", templateFields.name);
+		console.log("📄 Content:", templateFields.content);
+	
 		setModalOpen(true);
 		setLoading(true);
 		setValidationResult("");
-
-		const response = await fetch("/api/validate", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				systemDescription:
-					"StudentDeal is a web-based platform designed for university students and partner enterprises...",
-				actors: ["Guest", "Student", "Entrepreneur", "Admin", "payments.com", "eUniversity system"],
-				requirement: `${templateFields.name ?? "Unnamed Requirement"}: ${templateFields.content ?? ""}`,
-			}),
-		});
-
-		const data = await response.json();
-		setValidationResult(data.analysis ?? data.error ?? "No result");
+	
+		const payload = {
+			systemDescription:
+				"StudentDeal is a web-based platform designed for university students and partner enterprises...",
+			actors: ["Guest", "Student", "Entrepreneur", "Admin", "payments.com", "eUniversity system"],
+			requirement: `${templateFields.name ?? "Unnamed Requirement"}: ${JSON.stringify(templateFields.content)}`,
+		};
+	
+		console.log("📤 Payload to /api/validate:", payload);
+	
+		try {
+			const response = await fetch("/api/validate", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			});
+	
+			const data = await response.json();
+			console.log("✅ AI response received:", data);
+	
+			setValidationResult(data.analysis ?? data.error ?? "No result");
+		} catch (err) {
+			console.error("❌ Validation error:", err);
+			setValidationResult("Error occurred while validating.");
+		}
+	
 		setLoading(false);
 	};
+	
 
 	const steps = [
 		<SelectCategory
