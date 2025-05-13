@@ -122,7 +122,7 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
       systemDescription,
       actors,
       requirement: `${requirement.name ?? "Unnamed Requirement"}:
-${renderRequirementContent(requirement.content)}`,
+${parsedText}`,
     };
 
     console.log("📤 Validating with payload:", payload);
