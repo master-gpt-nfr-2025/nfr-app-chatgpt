@@ -96,34 +96,34 @@ const CreateRequirement = () => {
         gap: 2,
       }}
     >
-      <CreateRequirementForm custom={customRequirement}>
-        {[
-          <SelectCategory
-            key="select-category"
-            categories={categories}
-            selectedSubcategory={selectedSubcategory}
-            onSubcategorySelect={handleSubcategorySelect}
-            loading={loadingCategories}
-          />,
-          !customRequirement && (
-            <SelectTemplate
-              key="select-template"
-              templates={templates}
-              subcategoryName={selectedSubcategory?.subcategoryName}
-              selectedTemplate={selectedTemplate}
-              onTemplateSelect={handleTemplateSelect}
-              loading={loadingTemplates}
-            />
-          ),
-          templateFields && (
-            <FillTemplate
-              key="fill-template"
-              initialRequirement={templateFields}
-              subcategoryName={selectedSubcategory?.subcategoryName}
-            />
-          ),
-        ].filter(Boolean)}
-      </CreateRequirementForm>
+     <CreateRequirementForm custom={customRequirement}>
+  {[
+    <SelectCategory
+      key="select-category"
+      categories={categories}
+      selectedSubcategory={selectedSubcategory}
+      onSubcategorySelect={handleSubcategorySelect}
+      loading={loadingCategories}
+    />,
+    !customRequirement && (
+      <SelectTemplate
+        key="select-template"
+        templates={templates}
+        subcategoryName={selectedSubcategory?.subcategoryName}
+        selectedTemplate={selectedTemplate}
+        onTemplateSelect={handleTemplateSelect}
+        loading={loadingTemplates}
+      />
+    ),
+    templateFields && (
+      <FillTemplate
+        key="fill-template"
+        initialRequirement={templateFields}
+        subcategoryName={selectedSubcategory?.subcategoryName}
+      />
+    ),
+  ].filter(Boolean) as React.ReactElement[]}
+</CreateRequirementForm>
     </Box>
   );
 };
