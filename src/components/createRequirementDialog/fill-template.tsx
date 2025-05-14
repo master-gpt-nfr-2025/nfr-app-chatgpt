@@ -86,6 +86,7 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 	const [validationModalOpen, setValidationModalOpen] = useState(false);
 	const [validationResult, setValidationResult] = useState("");
 	const [copied, setCopied] = useState(false);
+	const [validationScore, setValidationScore] = useState(-1);
   
 	const [name, setName] = useState<string>(requirement.name);
   
@@ -136,6 +137,7 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 	  setValidationModalOpen(true);
 	  setValidationResult("");
 	  setLoading(true);
+	  setValidationScore(-1);
   
 	  const payload = {
 		systemDescription,
@@ -154,9 +156,11 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 		const data = await response.json();
 		console.log("✅ Validation response:", data);
 		setValidationResult(data.analysis ?? data.error ?? "No result");
+		setValidationScore(data.score ?? -1);
 	  } catch (err) {
 		console.error("❌ Validation error:", err);
 		setValidationResult("Validation failed.");
+		setValidationScore(0);
 	  }
   
 	  setLoading(false);
@@ -237,13 +241,15 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 		  </Button>
   
 		  <AiValidationModal
-			open={validationModalOpen}
-			onClose={() => setValidationModalOpen(false)}
-			loading={loading}
-			result={validationResult}
-			onCopy={handleCopy}
-  			copyButton={true}
-		  />
+  open={validationModalOpen}
+  onClose={() => setValidationModalOpen(false)}
+  loading={loading}
+  result={validationResult}
+  score={validationScore}
+  onCopy={handleCopy}
+  copyButton={true}
+/>
+
   
 		  <Snackbar
 			autoHideDuration={4000}
