@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
 
 		// === 🧠 Score Analysis ===
 		const metricSynonyms = {
-			Unambiguous: ["Unambiguous", "Ambiguity"],
+			Unambiguous: ["Unambiguous", "Ambiguity", " Unambiguous"],
 			Measurable: ["Measurable", "Measurability"],
 			"Individually Complete": ["Individually Complete", "Individual Completeness"]
 		};
@@ -62,8 +62,14 @@ export async function POST(req: NextRequest) {
 		let total = 0;
 		for (const [label, synonyms] of Object.entries(metricSynonyms)) {
 			const matched = synonyms.some((syn) =>
-				new RegExp(`[-–*]?\\s*\\*?\\*?${syn}\\*?\\*?\\s*[:：]?\\s*\\(?1\\)?`, "i").test(text)
-			);
+                new RegExp(
+                  `(^|\\n)[ \\t#>*-]*\\*{0,2}${syn
+                    .trim()
+                    .replace(/\s+/g, '[\\s_]+')}\\*{0,2}\\s*[:：]?\\s*\\(?\\s*1\\s*\\)?\\s*(\\n|$)`,
+                  "i"
+                ).test(text)
+              );              
+                                                   
 			console.log(`📊 ${label}:`, matched ? 1 : 0);
 			if (matched) total++;
 		}
@@ -77,18 +83,37 @@ export async function POST(req: NextRequest) {
 
 		console.log("✅ Score total:", total);
 		console.log("🏷️ Evaluation:", qualityLevels[total as keyof typeof qualityLevels]);
-
+        if (total !== 3) {
+            text = text
+                // Remove metric lines and descriptions
+                .replace(/^\s*(Unambiguous|Unambigious|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\s*[:：]?\s*\(?\s*1\s*\)?\s*$/gim, '')
+                .replace(/^\s*(\d+\.|[-–*])?\s*\*?\*?(Unambiguous|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\*?\*?\s*[:：]?\s*\(?1\)?\)?\s*.*(?:\r?\n(\s*[-–•*] .*|.*))*$/gim, "")
+        
+                // 🔥 Remove everything before "Advice" only
+                .replace(/^[\s\S]*?(?=\bAdvice:|\*\*?Advice)/i, '')
+        
+                // Collapse multiple blank lines
+                .replace(/\n{2,}/g, "\n")
+                .trim();
+        
+            // 💡 Make "Corrected requirement:" bold
+            text = text.replace(/(^|\n)(Corrected requirement:)/i, '$1**$2**');
+        }
+        
 		if (total === 3) {
 			text = text
-                .replace(/^\s*(AI Validation|Analysis|Requirement Assessment)\s*:?\s*$/gim, "")
-                .replace(/^\s*\*\*(AI Validation|Analysis|Requirement Assessment)\*\*:?$/gim, "")
-				// Remove numbered or bulleted metric lines
+                .replace(/^\s*(AI Validation|Analysis|Requirement Assessment|Advice)\s*[:：]?\s*$/gim, "")
+                .replace(/^\s*\*{1,2}\s*(AI Validation|Analysis|Requirement Assessment|Advice)\s*\*{1,2}\s*[:：]?\s*$/gim, "")
+                            // Remove numbered or bulleted metric lines
+                .replace(/^\s*(Unambiguous|Unambigious|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\s*[:：]?\s*\(?\s*1\s*\)?\s*$/gim, '')
 				.replace(/^\s*(\d+\.|[-–*])?\s*\*?\*?(Unambiguous|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\*?\*?\s*[:：]?\s*\(?1\)?\)?\s*.*(?:\r?\n(\s*[-–•*] .*|.*))*$/gim, "")
 				// Remove generic high quality lines
 				.replace(/^\s*The requirement is of high quality\.*\s*$/gim, "")
-				.replace(/^\s*\*\*Corrected requirement:?\*\*\s*The requirement is of high quality\.*\s*$/gim, "")
+				.replace(/^Corrected requirement:\s*.+$/gim, "")
 				.replace(/\n{2,}/g, "\n")
                 .replace(/^\*\*(High[- ]Quality|Conclusion|Requirement Assessment)\*\*:?$/gim, "")
+                .replace(/^Requirement:\s?.*$/gim, "")
+                .replace(/^The requirement is (clear|of high quality|clear, measurable, and complete)\.?$/gim, "")
 				.trim();
 		}
 
