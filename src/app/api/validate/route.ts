@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 		console.log("🧑 Actors:", actors);
 
 		const userMessage =
-			`I am the Requirements Engineer. I want to elicitate the quality and completeness of my non-functional requirement.\n` +
+			`I am a Requirements Engineer. I want to formulate a non-functional requirement. The non-functional requirement shall be of high quality.\n` +
 			`Requirement: ${requirement}\n\n` +
 			`System Description: ${systemDescription}\n` +
 			`Actors: ${actors.join(", ")}`;
