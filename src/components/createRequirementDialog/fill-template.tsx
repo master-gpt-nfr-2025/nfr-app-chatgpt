@@ -11,7 +11,7 @@ import {
   Stack,
   Typography,
 } from "@mui/joy";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUserContext } from "../UserProvider";
 import { saveRequirement } from "@/lib/actions-requirement";
 import ParsedRequirementText from "../ui/parsed-requirement-text";
@@ -22,26 +22,27 @@ import { useRouter } from "next/navigation";
 import { CheckRounded, ContentCopy } from "@mui/icons-material";
 import AiValidationModal from "@/components/AiValidationModal";
 
-const systemDescription =
-  "StudentDeal is a web-based platform designed for university students and partner enterprises, similar to popular platforms like Amazon, Allegro, and eBay. It allows verified university students to purchase goods and services at discounted prices, while sellers—trusted companies verified by the university—gain access to a young customer base with long-term potential.\n\n" +
-  "To develop the StudentDeal system, we are following the standard software development lifecycle. The process began by identifying the project's business assumptions—specifically, the need for a secure, student-focused e-commerce platform that benefits both students and businesses. We then initiated an iterative process of requirements gathering, focusing first on functional requirements (what the system should do), and currently emphasizing the elicitation of non-functional requirements (how the system should behave). These requirements will serve as the foundation for the system's design and implementation.\n\n" +
-  "The core business assumptions of StudentDeal include:\n" +
-  "- Providing a secure online marketplace for students through the verification of both buyers and sellers.\n" +
-  "- Ensuring students can trust sellers due to university validation.\n" +
-  "- Ensuring sellers can trust buyers as verified students.\n" +
-  "- Offering students significant discounts on products and services.\n" +
-  "- Helping sellers reach a valuable future customer base.\n\n" +
-  "The platform's motto is: \"Stop looking for discounts, shop at StudentDeal for the best prices 24 hours 7 days a week.\"\n\n" +
-  "Students will find offers for both products (e.g., watches, shoes) and services (e.g., beauty treatments), all at exclusive student prices. StudentDeal is designed with scalability in mind: initially launching for our university students, then expanding to other universities in the city, and ultimately to students across the country. At first, only existing business partners of the university will be able to post offers, but over time, the seller base will expand.\n\n" +
-  "Functional requirements of the StudentDeal system include:\n" +
-  "- Students can browse offers, place orders, and make payments through an external payment system.\n" +
-  "- Students can view their purchase history.\n" +
-  "- Entrepreneurs can create, update, and remove offers, change offer availability status, view transaction history, and manage settlements.\n" +
-  "- Guests (non-logged-in users) can browse offers and register for an account.\n" +
-  "- Both students and entrepreneurs can log in/out, update account details, and delete their accounts.\n" +
-  "- The system integrates with the university’s student information system to periodically verify student status.\n" +
-  "- An administrator can activate or deactivate users and generate monthly platform usage and transaction reports.\n\n" +
-  "The study will primarily focus on the third phase of the software development process: the elicitation and analysis of non-functional requirements, which are essential for ensuring system reliability, performance, and security.";
+//const systemDescription = localStorage.getItem("projectDescription") || "";
+
+//   "StudentDeal is a web-based platform designed for university students and partner enterprises, similar to popular platforms like Amazon, Allegro, and eBay. It allows verified university students to purchase goods and services at discounted prices, while sellers—trusted companies verified by the university—gain access to a young customer base with long-term potential.\n\n" +
+//   "To develop the StudentDeal system, we are following the standard software development lifecycle. The process began by identifying the project's business assumptions—specifically, the need for a secure, student-focused e-commerce platform that benefits both students and businesses. We then initiated an iterative process of requirements gathering, focusing first on functional requirements (what the system should do), and currently emphasizing the elicitation of non-functional requirements (how the system should behave). These requirements will serve as the foundation for the system's design and implementation.\n\n" +
+//   "The core business assumptions of StudentDeal include:\n" +
+//   "- Providing a secure online marketplace for students through the verification of both buyers and sellers.\n" +
+//   "- Ensuring students can trust sellers due to university validation.\n" +
+//   "- Ensuring sellers can trust buyers as verified students.\n" +
+//   "- Offering students significant discounts on products and services.\n" +
+//   "- Helping sellers reach a valuable future customer base.\n\n" +
+//   "The platform's motto is: \"Stop looking for discounts, shop at StudentDeal for the best prices 24 hours 7 days a week.\"\n\n" +
+//   "Students will find offers for both products (e.g., watches, shoes) and services (e.g., beauty treatments), all at exclusive student prices. StudentDeal is designed with scalability in mind: initially launching for our university students, then expanding to other universities in the city, and ultimately to students across the country. At first, only existing business partners of the university will be able to post offers, but over time, the seller base will expand.\n\n" +
+//   "Functional requirements of the StudentDeal system include:\n" +
+//   "- Students can browse offers, place orders, and make payments through an external payment system.\n" +
+//   "- Students can view their purchase history.\n" +
+//   "- Entrepreneurs can create, update, and remove offers, change offer availability status, view transaction history, and manage settlements.\n" +
+//   "- Guests (non-logged-in users) can browse offers and register for an account.\n" +
+//   "- Both students and entrepreneurs can log in/out, update account details, and delete their accounts.\n" +
+//   "- The system integrates with the university’s student information system to periodically verify student status.\n" +
+//   "- An administrator can activate or deactivate users and generate monthly platform usage and transaction reports.\n\n" +
+//   "The study will primarily focus on the third phase of the software development process: the elicitation and analysis of non-functional requirements, which are essential for ensuring system reliability, performance, and security.";
 const actors = ["Guest", "Student", "Entrepreneur", "Admin", "payments.com", "eUniversity system"];
 
 function renderRequirementContent(elements: RequirementElement[]): string {
@@ -77,7 +78,15 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 	const { requirement, parsedText, updateRequirement } = useRequirementData(initialRequirement);
 	const { user } = useUserContext();
 	const router = useRouter();
-  
+	const [systemDescription, setSystemDescription] = useState("");
+
+	useEffect(() => {
+		const cachedDescription = localStorage.getItem("projectDescription");
+		if (cachedDescription) {
+		  setSystemDescription(cachedDescription);
+		}
+	  }, []);
+	  
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [errorText, setErrorText] = useState("");
@@ -167,12 +176,17 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 	};
   
 	const handleCopy = async () => {
-	  if (validationResult) {
-		await navigator.clipboard.writeText(validationResult);
-		setCopied(true);
-		setTimeout(() => setCopied(false), 2000);
-	  }
-	};
+		if (validationResult) {
+		  const match = validationResult.match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
+		  const corrected = match ? match[1].trim() : validationResult.trim();
+	  
+		  await navigator.clipboard.writeText(corrected);
+		  setCopied(true);
+		  setTimeout(() => setCopied(false), 2000);
+		}
+	  };
+	  
+	  
   
 	const handleGotoRequirement = () => {
 	  setLoading(true);
