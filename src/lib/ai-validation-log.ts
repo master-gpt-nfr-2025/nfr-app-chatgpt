@@ -10,6 +10,9 @@ const validationLogSchema = new mongoose.Schema({
   validationResponse: String,
   validationScore: Number,
   correctedRequirement: String,
+  unambiguous: Number,
+  measurable: Number,
+  individuallyCompleted: Number,
   timestamp: { type: Date, default: Date.now },
 });
 
@@ -22,6 +25,9 @@ export const logValidationResult = async (log: {
   rawRequirement: string;
   templateName?: string;
   validationResponse: string;
+  unambiguous: number;
+  measurable: number;
+  individuallyCompleted: number;
   validationScore: number;
   correctedRequirement?: string;
 }) => {

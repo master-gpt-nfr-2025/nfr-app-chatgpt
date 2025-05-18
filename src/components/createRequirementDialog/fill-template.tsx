@@ -168,14 +168,13 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 		console.log("✅ Validation response:", data);
 		setValidationResult(data.analysis ?? data.error ?? "No result");
 		setValidationScore(data.score ?? -1);
-
-		await fetch("/api/log-validation", {
+			await fetch("/api/log-validation", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
 			  userId: user?.id ?? "unknown",
 			  systemDescription,
-			  rawRequirement: `${requirement.name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
+			  rawRequirement: `${name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
 			  templateName: !requirement.custom ? initialRequirement.name : undefined,
 			  validationResponse: data.analysis ?? data.error ?? "No result",
 			  validationScore: data.score ?? -1,
@@ -183,7 +182,10 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 				const match = (data.analysis ?? "").match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
 				return match ? match[1].trim() : undefined;
 			  })(),
-			}),
+			  unambiguous: data.unambiguous ?? 0,
+          	  measurable: data.measurable ?? 0,
+          	  individuallyCompleted: data.individuallyCompleted ?? 0,
+			  }),
 		  });
 		  
 	  } catch (err) {

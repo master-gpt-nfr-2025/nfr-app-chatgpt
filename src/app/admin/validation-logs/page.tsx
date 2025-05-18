@@ -18,9 +18,9 @@ type Log = {
   validationScore: number;
   rawRequirement?: string;
   correctedRequirement?: string;
-  unambiguous?: number;
-  measurable?: number;
-  individuallyCompleted?: number;
+  unambiguous: number;
+  measurable: number;
+  individuallyCompleted: number;
   timestamp: string;
 };
 
