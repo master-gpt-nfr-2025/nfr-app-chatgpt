@@ -8,9 +8,10 @@ import {
   Tooltip,
   IconButton,
   Stack,
+  Button,
 } from "@mui/joy";
 import { useEffect, useState } from "react";
-import { ContentCopy } from "@mui/icons-material";
+import { ContentCopy, FileDownload, Download } from "@mui/icons-material";
 
 type Log = {
   userId: string;
@@ -59,11 +60,70 @@ export default function ValidationLogsPage() {
     }
   };
 
+  const exportToJson = () => {
+    const blob = new Blob([JSON.stringify(logs, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    triggerDownload(url, "validation-logs.json");
+  };
+
+  const exportToCsv = () => {
+    const header = [
+      "userId",
+      "templateName",
+      "validationScore",
+      "unambiguous",
+      "measurable",
+      "individuallyCompleted",
+      "rawRequirement",
+      "correctedRequirement",
+      "timestamp",
+    ];
+    const csvRows = logs.map((log) =>
+      header.map((key) => {
+        const val = (log as any)[key];
+        return `"${String(val ?? "").replace(/"/g, '""')}"`;
+      }).join(",")
+    );
+    const csvContent = [header.join(","), ...csvRows].join("\n");
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+    triggerDownload(url, "validation-logs.csv");
+  };
+
+  const triggerDownload = (url: string, filename: string) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <Box sx={{ maxWidth: "100%", px: 2, py: 4 }}>
-      <Typography level="h2" sx={{ mb: 3, textAlign: "center" }}>
+      <Typography level="h2" sx={{ mb: 2, textAlign: "center" }}>
         Validation Logs
       </Typography>
+
+      <Stack direction="row" spacing={2} sx={{ mb: 3, justifyContent: "center" }}>
+        <Button
+          variant="outlined"
+          color="primary"
+          startDecorator={<FileDownload />}
+          onClick={exportToJson}
+        >
+          Export JSON
+        </Button>
+        <Button
+          variant="outlined"
+          color="neutral"
+          startDecorator={<Download />}
+          onClick={exportToCsv}
+        >
+          Export CSV
+        </Button>
+      </Stack>
 
       <Sheet
         variant="outlined"
@@ -89,8 +149,8 @@ export default function ValidationLogsPage() {
               <th>User</th>
               <th>Template</th>
               <th>Quality score</th>
-              <th>Original Template</th>
-              <th>Adviced Template</th>
+              <th>Original requirement</th>
+              <th>Adviced requirement</th>
               <th>Date</th>
             </tr>
           </thead>
@@ -105,8 +165,8 @@ export default function ValidationLogsPage() {
                   <td>{log.templateName || "—"}</td>
                   <td>
                     <Tooltip
-                    variant="soft"
-                    color="neutral"
+                      variant="soft"
+                      color="neutral"
                       title={
                         <Stack spacing={0.5}>
                           <Typography level="body-xs">
@@ -153,7 +213,7 @@ export default function ValidationLogsPage() {
                           {log.rawRequirement}
                         </Typography>
                       </Tooltip>
-                      <Tooltip title="Kopiuj oryginalne">
+                      <Tooltip title="Copy original">
                         <IconButton
                           size="sm"
                           variant="soft"
@@ -185,7 +245,7 @@ export default function ValidationLogsPage() {
                         </Typography>
                       </Tooltip>
                       {log.correctedRequirement && (
-                        <Tooltip title="Kopiuj poprawione">
+                        <Tooltip title="Copy corrected">
                           <IconButton
                             size="sm"
                             variant="soft"
@@ -216,7 +276,7 @@ export default function ValidationLogsPage() {
           level="body-md"
           sx={{ mt: 4, textAlign: "center", color: "text.secondary" }}
         >
-          Brak logów walidacji.
+          No validation logs.
         </Typography>
       )}
     </Box>
