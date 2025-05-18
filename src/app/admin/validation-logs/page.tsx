@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Box,
   Typography,
@@ -10,6 +11,7 @@ import {
   Stack,
   Button,
 } from "@mui/joy";
+import Pagination from "@mui/material/Pagination";
 import { useEffect, useState } from "react";
 import { ContentCopy, FileDownload, Download } from "@mui/icons-material";
 
@@ -28,6 +30,8 @@ type Log = {
 export default function ValidationLogsPage() {
   const [logs, setLogs] = useState<Log[]>([]);
   const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 10;
 
   useEffect(() => {
     const fetchLogs = async () => {
@@ -49,6 +53,8 @@ export default function ValidationLogsPage() {
 
     fetchLogs();
   }, []);
+
+  const paginatedLogs = logs.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
   const handleCopy = async (text: string, key: string) => {
     try {
@@ -79,10 +85,12 @@ export default function ValidationLogsPage() {
       "timestamp",
     ];
     const csvRows = logs.map((log) =>
-      header.map((key) => {
-        const val = (log as any)[key];
-        return `"${String(val ?? "").replace(/"/g, '""')}"`;
-      }).join(",")
+      header
+        .map((key) => {
+          const val = (log as any)[key];
+          return `"${String(val ?? "").replace(/"/g, '""')}"`;
+        })
+        .join(",")
     );
     const csvContent = [header.join(","), ...csvRows].join("\n");
     const blob = new Blob([csvContent], { type: "text/csv" });
@@ -155,7 +163,7 @@ export default function ValidationLogsPage() {
             </tr>
           </thead>
           <tbody>
-            {logs.map((log, index) => {
+            {paginatedLogs.map((log, index) => {
               const correctedKey = `corrected-${index}`;
               const originalKey = `original-${index}`;
 
@@ -270,6 +278,15 @@ export default function ValidationLogsPage() {
           </tbody>
         </Table>
       </Sheet>
+
+      <Stack direction="row" justifyContent="center" sx={{ mt: 3 }}>
+        <Pagination
+          count={Math.ceil(logs.length / rowsPerPage)}
+          page={page}
+          onChange={(_, value) => setPage(value)}
+          color="primary"
+        />
+      </Stack>
 
       {logs.length === 0 && (
         <Typography
