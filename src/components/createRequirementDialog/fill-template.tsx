@@ -14,6 +14,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { useUserContext } from "../UserProvider";
 import { saveRequirement } from "@/lib/actions-requirement";
+import { logValidationResult } from "@/lib/ai-validation-log";
+
 import ParsedRequirementText from "../ui/parsed-requirement-text";
 import RequirementFields from "../ui/requirement-fields";
 import { useRequirementData } from "@/hooks/useRequirementData";
@@ -166,6 +168,24 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 		console.log("✅ Validation response:", data);
 		setValidationResult(data.analysis ?? data.error ?? "No result");
 		setValidationScore(data.score ?? -1);
+
+		await fetch("/api/log-validation", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+			  userId: user?.id ?? "unknown",
+			  systemDescription,
+			  rawRequirement: `${requirement.name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
+			  templateName: !requirement.custom ? initialRequirement.name : undefined,
+			  validationResponse: data.analysis ?? data.error ?? "No result",
+			  validationScore: data.score ?? -1,
+			  correctedRequirement: (() => {
+				const match = (data.analysis ?? "").match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
+				return match ? match[1].trim() : undefined;
+			  })(),
+			}),
+		  });
+		  
 	  } catch (err) {
 		console.error("❌ Validation error:", err);
 		setValidationResult("Validation failed.");

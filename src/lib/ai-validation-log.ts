@@ -1,0 +1,37 @@
+// Add this to a separate file like `lib/logValidationResult.ts`
+import mongoose from "mongoose";
+import { CONFIG } from "@/config/config";
+
+const validationLogSchema = new mongoose.Schema({
+  userId: String,
+  systemDescription: String,
+  rawRequirement: String,
+  templateName: String,
+  validationResponse: String,
+  validationScore: Number,
+  correctedRequirement: String,
+  timestamp: { type: Date, default: Date.now },
+});
+
+const ValidationLog =
+  mongoose.models.ValidationLog || mongoose.model("ValidationLog", validationLogSchema);
+
+export const logValidationResult = async (log: {
+  userId: string;
+  systemDescription: string;
+  rawRequirement: string;
+  templateName?: string;
+  validationResponse: string;
+  validationScore: number;
+  correctedRequirement?: string;
+}) => {
+  try {
+    if (!mongoose.connection.readyState) {
+      await mongoose.connect(CONFIG.MONGO.connectionString);
+    }
+    await ValidationLog.create(log);
+    console.log("📝 Validation log saved to MongoDB.");
+  } catch (err) {
+    console.error("❌ Failed to log validation result:", err);
+  }
+};
