@@ -3,15 +3,18 @@ import mongoose from "mongoose";
 import { CONFIG } from "@/config/config";
 
 const validationLogSchema = new mongoose.Schema({
-  userId: String,
-  systemDescription: String,
-  rawRequirement: String,
-  templateName: String,
-  validationResponse: String,
-  validationScore: Number,
-  correctedRequirement: String,
-  timestamp: { type: Date, default: Date.now },
-});
+    userId: String,
+    systemDescription: String,
+    rawRequirement: String,
+    templateName: String,
+    validationResponse: String,
+    validationScore: Number,
+    correctedRequirement: String,
+    unambiguous: Number,
+    measurable: Number,
+    individuallyCompleted: Number,
+    timestamp: { type: Date, default: Date.now },
+  });
 
 const ValidationLog = mongoose.models.ValidationLog || mongoose.model("ValidationLog", validationLogSchema);
 
@@ -27,5 +30,19 @@ export async function POST(req: NextRequest) {
   } catch (err) {
     console.error("❌ Logging error:", err);
     return NextResponse.json({ error: "Logging failed" }, { status: 500 });
+  }
+}
+
+export async function GET() {
+  try {
+    if (!mongoose.connection.readyState) {
+      await mongoose.connect(CONFIG.MONGO.connectionString);
+    }
+
+    const logs = await ValidationLog.find().sort({ timestamp: -1 }).lean();
+    return NextResponse.json({ logs }, { status: 200 });
+  } catch (err) {
+    console.error("❌ Failed to fetch logs:", err);
+    return NextResponse.json({ error: "Failed to fetch logs" }, { status: 500 });
   }
 }
