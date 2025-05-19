@@ -93,7 +93,7 @@ const AiValidationModal = ({
 
             {/* Rating buttons */}
             <FormControl sx={{ mt: 3 }}>
-              <FormLabel sx={{ fontWeight: "600", mb: 1 }}>Your Rating (0–5)</FormLabel>
+              <FormLabel sx={{ fontWeight: "600", mb: 1 }}>How would you rate the AI response (0–5)</FormLabel>
               <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
                 {ratingLabels.map((item) => (
                   <Button
