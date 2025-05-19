@@ -1,15 +1,15 @@
 "use client";
 import { Requirement, RequirementElement } from "@/types/requirement";
 import {
-  Button,
-  Chip,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Snackbar,
-  Stack,
-  Typography,
+	Button,
+	Chip,
+	FormControl,
+	FormHelperText,
+	FormLabel,
+	Input,
+	Snackbar,
+	Stack,
+	Typography,
 } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import { useUserContext } from "../UserProvider";
@@ -49,34 +49,34 @@ const actors = ["Guest", "Student", "Entrepreneur", "Admin", "payments.com", "eU
 
 function renderRequirementContent(elements: RequirementElement[]): string {
 	return elements
-	  .map((el) => {
-		switch (el.elementType) {
-		  case "textReq":
-			return el.value;
-		  case "inputReq":
-			return `${el.placeholder}: ${el.value}`;
-		  case "choiceReq":
-			return `${el.placeholder}: ${el.selectedOption}`;
-		  case "optionalReq":
-			return el.enabled ? `${el.placeholder}: ` + renderRequirementContent(el.content) : "";
-		  case "repeatableReq":
-			return `${el.placeholder}: ` + el.instances.map((i) => renderRequirementContent(i)).join(" | ");
-		  case "referenceReq":
-			return `${el.placeholder}: Refers to ${el.refElementName}`;
-		  default:
-			return "";
-		}
-	  })
-	  .filter(Boolean)
-	  .join("\n");
-  }
-  
-  type FillTemplateProps = {
+		.map((el) => {
+			switch (el.elementType) {
+				case "textReq":
+					return el.value;
+				case "inputReq":
+					return `${el.placeholder}: ${el.value}`;
+				case "choiceReq":
+					return `${el.placeholder}: ${el.selectedOption}`;
+				case "optionalReq":
+					return el.enabled ? `${el.placeholder}: ` + renderRequirementContent(el.content) : "";
+				case "repeatableReq":
+					return `${el.placeholder}: ` + el.instances.map((i) => renderRequirementContent(i)).join(" | ");
+				case "referenceReq":
+					return `${el.placeholder}: Refers to ${el.refElementName}`;
+				default:
+					return "";
+			}
+		})
+		.filter(Boolean)
+		.join("\n");
+}
+
+type FillTemplateProps = {
 	initialRequirement: Requirement;
 	subcategoryName?: string;
-  };
-  
-  const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps) => {
+};
+
+const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps) => {
 	const { requirement, parsedText, updateRequirement } = useRequirementData(initialRequirement);
 	const { user } = useUserContext();
 	const router = useRouter();
@@ -85,10 +85,10 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 	useEffect(() => {
 		const cachedDescription = localStorage.getItem("projectDescription");
 		if (cachedDescription) {
-		  setSystemDescription(cachedDescription);
+			setSystemDescription(cachedDescription);
 		}
-	  }, []);
-	  
+	}, []);
+
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 	const [errorText, setErrorText] = useState("");
@@ -98,231 +98,254 @@ function renderRequirementContent(elements: RequirementElement[]): string {
 	const [validationResult, setValidationResult] = useState("");
 	const [copied, setCopied] = useState(false);
 	const [validationScore, setValidationScore] = useState(-1);
-  
+	const [rating, setRating] = useState<number>(-1);
+	const [logId, setLogId] = useState<string | null>(null);
+
 	const [name, setName] = useState<string>(requirement.name);
-  
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-	  setName(e.target.value);
-	  setErrorText("");
-	  setError(false);
+		setName(e.target.value);
+		setErrorText("");
+		setError(false);
 	};
-  
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-	  e.preventDefault();
-	  setLoading(true);
-	  if (!name) {
-		setError(true);
-		setErrorText("Nazwa wymagania jest obowiązkowa!");
-		return;
-	  }
-	  requirement.name = name;
-	  requirement.createdAt = new Date();
-	  requirement.createdThrough = "creator";
-	  if (user) {
-		requirement.createdBy = user.id;
-	  }
-	  try {
-		const createdRequirementID = await saveRequirement(requirement, user?.id);
-		if (!createdRequirementID) {
-		  setError(true);
-		  setErrorText("Wymaganie o podanej nazwie już istnieje!");
-		  setLoading(false);
-		  return;
-		} else {
-		  setReqID(createdRequirementID);
-		  setSnackbarOpen(true);
-		  setError(false);
-		  setErrorText("");
+		e.preventDefault();
+		setLoading(true);
+		if (!name) {
+			setError(true);
+			setErrorText("Nazwa wymagania jest obowiązkowa!");
+			return;
 		}
-		router.push(`/requirements/${createdRequirementID}`);
-		setLoading(false);
-	  } catch (error) {
-		console.error(error);
-		setError(true);
-		setErrorText("Wystąpił błąd podczas tworzenia wymagania!");
-		setLoading(false);
-	  }
+		requirement.name = name;
+		requirement.createdAt = new Date();
+		requirement.createdThrough = "creator";
+		if (user) {
+			requirement.createdBy = user.id;
+		}
+		try {
+			const createdRequirementID = await saveRequirement(requirement, user?.id);
+			if (!createdRequirementID) {
+				setError(true);
+				setErrorText("Wymaganie o podanej nazwie już istnieje!");
+				setLoading(false);
+				return;
+			} else {
+				setReqID(createdRequirementID);
+				setSnackbarOpen(true);
+				setError(false);
+				setErrorText("");
+			}
+			router.push(`/requirements/${createdRequirementID}`);
+			setLoading(false);
+		} catch (error) {
+			console.error(error);
+			setError(true);
+			setErrorText("Wystąpił błąd podczas tworzenia wymagania!");
+			setLoading(false);
+		}
 	};
-  
+
 	const handleValidate = async () => {
-	  setValidationModalOpen(true);
-	  setValidationResult("");
-	  setLoading(true);
-	  setValidationScore(-1);
-  
-	  const payload = {
-		systemDescription,
-		actors,
-		requirement: `${requirement.name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
-	  };
-  
-	  console.log("📤 Validating with payload:", payload);
-  
-	  try {
-		const response = await fetch("/api/validate", {
-		  method: "POST",
-		  headers: { "Content-Type": "application/json" },
-		  body: JSON.stringify(payload),
-		});
-		const data = await response.json();
-		console.log("✅ Validation response:", data);
-		setValidationResult(data.analysis ?? data.error ?? "No result");
-		setValidationScore(data.score ?? -1);
-			await fetch("/api/log-validation", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-			  userId: user?.id ?? "unknown",
-			  systemDescription,
-			  rawRequirement: `${name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
-			  templateName: !requirement.custom ? initialRequirement.name : undefined,
-			  validationResponse: data.analysis ?? data.error ?? "No result",
-			  validationScore: data.score ?? -1,
-			  correctedRequirement: (() => {
-				const match = (data.analysis ?? "").match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
-				return match ? match[1].trim() : undefined;
-			  })(),
-			  unambiguous: data.unambiguous ?? 0,
-          	  measurable: data.measurable ?? 0,
-          	  individuallyCompleted: data.individuallyCompleted ?? 0,
-			  }),
-		  });
-		  
-	  } catch (err) {
-		console.error("❌ Validation error:", err);
-		setValidationResult("Validation failed.");
-		setValidationScore(0);
-	  }
-  
-	  setLoading(false);
+		setValidationModalOpen(true);
+		setValidationResult("");
+		setLoading(true);
+		setValidationScore(-1);
+
+		const payload = {
+			systemDescription,
+			actors,
+			requirement: `${requirement.name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
+		};
+
+		console.log("📤 Validating with payload:", payload);
+
+		try {
+			const response = await fetch("/api/validate", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(payload),
+			});
+			const data = await response.json();
+			console.log("✅ Validation response:", data);
+			setValidationResult(data.analysis ?? data.error ?? "No result");
+			setValidationScore(data.score ?? -1);
+			const logRes = await fetch("/api/log-validation", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId: user?.id ?? "unknown",
+					systemDescription,
+					rawRequirement: `${name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
+					templateName: !requirement.custom ? initialRequirement.name : undefined,
+					validationResponse: data.analysis ?? data.error ?? "No result",
+					validationScore: data.score ?? -1,
+					rating: rating !== -1 ? rating : undefined,
+					correctedRequirement: (() => {
+						const match = (data.analysis ?? "").match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
+						return match ? match[1].trim() : undefined;
+					})(),
+					unambiguous: data.unambiguous ?? 0,
+					measurable: data.measurable ?? 0,
+					individuallyCompleted: data.individuallyCompleted ?? 0,
+				}),
+			});
+			const logData = await logRes.json();
+			if (logData?.id) setLogId(logData.id);
+
+		} catch (err) {
+			console.error("❌ Validation error:", err);
+			setValidationResult("Validation failed.");
+			setValidationScore(0);
+		}
+
+		setLoading(false);
 	};
-  
+
+	const handleModalClose = async () => {
+		setValidationModalOpen(false);
+		if (logId && rating !== -1) {
+			try {
+				await fetch("/api/log-validation", {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ id: logId, rating }),
+				});
+				console.log("✅ Rating updated");
+			} catch (err) {
+				console.error("❌ Failed to update rating:", err);
+			}
+		}
+	};
+
+
 	const handleCopy = async () => {
 		if (validationResult) {
-		  const match = validationResult.match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
-		  const corrected = match ? match[1].trim() : validationResult.trim();
-	  
-		  await navigator.clipboard.writeText(corrected);
-		  setCopied(true);
-		  setTimeout(() => setCopied(false), 2000);
-		}
-	  };
-	  
-	  
-  
-	const handleGotoRequirement = () => {
-	  setLoading(true);
-	  setSnackbarOpen(false);
-	  if (reqID) {
-		router.push(`/requirements/${reqID}`);
-	  }
-	  setLoading(false);
-	};
-  
-	return (
-	  <>
-		<Typography level="title-lg" textColor={"neutral.600"} textAlign={"center"}>
-		  {`Wybrana podkategoria - ${subcategoryName}`} {" "}
-		</Typography>
-		{!requirement.custom && (
-		  <Typography level="title-md" textColor={"neutral.600"} textAlign={"center"}>
-			{`Szablon - ${initialRequirement.name}`} {" "}
-		  </Typography>
-		)}
-		<Stack gap={2}>
-		  <Stack gap={2}>
-			<Stack gap={1}>
-			  <Typography level="body-md" sx={{ color: "text.secondary", fontWeight: 600 }}>
-				{`${requirement.custom ? "Treść wymagania" : "Uzupełnij szablon wymagania"}`}
-			  </Typography>
-			  <RequirementFields requirement={requirement} updateRequirement={updateRequirement} />
-			</Stack>
-			{!requirement.custom && (
-			  <>
-				<Stack gap={1}>
-				  <Typography level="body-md" sx={{ color: "text.secondary", fontWeight: 600 }}>
-					Wymaganie
-				  </Typography>
-				  <ParsedRequirementText parsedText={parsedText} />
-				</Stack>
-				<Stack gap={1}>
-				  <Typography level="body-md" sx={{ color: "text.secondary" }}>
-					Legenda
-				  </Typography>
-				  <Stack direction="row" spacing={1}>
-					<Chip color="neutral" variant="outlined">
-					  Pola obowiązkowe
-					</Chip>
-					<Chip color="neutral" variant="soft">
-					  Pola opcjonalne
-					</Chip>
-				  </Stack>
-				</Stack>
-			  </>
-			)}
-		  </Stack>
-		  <form onSubmit={handleSubmit}>
-			<FormControl error={error} sx={{ mb: "1rem" }}>
-			  <FormLabel sx={{ fontWeight: "600" }} htmlFor="requirement-name">
-				Nazwa wymagania
-			  </FormLabel>
-			  <Input placeholder="Nazwa wymagania" variant="soft" value={name} onChange={handleChange} />
-			  <FormHelperText>{errorText}</FormHelperText>
-			</FormControl>
-			<DialogNavigationButtons submit loading={loading} />
-		  </form>
-  
-		  <Button onClick={handleValidate} color="primary" variant="solid" sx={{ width: "fit-content" }}>
-			Validate with AI
-		  </Button>
-  
-		  <AiValidationModal
-  open={validationModalOpen}
-  onClose={() => setValidationModalOpen(false)}
-  loading={loading}
-  result={validationResult}
-  score={validationScore}
-  onCopy={handleCopy}
-  copyButton={true}
-/>
+			const match = validationResult.match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
+			const corrected = match ? match[1].trim() : validationResult.trim();
 
-  
-		  <Snackbar
-			autoHideDuration={4000}
-			open={snackbarOpen}
-			variant="soft"
-			color={"success"}
-			onClose={() => setSnackbarOpen(false)}
-			startDecorator={<CheckRounded />}
-			endDecorator={
-			  reqID ? (
-				<Button onClick={handleGotoRequirement} size="sm" variant="soft" color="success" loading={loading}>
-				  Zobacz
+			await navigator.clipboard.writeText(corrected);
+			setCopied(true);
+			setTimeout(() => setCopied(false), 2000);
+		}
+	};
+
+
+
+	const handleGotoRequirement = () => {
+		setLoading(true);
+		setSnackbarOpen(false);
+		if (reqID) {
+			router.push(`/requirements/${reqID}`);
+		}
+		setLoading(false);
+	};
+
+	return (
+		<>
+			<Typography level="title-lg" textColor={"neutral.600"} textAlign={"center"}>
+				{`Wybrana podkategoria - ${subcategoryName}`} {" "}
+			</Typography>
+			{!requirement.custom && (
+				<Typography level="title-md" textColor={"neutral.600"} textAlign={"center"}>
+					{`Szablon - ${initialRequirement.name}`} {" "}
+				</Typography>
+			)}
+			<Stack gap={2}>
+				<Stack gap={2}>
+					<Stack gap={1}>
+						<Typography level="body-md" sx={{ color: "text.secondary", fontWeight: 600 }}>
+							{`${requirement.custom ? "Treść wymagania" : "Uzupełnij szablon wymagania"}`}
+						</Typography>
+						<RequirementFields requirement={requirement} updateRequirement={updateRequirement} />
+					</Stack>
+					{!requirement.custom && (
+						<>
+							<Stack gap={1}>
+								<Typography level="body-md" sx={{ color: "text.secondary", fontWeight: 600 }}>
+									Wymaganie
+								</Typography>
+								<ParsedRequirementText parsedText={parsedText} />
+							</Stack>
+							<Stack gap={1}>
+								<Typography level="body-md" sx={{ color: "text.secondary" }}>
+									Legenda
+								</Typography>
+								<Stack direction="row" spacing={1}>
+									<Chip color="neutral" variant="outlined">
+										Pola obowiązkowe
+									</Chip>
+									<Chip color="neutral" variant="soft">
+										Pola opcjonalne
+									</Chip>
+								</Stack>
+							</Stack>
+						</>
+					)}
+				</Stack>
+				<form onSubmit={handleSubmit}>
+					<FormControl error={error} sx={{ mb: "1rem" }}>
+						<FormLabel sx={{ fontWeight: "600" }} htmlFor="requirement-name">
+							Nazwa wymagania
+						</FormLabel>
+						<Input placeholder="Nazwa wymagania" variant="soft" value={name} onChange={handleChange} />
+						<FormHelperText>{errorText}</FormHelperText>
+					</FormControl>
+					<DialogNavigationButtons submit loading={loading} />
+				</form>
+
+				<Button onClick={handleValidate} color="primary" variant="solid" sx={{ width: "fit-content" }}>
+					Validate with AI
 				</Button>
-			  ) : null
-			}
-		  >
-			<Stack direction="column" gap={1}>
-			  <span>Wymaganie zostało utworzone</span>
+
+				<AiValidationModal
+					open={validationModalOpen}
+					onClose={handleModalClose}
+					loading={loading}
+					result={validationResult}
+					score={validationScore}
+					rating={rating}
+					onRatingChange={setRating}
+					onCopy={handleCopy}
+					copyButton={true}
+				/>
+
+
+				<Snackbar
+					autoHideDuration={4000}
+					open={snackbarOpen}
+					variant="soft"
+					color={"success"}
+					onClose={() => setSnackbarOpen(false)}
+					startDecorator={<CheckRounded />}
+					endDecorator={
+						reqID ? (
+							<Button onClick={handleGotoRequirement} size="sm" variant="soft" color="success" loading={loading}>
+								Zobacz
+							</Button>
+						) : null
+					}
+				>
+					<Stack direction="column" gap={1}>
+						<span>Wymaganie zostało utworzone</span>
+					</Stack>
+				</Snackbar>
+
+				{copied && (
+					<Snackbar
+						autoHideDuration={2000}
+						open={copied}
+						variant="soft"
+						color="primary"
+						onClose={() => setCopied(false)}
+						startDecorator={<ContentCopy />}
+					>
+						Poprawione wymaganie zostało skopiowane do schowka
+					</Snackbar>
+				)}
 			</Stack>
-		  </Snackbar>
-  
-		  {copied && (
-			<Snackbar
-			  autoHideDuration={2000}
-			  open={copied}
-			  variant="soft"
-			  color="primary"
-			  onClose={() => setCopied(false)}
-			  startDecorator={<ContentCopy />}
-			>
-			  Poprawione wymaganie zostało skopiowane do schowka
-			</Snackbar>
-		  )}
-		</Stack>
-	  </>
+		</>
 	);
-  };
-  
-  export default FillTemplate;
-  
+};
+
+export default FillTemplate;

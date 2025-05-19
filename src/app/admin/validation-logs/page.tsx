@@ -25,6 +25,7 @@ type Log = {
   measurable: number;
   individuallyCompleted: number;
   timestamp: string;
+  rating?: number;
 };
 
 export default function ValidationLogsPage() {
@@ -66,6 +67,11 @@ export default function ValidationLogsPage() {
     }
   };
 
+  const getRatingColor = (rating: number) => {
+    const colors = ["danger", "danger", "warning", "warning", "success", "success"];
+    return colors[rating] || "neutral";
+  };
+
   const exportToJson = () => {
     const blob = new Blob([JSON.stringify(logs, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
@@ -80,6 +86,7 @@ export default function ValidationLogsPage() {
       "unambiguous",
       "measurable",
       "individuallyCompleted",
+      "rating",
       "rawRequirement",
       "correctedRequirement",
       "timestamp",
@@ -157,6 +164,7 @@ export default function ValidationLogsPage() {
               <th>User</th>
               <th>Template</th>
               <th>Quality score</th>
+              <th>Rating</th>
               <th>Original requirement</th>
               <th>Adviced requirement</th>
               <th>Date</th>
@@ -205,6 +213,15 @@ export default function ValidationLogsPage() {
                         {log.validationScore}
                       </Chip>
                     </Tooltip>
+                  </td>
+                  <td>
+                    {log.rating !== undefined ? (
+                      <Chip color={getRatingColor(log.rating)} variant="soft">
+                        {log.rating}
+                      </Chip>
+                    ) : (
+                      <Typography level="body-sm" sx={{ color: "text.tertiary" }}>—</Typography>
+                    )}
                   </td>
                   <td>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
