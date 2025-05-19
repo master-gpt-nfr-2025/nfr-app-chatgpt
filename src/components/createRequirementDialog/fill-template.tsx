@@ -48,21 +48,23 @@ import AiValidationModal from "@/components/AiValidationModal";
 const actors = ["Guest", "Student", "Entrepreneur", "Admin", "payments.com", "eUniversity system"];
 
 function renderRequirementContent(elements: RequirementElement[]): string {
+	
 	return elements
 		.map((el) => {
+			console.log("element type:", el.elementType);
 			switch (el.elementType) {
 				case "textReq":
 					return el.value;
 				case "inputReq":
-					return `${el.placeholder}: ${el.value}`;
+					return el.value;
 				case "choiceReq":
-					return `${el.placeholder}: ${el.selectedOption}`;
+					return el.selectedOption;
 				case "optionalReq":
-					return el.enabled ? `${el.placeholder}: ` + renderRequirementContent(el.content) : "";
+					return el.enabled ? renderRequirementContent(el.content) : "";
 				case "repeatableReq":
-					return `${el.placeholder}: ` + el.instances.map((i) => renderRequirementContent(i)).join(" | ");
+					return el.instances.map((i) => renderRequirementContent(i)).join(" | ");
 				case "referenceReq":
-					return `${el.placeholder}: Refers to ${el.refElementName}`;
+					return el.refElementName;
 				default:
 					return "";
 			}
@@ -152,11 +154,18 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 		setLoading(true);
 		setValidationScore(-1);
 
+		const rawRequirement = `${renderRequirementContent(requirement.content)}`;
+		const templateUsed = !requirement.custom ? initialRequirement.name : "(custom template)";
+		
+		console.log("📄 Template used:", templateUsed);
+		console.log("🧾 Raw requirement content:\n", rawRequirement);
+		
 		const payload = {
 			systemDescription,
 			actors,
-			requirement: `${requirement.name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
+			requirement: rawRequirement,
 		};
+		
 
 		console.log("📤 Validating with payload:", payload);
 
