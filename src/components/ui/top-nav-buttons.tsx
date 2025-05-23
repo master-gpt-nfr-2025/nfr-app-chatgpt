@@ -11,6 +11,7 @@ const TopNavButtons = () => {
 			<NavButton icon="ph:magic-wand-bold" href="/create-requirement" title="Kreator wymagań" />
 			<NavButton icon="ph:file-text-bold" href="/project-description" title="Opis projektu" />
 			<NavButton icon="ph:gear-six-bold" href="/admin/validation-logs" title="Panel Administratora" />
+			<NavButton icon="ph:file-arrow-up-bold" href="/mass-validation" title="AI mass validation" />
 		</Stack>
 	);
 };
