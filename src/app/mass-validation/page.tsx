@@ -1,15 +1,15 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef, SetStateAction } from "react";
 import {
   Box,
   Button,
   CircularProgress,
   FormControl,
   Stack,
-  Typography,
+  Typography
 } from "@mui/joy";
 import { Icon } from "@iconify/react";
-
+import Pagination from "@mui/material/Pagination";
 export type RequirementRecord = {
   NAME: string;
   REQUIREMENT: string;
@@ -22,7 +22,10 @@ export default function UploadAndValidatePage() {
   const [progress, setProgress] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [results, setResults] = useState<any[]>([]);
-  const [stopFlag, setStopFlag] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
+
+  const stopRef = useRef(false);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -33,7 +36,8 @@ export default function UploadAndValidatePage() {
     setLog([]);
     setProgress(0);
     setResults([]);
-    setStopFlag(false);
+    setCurrentPage(1);
+    stopRef.current = false;
 
     const text = await file.text();
     let parsed: RequirementRecord[];
@@ -49,7 +53,7 @@ export default function UploadAndValidatePage() {
     setTotal(parsed.length);
 
     for (let i = 0; i < parsed.length; i++) {
-      if (stopFlag) {
+      if (stopRef.current) {
         setLog((prev) => [...prev, "⛔️ Processing stopped by user."]);
         break;
       }
@@ -130,6 +134,10 @@ export default function UploadAndValidatePage() {
     setLoading(false);
   };
 
+  const stopProcessing = () => {
+    stopRef.current = true;
+  };
+
   const downloadResults = () => {
     const now = new Date();
     const timestamp = `${now.getDate().toString().padStart(2, "0")}-${(now.getMonth() + 1)
@@ -156,6 +164,8 @@ export default function UploadAndValidatePage() {
     link.remove();
     URL.revokeObjectURL(url);
   };
+
+  const paginatedLogs = log.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
     <Box sx={{ p: 4 }}>
@@ -193,11 +203,7 @@ export default function UploadAndValidatePage() {
           <Typography level="body-sm" sx={{ mb: 1 }}>
             Processing {progress}/{total}...
           </Typography>
-          <Button
-            variant="outlined"
-            color="danger"
-            onClick={() => setStopFlag(true)}
-          >
+          <Button variant="outlined" color="danger" onClick={stopProcessing}>
             Stop Processing
           </Button>
         </>
@@ -210,12 +216,22 @@ export default function UploadAndValidatePage() {
       )}
 
       <Stack spacing={1} sx={{ mt: 3 }}>
-        {log.map((entry, idx) => (
+        {paginatedLogs.map((entry, idx) => (
           <Typography key={idx} level="body-sm">
             {entry}
           </Typography>
         ))}
       </Stack>
+
+      {log.length > itemsPerPage && (
+        <Stack direction="row" justifyContent="center" sx={{ mt: 2 }}>
+          <Pagination
+            count={Math.ceil(log.length / itemsPerPage)}
+            page={currentPage}
+            onChange={(_: any, page: SetStateAction<number>) => setCurrentPage(page)}
+          />
+        </Stack>
+      )}
     </Box>
   );
 }
