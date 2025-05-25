@@ -10,6 +10,7 @@ import {
 } from "@mui/joy";
 import { Icon } from "@iconify/react";
 import Pagination from "@mui/material/Pagination";
+
 export type RequirementRecord = {
   NAME: string;
   REQUIREMENT: string;
@@ -23,6 +24,7 @@ export default function UploadAndValidatePage() {
   const [total, setTotal] = useState<number>(0);
   const [results, setResults] = useState<any[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [summary, setSummary] = useState<{ Q_M: string; Q_U: string; Q_IC: string } | null>(null);
   const itemsPerPage = 20;
 
   const stopRef = useRef(false);
@@ -36,6 +38,7 @@ export default function UploadAndValidatePage() {
     setLog([]);
     setProgress(0);
     setResults([]);
+    setSummary(null);
     setCurrentPage(1);
     stopRef.current = false;
 
@@ -51,6 +54,8 @@ export default function UploadAndValidatePage() {
     }
 
     setTotal(parsed.length);
+
+    const tempResults: any[] = [];
 
     for (let i = 0; i < parsed.length; i++) {
       if (stopRef.current) {
@@ -96,32 +101,12 @@ export default function UploadAndValidatePage() {
           return match ? match[1].trim() : undefined;
         })();
 
-        await fetch("/api/log-validation", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: "batch-user",
-            systemDescription: "Uploaded from file",
-            rawRequirement: requirementText,
-            templateName: name,
-            validationResponse: validation.analysis,
-            validationScore: validation.score ?? -1,
-            correctedRequirement: corrected,
-            unambiguous: validation.unambiguous ?? 0,
-            measurable: validation.measurable ?? 0,
-            individuallyCompleted: validation.individuallyCompleted ?? 0,
-          }),
+        tempResults.push({
+          requirement: requirementText,
+          unambiguous: validation.unambiguous ?? 0,
+          measurable: validation.measurable ?? 0,
+          individuallyCompleted: validation.individuallyCompleted ?? 0,
         });
-
-        setResults((prev) => [
-          ...prev,
-          {
-            requirement: requirementText,
-            "AI is unambiguous": validation.unambiguous ?? 0,
-            "AI is measurable": validation.measurable ?? 0,
-            "AI is individually completed": validation.individuallyCompleted ?? 0,
-          },
-        ]);
 
         setLog((prev) => [...prev, `✅ Saved result for ${name}`]);
       } catch (err) {
@@ -131,38 +116,26 @@ export default function UploadAndValidatePage() {
       setProgress(i + 1);
     }
 
+    setResults(tempResults);
+    calculateQuality(tempResults);
     setLoading(false);
+  };
+
+  const calculateQuality = (data: any[]) => {
+    const totalCount = data.length || 1;
+    const countM = data.filter((d) => d.measurable === 1).length;
+    const countU = data.filter((d) => d.unambiguous === 1).length;
+    const countIC = data.filter((d) => d.individuallyCompleted === 1).length;
+
+    setSummary({
+      Q_M: `${countM} / ${totalCount} = ${(countM / totalCount * 100).toFixed(1)}%`,
+      Q_U: `${countU} / ${totalCount} = ${(countU / totalCount * 100).toFixed(1)}%`,
+      Q_IC: `${countIC} / ${totalCount} = ${(countIC / totalCount * 100).toFixed(1)}%`,
+    });
   };
 
   const stopProcessing = () => {
     stopRef.current = true;
-  };
-
-  const downloadResults = () => {
-    const now = new Date();
-    const timestamp = `${now.getDate().toString().padStart(2, "0")}-${(now.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${now.getFullYear()}-${now
-      .getHours()
-      .toString()
-      .padStart(2, "0")}${now.getMinutes().toString().padStart(2, "0")}${now
-      .getSeconds()
-      .toString()
-      .padStart(2, "0")}`;
-
-    const filename = `ai-validation-results-${timestamp}.json`;
-
-    const blob = new Blob([JSON.stringify(results, null, 2)], {
-      type: "application/json",
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
   };
 
   const paginatedLogs = log.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -209,12 +182,6 @@ export default function UploadAndValidatePage() {
         </>
       )}
 
-      {!loading && results.length > 0 && (
-        <Button onClick={downloadResults} variant="outlined" color="success">
-          Download AI Validation Results JSON
-        </Button>
-      )}
-
       <Stack spacing={1} sx={{ mt: 3 }}>
         {paginatedLogs.map((entry, idx) => (
           <Typography key={idx} level="body-sm">
@@ -231,6 +198,17 @@ export default function UploadAndValidatePage() {
             onChange={(_: any, page: SetStateAction<number>) => setCurrentPage(page)}
           />
         </Stack>
+      )}
+
+      {summary && (
+        <Box sx={{ mt: 4, p: 2, border: "1px solid", borderColor: "divider", borderRadius: "md" }}>
+          <Typography level="h4" sx={{ mb: 2 }}>
+            📊 Quality Metrics Summary
+          </Typography>
+          <Typography level="body-sm">Q(M) Measurability: {summary.Q_M}</Typography>
+          <Typography level="body-sm">Q(U) Unambiguity: {summary.Q_U}</Typography>
+          <Typography level="body-sm">Q(IC) Individual Completeness: {summary.Q_IC}</Typography>
+        </Box>
       )}
     </Box>
   );
