@@ -6,7 +6,8 @@ import {
   CircularProgress,
   FormControl,
   Stack,
-  Typography
+  Typography,
+  Checkbox,
 } from "@mui/joy";
 import { Icon } from "@iconify/react";
 import Pagination from "@mui/material/Pagination";
@@ -14,6 +15,7 @@ import Pagination from "@mui/material/Pagination";
 export type RequirementRecord = {
   NAME: string;
   REQUIREMENT: string;
+  CATEGORY: string; // subcategoryId
 };
 
 export default function UploadAndValidatePage() {
@@ -23,10 +25,12 @@ export default function UploadAndValidatePage() {
   const [progress, setProgress] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
   const [results, setResults] = useState<any[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [summary, setSummary] = useState<{ Q_M: string; Q_U: string; Q_IC: string } | null>(null);
-  const itemsPerPage = 20;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [useSystemDesc, setUseSystemDesc] = useState(false);
+  const [useTemplates, setUseTemplates] = useState(false); // ✅ New checkbox state
 
+  const itemsPerPage = 20;
   const stopRef = useRef(false);
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,14 +51,13 @@ export default function UploadAndValidatePage() {
     try {
       parsed = JSON.parse(text);
       if (!Array.isArray(parsed)) throw new Error("Invalid JSON format");
-    } catch (err) {
+    } catch {
       setLog(["❌ Failed to parse JSON"]);
       setLoading(false);
       return;
     }
 
     setTotal(parsed.length);
-
     const tempResults: any[] = [];
 
     for (let i = 0; i < parsed.length; i++) {
@@ -63,43 +66,51 @@ export default function UploadAndValidatePage() {
         break;
       }
 
-      const item = parsed[i];
-      const name = item.NAME;
-      const requirement = item.REQUIREMENT;
-      const requirementText = `${name}:\n${requirement}`;
-
-      setLog((prev) => [...prev, `📤 Validating ${name}`]);
+      const { NAME, REQUIREMENT, CATEGORY } = parsed[i];
+      const requirementText = `${NAME}:\n${REQUIREMENT}`;
+      setLog((prev) => [...prev, `📤 Validating ${NAME}`]);
 
       try {
+        let renderedTemplates = "";
+        if (useTemplates && CATEGORY) {
+          setLog((prev) => [...prev, `🔎 Fetching templates for subcategoryId: ${CATEGORY}`]);
+          const res = await fetch(`/api/templates/${CATEGORY}`);
+          const data = await res.json();
+
+          if (data && data.renderedTemplates) {
+            renderedTemplates = data.renderedTemplates;
+            setLog((prev) => [...prev, `✅ Templates fetched and rendered for subcategoryId: ${CATEGORY}`]);
+            console.log("📝 Rendered Templates:\n", renderedTemplates);
+          } else {
+            setLog((prev) => [...prev, `⚠️ No templates found for subcategoryId: ${CATEGORY}`]);
+          }
+        } else if (useTemplates) {
+          setLog((prev) => [...prev, "⚠️ No categoryId found for this requirement"]);
+        }
+
+        const body: any = {
+          requirement: requirementText,
+          actors: [],
+        };
+        if (useSystemDesc) body.systemDescription = localStorage.getItem("projectDescription") || "";
+        if (renderedTemplates) body.templates = [renderedTemplates];
+
         const validateRes = await fetch("/api/validate", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            systemDescription: "Batch upload file",
-            actors: [],
-            requirement: requirementText,
-          }),
+          body: JSON.stringify(body),
         });
 
         if (validateRes.status === 500) {
-          setLog((prev) => [...prev, `❌ Server error for ${name}`]);
+          setLog((prev) => [...prev, `❌ Server error for ${NAME}`]);
           continue;
         }
 
         const validation = await validateRes.json();
-
-        if (
-          validation.analysis?.includes("Assistant run failed") ||
-          validation.analysis?.includes("Server error")
-        ) {
-          setLog((prev) => [...prev, `⚠️ Error for ${name}: ${validation.analysis}`]);
+        if (validation.analysis?.includes("Assistant run failed") || validation.analysis?.includes("Server error")) {
+          setLog((prev) => [...prev, `⚠️ Error for ${NAME}: ${validation.analysis}`]);
           continue;
         }
-
-        const corrected = (() => {
-          const match = validation.analysis?.match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
-          return match ? match[1].trim() : undefined;
-        })();
 
         tempResults.push({
           requirement: requirementText,
@@ -108,9 +119,10 @@ export default function UploadAndValidatePage() {
           individuallyCompleted: validation.individuallyCompleted ?? 0,
         });
 
-        setLog((prev) => [...prev, `✅ Saved result for ${name}`]);
+        setLog((prev) => [...prev, `✅ Processed ${NAME}`]);
       } catch (err) {
-        setLog((prev) => [...prev, `❌ Failed to process ${name}`]);
+        console.error("❌ Processing error:", err);
+        setLog((prev) => [...prev, `❌ Failed to process ${NAME}`]);
       }
 
       setProgress(i + 1);
@@ -138,6 +150,22 @@ export default function UploadAndValidatePage() {
     stopRef.current = true;
   };
 
+  const downloadResults = () => {
+    const now = new Date();
+    const timestamp = `${now.getDate().toString().padStart(2, "0")}-${(now.getMonth() + 1)
+      .toString().padStart(2, "0")}-${now.getFullYear()}-${now.getHours().toString().padStart(2, "0")}${now.getMinutes().toString().padStart(2, "0")}${now.getSeconds().toString().padStart(2, "0")}`;
+    const filename = `ai-validation-results-${timestamp}.json`;
+    const blob = new Blob([JSON.stringify(results, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+
   const paginatedLogs = log.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
   return (
@@ -146,23 +174,29 @@ export default function UploadAndValidatePage() {
         Upload & Validate JSON Requirements
       </Typography>
 
-      <FormControl sx={{ mb: 3 }}>
-        <Button
-          component="label"
-          variant="solid"
-          color="primary"
-          startDecorator={<Icon icon="ph:cloud-arrow-up-bold" width={20} />}
-        >
-          Upload JSON File
-          <input
-            hidden
-            type="file"
-            accept="application/json"
-            onChange={handleFileUpload}
-            disabled={loading}
-          />
-        </Button>
-      </FormControl>
+      <Stack spacing={2} sx={{ mb: 3 }}>
+        <Checkbox
+          label="Include system description"
+          checked={useSystemDesc}
+          onChange={(e) => setUseSystemDesc(e.target.checked)}
+        />
+        <Checkbox
+          label="Use templates (by subcategoryId)"
+          checked={useTemplates}
+          onChange={(e) => setUseTemplates(e.target.checked)}
+        />
+        <FormControl>
+          <Button
+            component="label"
+            variant="solid"
+            color="primary"
+            startDecorator={<Icon icon="ph:cloud-arrow-up-bold" width={20} />}
+          >
+            Upload JSON File
+            <input hidden type="file" accept="application/json" onChange={handleFileUpload} disabled={loading} />
+          </Button>
+        </FormControl>
+      </Stack>
 
       {fileName && (
         <Typography level="body-sm" sx={{ mb: 2 }}>
@@ -182,6 +216,12 @@ export default function UploadAndValidatePage() {
         </>
       )}
 
+      {!loading && results.length > 0 && (
+        <Button onClick={downloadResults} variant="outlined" color="success" sx={{ mt: 3 }}>
+          Download AI Validation Results JSON
+        </Button>
+      )}
+
       <Stack spacing={1} sx={{ mt: 3 }}>
         {paginatedLogs.map((entry, idx) => (
           <Typography key={idx} level="body-sm">
@@ -195,7 +235,7 @@ export default function UploadAndValidatePage() {
           <Pagination
             count={Math.ceil(log.length / itemsPerPage)}
             page={currentPage}
-            onChange={(_: any, page: SetStateAction<number>) => setCurrentPage(page)}
+            onChange={(_, page: SetStateAction<number>) => setCurrentPage(page)}
           />
         </Stack>
       )}

@@ -1,4 +1,4 @@
-// Add this to a separate file like `lib/logValidationResult.ts`
+// lib/logValidationResult.ts
 import mongoose from "mongoose";
 import { CONFIG } from "@/config/config";
 
@@ -13,6 +13,8 @@ const validationLogSchema = new mongoose.Schema({
   unambiguous: Number,
   measurable: Number,
   individuallyCompleted: Number,
+  wasIgnoreClicked: Boolean,
+  wasUseSuggestionClicked: Boolean,
   timestamp: { type: Date, default: Date.now },
 });
 
@@ -30,6 +32,8 @@ export const logValidationResult = async (log: {
   individuallyCompleted: number;
   validationScore: number;
   correctedRequirement?: string;
+  wasIgnoreClicked?: boolean;
+  wasUseSuggestionClicked?: boolean;
 }) => {
   try {
     if (!mongoose.connection.readyState) {

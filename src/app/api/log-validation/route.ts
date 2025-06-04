@@ -2,20 +2,24 @@ import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
 import { CONFIG } from "@/config/config";
 
+
 const validationLogSchema = new mongoose.Schema({
-    userId: String,
-    systemDescription: String,
-    rawRequirement: String,
-    templateName: String,
-    validationResponse: String,
-    validationScore: Number,
-    correctedRequirement: String,
-    unambiguous: Number,
-    measurable: Number,
-    individuallyCompleted: Number,
-    rating: Number,
-    timestamp: { type: Date, default: Date.now },
-  });  
+  userId: String,
+  systemDescription: String,
+  rawRequirement: String,
+  templateName: String,
+  validationResponse: String,
+  validationScore: Number,
+  correctedRequirement: String,
+  unambiguous: Number,
+  measurable: Number,
+  individuallyCompleted: Number,
+  rating: Number,
+  wasIgnoreClicked: Boolean,            
+  wasUseSuggestionClicked: Boolean,     
+  timestamp: { type: Date, default: Date.now },
+});
+
 
   if (mongoose.models.ValidationLog) {
     delete mongoose.models.ValidationLog;

@@ -27,6 +27,8 @@ type Log = {
     individuallyCompleted: number;
     timestamp: string;
     rating?: number;
+    wasIgnoreClicked?: boolean;
+    wasUseSuggestionClicked?: boolean;
 };
 
 export default function ValidationLogsPage() {
@@ -83,6 +85,8 @@ export default function ValidationLogsPage() {
             "measurable",
             "individuallyCompleted",
             "rating",
+            "wasIgnoreClicked",
+            "wasUseSuggestionClicked",
             "rawRequirement",
             "correctedRequirement",
             "timestamp",
@@ -165,6 +169,8 @@ export default function ValidationLogsPage() {
                             <th>Template</th>
                             <th>Quality</th>
                             <th>Rating</th>
+                            <th>Ignore Button?</th>
+                            <th>Suggest Button?</th>
                             <th>Original</th>
                             <th>Suggested</th>
                             <th>Date</th>
@@ -207,7 +213,6 @@ export default function ValidationLogsPage() {
                                             </Typography>
                                         </Tooltip>
                                     </td>
-
                                     <td>
                                         <Tooltip
                                             variant="soft"
@@ -243,6 +248,22 @@ export default function ValidationLogsPage() {
                                         ) : (
                                             <Typography level="body-sm" sx={{ color: "text.tertiary" }}>—</Typography>
                                         )}
+                                    </td>
+                                    <td>
+                                        <Chip
+                                            variant="soft"
+                                            color={log.wasIgnoreClicked ? "danger" : "neutral"}
+                                        >
+                                            {log.wasIgnoreClicked ? "Yes" : "No"}
+                                        </Chip>
+                                    </td>
+                                    <td>
+                                        <Chip
+                                            variant="soft"
+                                            color={log.wasUseSuggestionClicked ? "success" : "neutral"}
+                                        >
+                                            {log.wasUseSuggestionClicked ? "Yes" : "No"}
+                                        </Chip>
                                     </td>
                                     <td>
                                         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
