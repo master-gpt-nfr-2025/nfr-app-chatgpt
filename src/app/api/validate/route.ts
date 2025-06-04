@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     console.log("🔧 New validation request");
     console.log("📝 Requirement:", requirement);
 
-    const userMessage = `I am a Requirements Engineer. I want to formulate a non-functional requirement. The non-functional requirement shall be of high quality.\nRequirement: ${requirement}\n\nSystem Description: ${systemDescription}\n`;
+    const userMessage = `I am a Requirements Engineer. I want to formulate a non-functional requirement. The non-functional requirement shall be of high quality.\nRequirement: ${requirement}\n`;
 
     const thread = await openai.beta.threads.create();
     await openai.beta.threads.messages.create(thread.id, {
@@ -37,73 +37,61 @@ export async function POST(req: NextRequest) {
     let text =
       last?.content?.[0]?.type === "text" ? last.content[0].text.value : "No response";
 
-	  const metricSynonyms = {
-		unambiguous: ["Unambiguous", "Ambiguity", " Unambiguous"],
-		measurable: ["Measurable", "Measurability"],
-		individuallyCompleted: ["Individually Complete", "Individual Completeness"],
-	};
+    console.log("📨 AI Response:", text);
 
-	let total = 0;
-	const qualityFactors: Record<keyof typeof metricSynonyms, number> = {
-		unambiguous: 0,
-		measurable: 0,
-		individuallyCompleted: 0,
-	};
+    const metricSynonyms = {
+      unambiguous: ["Unambiguous", "Ambiguity"],
+      measurable: ["Measurable", "Measurability"],
+      individuallyCompleted: ["Individually Complete", "Individual Completeness"],
+    };
 
-	for (const [key, synonyms] of Object.entries(metricSynonyms) as [keyof typeof metricSynonyms, string[]][]) {
-		const matched = synonyms.some((syn) =>
-			new RegExp(
-				`(^|\\n)[ \\t#>*-]*\\*{0,2}${syn
-					.trim()
-					.replace(/\s+/g, '[\\s_]+')}\\*{0,2}\\s*[:：]?\\s*\\(?\\s*1\\s*\\)?\\s*(\\n|$)`,
-				"i"
-			).test(text)
-		);
-		qualityFactors[key] = matched ? 1 : 0;
-		if (matched) total++;
-	}
+    let total = 0;
+    const qualityFactors: Record<keyof typeof metricSynonyms, number> = {
+      unambiguous: 0,
+      measurable: 0,
+      individuallyCompleted: 0,
+    };
 
+    for (const [key, synonyms] of Object.entries(metricSynonyms) as [keyof typeof metricSynonyms, string[]][]) {
+      const matched = synonyms.some((syn) =>
+        new RegExp(`(^|\\n)[ \\t#>*-]*\\*{0,2}${syn.replace(/\s+/g, '[\\s_]+')}\\*{0,2}\\s*[:：]?\\s*\\(?\\s*1\\s*\\)?\\s*(\\n|$)`, "i").test(text)
+      );
+      qualityFactors[key] = matched ? 1 : 0;
+      if (matched) total++;
+    }
+
+    // 🔍 Extract Suggested Requirement & Explanation
+    let parsed = "";
     if (total !== 3) {
+  const match = text.match(/(?:\*\*\s*)?Suggested requirement\s*[:：]?\s*(.*?)\s*(?:\n+|$)(?:\*\*\s*)?Explanation\s*[:：]?\s*(.+)?/is);
+  let parsed = "";
+  if (match) {
+    const suggested = match[1]?.trim();
+    const explanation = match[2]?.trim();
+    parsed += suggested ? `Suggested requirement: ${suggested}\n` : "";
+    parsed += explanation ? `Explanation: ${explanation}` : "";
+  } else {
+    parsed = text.trim();
+  }
+  text = parsed;
+}
+ else {
+      // Clean high quality response
       text = text
-        .replace(
-          /^\s*(Unambiguous|Unambigious|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\s*[:：]?\s*\(?\s*1\s*\)?\s*$/gim,
-          ""
-        )
-        .replace(
-          /^\s*(\d+\.|[-–*])?\s*\*?\*?(Unambiguous|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\*?\*?\s*[:：]?\s*\(?1\)?\)?\s*.*(?:\r?\n(\s*[-–•*] .*|.*))*$/gim,
-          ""
-        )
-        .replace(/^[\s\S]*?(?=\bAdvice:|\*\*?Advice)/i, "")
+        .replace(/^Your requirement:.*$/gim, "")
+        .replace(/^Unambiguous:\s*\d+/gim, "")
+        .replace(/^Measurable:\s*\d+/gim, "")
+        .replace(/^Individually complete:\s*\d+/gim, "")
         .replace(/\n{2,}/g, "\n")
-        .replace(/(^|\n)(Corrected requirement:)/i, "$1**$2**")
-        .trim();
-    } else {
-      text = text
-        .replace(/^\s*(AI Validation|Analysis|Requirement Assessment|Advice)\s*[:：]?\s*$/gim, "")
-        .replace(/^\s*\*{1,2}\s*(AI Validation|Analysis|Requirement Assessment|Advice)\s*\*{1,2}\s*[:：]?\s*$/gim, "")
-        .replace(
-          /^\s*(Unambiguous|Unambigious|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\s*[:：]?\s*\(?\s*1\s*\)?\s*$/gim,
-          ""
-        )
-        .replace(
-          /^\s*(\d+\.|[-–*])?\s*\*?\*?(Unambiguous|Ambiguity|Measurable|Measurability|Individually Complete|Individual Completeness)\*?\*?\s*[:：]?\s*\(?1\)?\)?\s*.*(?:\r?\n(\s*[-–•*] .*|.*))*$/gim,
-          ""
-        )
-        .replace(/^\s*The requirement is of high quality\.*\s*$/gim, "")
-        .replace(/^Corrected requirement:\s*.+$/gim, "")
-        .replace(/\n{2,}/g, "\n")
-        .replace(/^\*\*(High[- ]Quality|Conclusion|Requirement Assessment)\*\*:?$/gim, "")
-        .replace(/^Requirement:\s?.*$/gim, "")
-        .replace(/^The requirement is (clear|of high quality|clear, measurable, and complete)\.?$/gim, "")
         .trim();
     }
-	return NextResponse.json({
-		analysis: text,
-		score: total,
-		...qualityFactors, // includes unambiguous, measurable, individuallyCompleted
-	});
 
-	  
+    return NextResponse.json({
+      analysis: text,
+      score: total,
+      ...qualityFactors,
+    });
+
   } catch (e: any) {
     console.error("❌ Server error:", e);
     return NextResponse.json({ error: e.message }, { status: 500 });

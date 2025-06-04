@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Modal,
   ModalDialog,
@@ -9,20 +9,22 @@ import {
   Box,
   FormControl,
   FormLabel,
+  Checkbox,
+  Textarea,
+  Stack,
+  Divider,
 } from "@mui/joy";
-import { ContentCopy, CheckCircle, Warning } from "@mui/icons-material";
+import { Warning, CheckCircle } from "@mui/icons-material";
 import ReactMarkdown from "react-markdown";
 
 type Props = {
   open: boolean;
-  onClose: () => void;
+  onClose: (metadata: { wasIgnoreClicked: boolean; wasUseSuggestionClicked: boolean }) => void;
   loading: boolean;
-  result: string;
+  original: string;
+  suggestion: string;
+  explanation: string;
   score: number;
-  rating?: number;
-  onRatingChange?: (val: number) => void;
-  onCopy?: () => void;
-  copyButton?: boolean;
 };
 
 const iconMap: Record<number, React.ReactNode> = {
@@ -39,98 +41,167 @@ const scoreTextMap: Record<number, string> = {
   0: "Must be fixed",
 };
 
-const ratingLabels = [
-  { value: 0, label: "Very Poor", color: "#ef4444" },
-  { value: 1, label: "Poor", color: "#f97316" },
-  { value: 2, label: "Fair", color: "#facc15" },
-  { value: 3, label: "Good", color: "#84cc16" },
-  { value: 4, label: "Very Good", color: "#22c55e" },
-  { value: 5, label: "Excellent", color: "#10b981" },
-];
-
 const AiValidationModal = ({
   open,
   onClose,
   loading,
-  result,
+  original,
+  suggestion,
+  explanation,
   score,
-  rating,
-  onRatingChange,
-  onCopy,
-  copyButton,
 }: Props) => {
   const icon = iconMap[score];
   const scoreText = scoreTextMap[score];
-  const showCopyButton = copyButton && score !== 3;
+  const [feedback, setFeedback] = useState<string[]>([]);
+  const [other, setOther] = useState("");
+
+  const [wasIgnoreClicked, setWasIgnoreClicked] = useState(false);
+  const [wasUseSuggestionClicked, setWasUseSuggestionClicked] = useState(false);
+
+  const handleCheckboxChange = (value: string) => {
+    setFeedback((prev) =>
+      prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value]
+    );
+  };
+
+  const handleClose = () => {
+    onClose({
+      wasIgnoreClicked,
+      wasUseSuggestionClicked,
+    });
+  };
+
+  const showSuggestion = score < 3;
 
   return (
-    <Modal open={open} onClose={onClose}>
-      <ModalDialog sx={{ maxWidth: "90vw", overflowY: "auto" }}>
+    <Modal open={open} onClose={handleClose}>
+      <ModalDialog sx={{ maxWidth: "800px", overflowY: "auto", p: 3 }}>
         <Typography level="h4" display="flex" alignItems="center" gap={1}>
-          {!loading && icon} AI Validation
+          {!loading && icon} Results of AI Validation
         </Typography>
 
         {loading ? (
-          <CircularProgress />
+          <Box display="flex" justifyContent="center" mt={4}>
+            <CircularProgress />
+          </Box>
         ) : (
-          <>
+          <Stack spacing={3} mt={2}>
             {scoreText && (
-              <Typography level="body-sm" sx={{ mt: 1, color: "text.secondary" }}>
+              <Typography level="body-sm" sx={{ color: "text.secondary" }}>
                 {scoreText}
               </Typography>
             )}
-            <Box
-              sx={{
-                mt: 2,
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-word",
-                maxHeight: "60vh",
-                overflowY: "auto",
-              }}
-            >
-              <ReactMarkdown>{result}</ReactMarkdown>
+
+            <Divider />
+
+            <Box>
+              <Typography level="title-md" sx={{ mb: 1 }}>
+                Your Requirement
+              </Typography>
+              <Box
+                sx={{
+                  whiteSpace: "pre-wrap",
+                  wordBreak: "break-word",
+                  backgroundColor: "#f1f5f9",
+                  p: 1.5,
+                  borderRadius: "sm",
+                  border: "1px solid #e2e8f0",
+                }}
+              >
+                <ReactMarkdown>{original}</ReactMarkdown>
+              </Box>
             </Box>
 
-            {/* Rating buttons */}
-            <FormControl sx={{ mt: 3 }}>
-              <FormLabel sx={{ fontWeight: "600", mb: 1 }}>How would you rate the AI response (0–5)</FormLabel>
-              <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-                {ratingLabels.map((item) => (
-                  <Button
-                    key={item.value}
-                    size="sm"
-                    variant={rating === item.value ? "solid" : "soft"}
-                    onClick={() => onRatingChange?.(item.value)}
+            {showSuggestion && (
+              <>
+                <Box>
+                  <Typography level="title-md" sx={{ mb: 1 }}>
+                    Suggested Requirement
+                  </Typography>
+                  <Box
                     sx={{
-                      backgroundColor: rating === item.value ? item.color : "#f1f5f9",
-                      color: rating === item.value ? "#fff" : "#000",
-                      "&:hover": {
-                        backgroundColor: item.color,
-                        color: "#fff",
-                      },
-                      minWidth: 90,
-                      textTransform: "none",
-                      fontWeight: 500,
+                      whiteSpace: "pre-wrap",
+                      wordBreak: "break-word",
+                      backgroundColor: "#ecfdf5",
+                      p: 1.5,
+                      borderRadius: "sm",
+                      border: "1px solid #d1fae5",
                     }}
                   >
-                    {item.label}
-                  </Button>
-                ))}
-              </Box>
-            </FormControl>
+                    <ReactMarkdown>{suggestion}</ReactMarkdown>
+                  </Box>
+                </Box>
 
-            {showCopyButton && (
-              <Button
-                variant="soft"
-                size="sm"
-                startDecorator={<ContentCopy />}
-                onClick={onCopy}
-                sx={{ mt: 3 }}
-              >
-                Copy Corrected Requirement
-              </Button>
+                <Box>
+                  <Typography level="title-md" sx={{ mb: 1 }}>
+                    Explanation
+                  </Typography>
+                  <Box
+                    sx={{
+                      whiteSpace: "pre-wrap",
+                      wordBreak: "break-word",
+                      backgroundColor: "#fef9c3",
+                      p: 1.5,
+                      borderRadius: "sm",
+                      border: "1px solid #fde68a",
+                    }}
+                  >
+                    <ReactMarkdown>{explanation}</ReactMarkdown>
+                  </Box>
+                </Box>
+
+                <Divider />
+
+                <FormControl>
+                  <FormLabel sx={{ fontWeight: 600 }}>Your Feedback</FormLabel>
+                  <Stack spacing={1} mt={1}>
+                    {[
+                      "It is not relevant",
+                      "Suggestion is of low quality",
+                      "I don’t like the way the requirement is documented",
+                      "Incorrect to the requirement content",
+                    ].map((label) => (
+                      <Checkbox
+                        key={label}
+                        checked={feedback.includes(label)}
+                        onChange={() => handleCheckboxChange(label)}
+                        label={label}
+                      />
+                    ))}
+                    <Textarea
+                      minRows={2}
+                      placeholder="Other feedback..."
+                      value={other}
+                      onChange={(e) => setOther(e.target.value)}
+                    />
+                  </Stack>
+                </FormControl>
+
+                <Stack direction="row" spacing={2} justifyContent="flex-end">
+                  <Button
+                    variant="outlined"
+                    color="neutral"
+                    onClick={() => {
+                      setWasIgnoreClicked(true);
+                      handleClose();
+                    }}
+                  >
+                    Ignore
+                  </Button>
+                  <Button
+                    variant="solid"
+                    color="success"
+                    onClick={() => {
+                      setWasUseSuggestionClicked(true);
+                      handleClose();
+                    }}
+                  >
+                    Use Suggested Requirement
+                  </Button>
+                </Stack>
+              </>
             )}
-          </>
+          </Stack>
         )}
       </ModalDialog>
     </Modal>

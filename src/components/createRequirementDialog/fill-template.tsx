@@ -48,7 +48,7 @@ import AiValidationModal from "@/components/AiValidationModal";
 const actors = ["Guest", "Student", "Entrepreneur", "Admin", "payments.com", "eUniversity system"];
 
 function renderRequirementContent(elements: RequirementElement[]): string {
-	
+
 	return elements
 		.map((el) => {
 			console.log("element type:", el.elementType);
@@ -156,16 +156,16 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 
 		const rawRequirement = `${renderRequirementContent(requirement.content)}`;
 		const templateUsed = !requirement.custom ? initialRequirement.name : "(custom template)";
-		
+
 		console.log("📄 Template used:", templateUsed);
 		console.log("🧾 Raw requirement content:\n", rawRequirement);
-		
+
 		const payload = {
 			systemDescription,
 			actors,
 			requirement: rawRequirement,
 		};
-		
+
 
 		console.log("📤 Validating with payload:", payload);
 
@@ -197,6 +197,8 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 					unambiguous: data.unambiguous ?? 0,
 					measurable: data.measurable ?? 0,
 					individuallyCompleted: data.individuallyCompleted ?? 0,
+					wasIgnoreClicked: false,            
+  					wasUseSuggestionClicked: false,  
 				}),
 			});
 			const logData = await logRes.json();
@@ -211,24 +213,30 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 		setLoading(false);
 	};
 
-	const handleModalClose = async () => {
+	const handleModalClose = async ({ wasIgnoreClicked, wasUseSuggestionClicked }) => {
+		console.log("Was Ignore Clicked?", wasIgnoreClicked);
+		console.log("Was Use Suggested Clicked?", wasUseSuggestionClicked);
 		setValidationModalOpen(false);
-		if (logId && rating !== -1) {
+		//if (logId) {
 			try {
 				await fetch("/api/log-validation", {
 					method: "PUT",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ id: logId, rating }),
+					body: JSON.stringify({
+						id: logId, rating,
+						wasIgnoreClicked,
+						wasUseSuggestionClicked,
+					}),
 				});
-				console.log("✅ Rating updated");
+				console.log("Buttons info updated");
 			} catch (err) {
-				console.error("❌ Failed to update rating:", err);
+				console.error("❌ Failed to update button info:", err);
 			}
-		}
+		//}
 	};
 
 
-	const handleCopy = async () => {
+	const handleCopy = async ({ wasIgnoreClicked, wasUseSuggestionClicked }) => {
 		if (validationResult) {
 			const match = validationResult.match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
 			const corrected = match ? match[1].trim() : validationResult.trim();
@@ -236,6 +244,23 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 			await navigator.clipboard.writeText(corrected);
 			setCopied(true);
 			setTimeout(() => setCopied(false), 2000);
+
+			//if (logId) {
+			try {
+				await fetch("/api/log-validation", {
+					method: "PUT",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						id: logId, rating,
+						wasIgnoreClicked,
+						wasUseSuggestionClicked,
+					}),
+				});
+				console.log("Buttons info updated");
+			} catch (err) {
+				console.error("❌ Failed to update button info:", err);
+			}
+		//}
 		}
 	};
 
@@ -311,13 +336,19 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 					open={validationModalOpen}
 					onClose={handleModalClose}
 					loading={loading}
-					result={validationResult}
+					original={renderRequirementContent(requirement.content)}
+					suggestion={(() => {
+						const match = validationResult.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
+						return match ? match[1].trim() : "";
+					})()}
+					explanation={(() => {
+						const match = validationResult.match(/(?:\*\*)?Explanation(?:\*\*)?:\s*(.+)/i);
+						return match ? match[1].trim() : "";
+					})()}
 					score={validationScore}
-					rating={rating}
-					onRatingChange={setRating}
-					onCopy={handleCopy}
-					copyButton={true}
+					onUseSuggestion={handleCopy}
 				/>
+
 
 
 				<Snackbar
