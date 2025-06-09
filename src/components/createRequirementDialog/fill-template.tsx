@@ -23,6 +23,8 @@ import DialogNavigationButtons from "../ui/dialog-navigation-buttons";
 import { useRouter } from "next/navigation";
 import { CheckRounded, ContentCopy } from "@mui/icons-material";
 import AiValidationModal from "@/components/AiValidationModal";
+import AutoAwesomeIcon from "@mui/icons-material/AutoAwesome";
+import { IconButton, Tooltip } from "@mui/joy";
 
 //const systemDescription = localStorage.getItem("projectDescription") || "";
 
@@ -102,6 +104,11 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 	const [validationScore, setValidationScore] = useState(-1);
 	const [rating, setRating] = useState<number>(-1);
 	const [logId, setLogId] = useState<string | null>(null);
+	const [wasIgnoreClicked, setWasIgnoreClicked] = useState(false);
+	const [wasUseSuggestionClicked, setWasUseSuggestionClicked] = useState(false);
+	const [feedback, setFeedback] = useState<string[]>([]);
+	const [otherFeedback, setOtherFeedback] = useState<string>("");
+
 
 	const [name, setName] = useState<string>(requirement.name);
 
@@ -156,18 +163,14 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 
 		const rawRequirement = `${renderRequirementContent(requirement.content)}`;
 		const templateUsed = !requirement.custom ? initialRequirement.name : "(custom template)";
-
 		console.log("📄 Template used:", templateUsed);
 		console.log("🧾 Raw requirement content:\n", rawRequirement);
 
 		const payload = {
 			systemDescription,
-			actors,
+			//actors,
 			requirement: rawRequirement,
 		};
-
-
-		console.log("📤 Validating with payload:", payload);
 
 		try {
 			const response = await fetch("/api/validate", {
@@ -177,8 +180,19 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 			});
 			const data = await response.json();
 			console.log("✅ Validation response:", data);
-			setValidationResult(data.analysis ?? data.error ?? "No result");
-			setValidationScore(data.score ?? -1);
+
+			const message = data.analysis ?? data.error ?? "No result";
+			const isNonNFRMessage = message.trim().toLowerCase().includes("try better");
+
+			if (isNonNFRMessage) {
+				setValidationResult("Please try better, it is not NFR :(");
+				setValidationScore(3); // green icon to indicate okay, but nothing actionable
+				setRating(0);
+			} else {
+				setValidationResult(message);
+				setValidationScore(data.score ?? -1);
+			}
+
 			const logRes = await fetch("/api/log-validation", {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
@@ -187,23 +201,25 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 					systemDescription,
 					rawRequirement: `${name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
 					templateName: !requirement.custom ? initialRequirement.name : undefined,
-					validationResponse: data.analysis ?? data.error ?? "No result",
+					validationResponse: message,
 					validationScore: data.score ?? -1,
-					rating: rating !== -1 ? rating : undefined,
+					rating: isNonNFRMessage ? 3 : rating,
 					correctedRequirement: (() => {
-						const match = (data.analysis ?? "").match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
+						if (isNonNFRMessage) return undefined;
+						const match = message.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
 						return match ? match[1].trim() : undefined;
 					})(),
 					unambiguous: data.unambiguous ?? 0,
 					measurable: data.measurable ?? 0,
 					individuallyCompleted: data.individuallyCompleted ?? 0,
-					wasIgnoreClicked: false,            
-  					wasUseSuggestionClicked: false,  
+					wasIgnoreClicked: false,
+					wasUseSuggestionClicked: false,
+					feedback,
+					otherFeedback,
 				}),
 			});
 			const logData = await logRes.json();
 			if (logData?.id) setLogId(logData.id);
-
 		} catch (err) {
 			console.error("❌ Validation error:", err);
 			setValidationResult("Validation failed.");
@@ -211,59 +227,76 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 		}
 
 		setLoading(false);
+
 	};
 
-	const handleModalClose = async ({ wasIgnoreClicked, wasUseSuggestionClicked }) => {
-		console.log("Was Ignore Clicked?", wasIgnoreClicked);
-		console.log("Was Use Suggested Clicked?", wasUseSuggestionClicked);
+	const handleModalClose = async ({
+		wasIgnoreClicked,
+		feedback,
+		otherFeedback,
+	}: {
+		wasIgnoreClicked: boolean;
+		feedback: string[];
+		otherFeedback: string;
+	}) => {
 		setValidationModalOpen(false);
-		//if (logId) {
-			try {
-				await fetch("/api/log-validation", {
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						id: logId, rating,
-						wasIgnoreClicked,
-						wasUseSuggestionClicked,
-					}),
-				});
-				console.log("Buttons info updated");
-			} catch (err) {
-				console.error("❌ Failed to update button info:", err);
-			}
-		//}
-	};
+		setWasIgnoreClicked(wasIgnoreClicked);
 
-
-	const handleCopy = async ({ wasIgnoreClicked, wasUseSuggestionClicked }) => {
-		if (validationResult) {
-			const match = validationResult.match(/(?:\*\*)?Corrected requirement(?:\*\*)?:\s*(.+)/i);
-			const corrected = match ? match[1].trim() : validationResult.trim();
-
-			await navigator.clipboard.writeText(corrected);
-			setCopied(true);
-			setTimeout(() => setCopied(false), 2000);
-
-			//if (logId) {
-			try {
-				await fetch("/api/log-validation", {
-					method: "PUT",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						id: logId, rating,
-						wasIgnoreClicked,
-						wasUseSuggestionClicked,
-					}),
-				});
-				console.log("Buttons info updated");
-			} catch (err) {
-				console.error("❌ Failed to update button info:", err);
-			}
-		//}
+		try {
+			await fetch("/api/log-validation", {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					id: logId,
+					rating,
+					wasIgnoreClicked,
+					wasUseSuggestionClicked,
+					feedback,
+					otherFeedback,
+				}),
+			});
+			console.log("📝 Modal close update sent.");
+		} catch (err) {
+			console.error("❌ Failed to update log on close:", err);
 		}
 	};
 
+	const handleCopy = async ({
+		wasUseSuggestionClicked,
+		feedback,
+		otherFeedback,
+	}: {
+		wasUseSuggestionClicked: boolean;
+		feedback: string[];
+		otherFeedback: string;
+	}) => {
+		setWasUseSuggestionClicked(wasUseSuggestionClicked);
+
+		const match = validationResult.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
+		const corrected = match ? match[1].trim() : validationResult.trim();
+
+		await navigator.clipboard.writeText(corrected);
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+
+		try {
+			await fetch("/api/log-validation", {
+				method: "PUT",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					id: logId,
+					rating,
+					wasIgnoreClicked,
+					wasUseSuggestionClicked,
+					feedback,
+					otherFeedback,
+				}),
+			});
+			console.log("📥 Use suggestion update sent.");
+		} catch (err) {
+			console.error("❌ Failed to update log on use suggestion:", err);
+		}
+	};
 
 
 	const handleGotoRequirement = () => {
@@ -317,6 +350,17 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 						</>
 					)}
 				</Stack>
+				<Tooltip title="Validate with AI" placement="top">
+					<IconButton
+						onClick={handleValidate}
+						color="primary"
+						variant="solid"
+						size="sm"
+						sx={{ width: "fit-content" }}
+					>
+						<AutoAwesomeIcon />
+					</IconButton>
+				</Tooltip>
 				<form onSubmit={handleSubmit}>
 					<FormControl error={error} sx={{ mb: "1rem" }}>
 						<FormLabel sx={{ fontWeight: "600" }} htmlFor="requirement-name">
@@ -328,27 +372,36 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 					<DialogNavigationButtons submit loading={loading} />
 				</form>
 
-				<Button onClick={handleValidate} color="primary" variant="solid" sx={{ width: "fit-content" }}>
-					Validate with AI
-				</Button>
 
-				<AiValidationModal
-					open={validationModalOpen}
-					onClose={handleModalClose}
-					loading={loading}
-					original={renderRequirementContent(requirement.content)}
-					suggestion={(() => {
-						const match = validationResult.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
-						return match ? match[1].trim() : "";
-					})()}
-					explanation={(() => {
-						const match = validationResult.match(/(?:\*\*)?Explanation(?:\*\*)?:\s*(.+)/i);
-						return match ? match[1].trim() : "";
-					})()}
-					score={validationScore}
-					onUseSuggestion={handleCopy}
-				/>
-
+<AiValidationModal
+	open={validationModalOpen}
+	loading={loading}
+	validationId={logId ?? ""}
+	original={renderRequirementContent(requirement.content)}
+	suggestion={(() => {
+		const match = validationResult.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
+		return match ? match[1].trim() : "";
+	})()}
+	explanation={(() => {
+		const match = validationResult.match(/(?:\*\*)?Explanation(?:\*\*)?:([\s\S]*)/i);
+		return match ? match[1].trim() : "";
+	})()}
+	score={validationScore}
+	onClose={(data) => {
+		const wasIgnoreClicked = data?.wasIgnoreClicked ?? false;
+		const feedback = data?.feedback ?? [];
+		const otherFeedback = data?.otherFeedback ?? "";
+		setWasIgnoreClicked(wasIgnoreClicked);
+		handleModalClose({ wasIgnoreClicked, feedback, otherFeedback });
+	}}
+	onUseSuggestion={(data) => {
+		const wasUseSuggestionClicked = data?.wasUseSuggestionClicked ?? false;
+		const feedback = data?.feedback ?? [];
+		const otherFeedback = data?.otherFeedback ?? "";
+		setWasUseSuggestionClicked(wasUseSuggestionClicked);
+		handleCopy({ wasUseSuggestionClicked, feedback, otherFeedback });
+	}}
+/>
 
 
 				<Snackbar

@@ -29,6 +29,8 @@ type Log = {
     rating?: number;
     wasIgnoreClicked?: boolean;
     wasUseSuggestionClicked?: boolean;
+    feedback?: string[];
+    otherFeedback?: string;
 };
 
 export default function ValidationLogsPage() {
@@ -87,6 +89,8 @@ export default function ValidationLogsPage() {
             "rating",
             "wasIgnoreClicked",
             "wasUseSuggestionClicked",
+            "feedback",
+            "otherFeedback",
             "rawRequirement",
             "correctedRequirement",
             "timestamp",
@@ -95,7 +99,7 @@ export default function ValidationLogsPage() {
             header
                 .map((key) => {
                     const val = (log as any)[key];
-                    return `"${String(val ?? "").replace(/"/g, '""')}"`;
+                    return `"${String(Array.isArray(val) ? val.join("; ") : val ?? "").replace(/"/g, '""')}"`;
                 })
                 .join(",")
         );
@@ -140,14 +144,7 @@ export default function ValidationLogsPage() {
                 </Button>
             </Stack>
 
-            <Sheet
-                variant="outlined"
-                sx={{
-                    borderRadius: "md",
-                    boxShadow: "md",
-                    overflow: "auto",
-                }}
-            >
+            <Sheet variant="outlined" sx={{ borderRadius: "md", boxShadow: "md", overflow: "auto" }}>
                 <Table
                     borderAxis="xBetween"
                     stickyHeader
@@ -171,6 +168,7 @@ export default function ValidationLogsPage() {
                             <th>Rating</th>
                             <th>Ignore Button?</th>
                             <th>Suggest Button?</th>
+                            <th>Feedback</th>
                             <th>Original</th>
                             <th>Suggested</th>
                             <th>Date</th>
@@ -180,154 +178,63 @@ export default function ValidationLogsPage() {
                         {paginatedLogs.map((log, index) => {
                             const correctedKey = `corrected-${index}`;
                             const originalKey = `original-${index}`;
-
                             return (
                                 <tr key={index}>
+                                    <td><Tooltip title={log.userId}><Typography level="body-sm" sx={{ maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{log.userId}</Typography></Tooltip></td>
+                                    <td><Tooltip title={log.templateName || "—"}><Typography level="body-sm" sx={{ maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{log.templateName || "—"}</Typography></Tooltip></td>
+                                    <td><Tooltip variant="soft" color="neutral" title={<Stack spacing={0.5}><Typography level="body-xs">Unambiguous: {log.unambiguous}</Typography><Typography level="body-xs">Measurable: {log.measurable}</Typography><Typography level="body-xs">Individually Completed: {log.individuallyCompleted}</Typography></Stack>} arrow placement="top"><Chip variant="soft" color={log.validationScore >= 8 ? "success" : log.validationScore >= 5 ? "warning" : "danger"} sx={{ cursor: "help" }}>{log.validationScore}</Chip></Tooltip></td>
+                                    <td>{log.rating !== undefined ? (<Chip variant="soft" color={getRatingColor(log.rating)}>{log.rating}</Chip>) : (<Typography level="body-sm" sx={{ color: "text.tertiary" }}>—</Typography>)}</td>
+                                    <td><Chip variant="soft" color={log.wasIgnoreClicked ? "danger" : "neutral"}>{log.wasIgnoreClicked ? "Yes" : "No"}</Chip></td>
+                                    <td><Chip variant="soft" color={log.wasUseSuggestionClicked ? "success" : "neutral"}>{log.wasUseSuggestionClicked ? "Yes" : "No"}</Chip></td>
                                     <td>
-                                        <Tooltip title={log.userId}>
-                                            <Typography
-                                                level="body-sm"
-                                                sx={{
-                                                    maxWidth: 150,
-                                                    overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    whiteSpace: "nowrap",
-                                                }}
-                                            >
-                                                {log.userId}
-                                            </Typography>
-                                        </Tooltip>
-                                    </td>
-                                    <td>
-                                        <Tooltip title={log.templateName || "—"}>
-                                            <Typography
-                                                level="body-sm"
-                                                sx={{
-                                                    maxWidth: 150,
-                                                    overflow: "hidden",
-                                                    textOverflow: "ellipsis",
-                                                    whiteSpace: "nowrap",
-                                                }}
-                                            >
-                                                {log.templateName || "—"}
-                                            </Typography>
-                                        </Tooltip>
-                                    </td>
-                                    <td>
-                                        <Tooltip
-                                            variant="soft"
-                                            color="neutral"
-                                            title={
-                                                <Stack spacing={0.5}>
-                                                    <Typography level="body-xs">Unambiguous: {log.unambiguous}</Typography>
-                                                    <Typography level="body-xs">Measurable: {log.measurable}</Typography>
-                                                    <Typography level="body-xs">Individually Completed: {log.individuallyCompleted}</Typography>
-                                                </Stack>
-                                            }
-                                            arrow
-                                            placement="top"
-                                        >
-                                            <Chip
-                                                variant="soft"
-                                                color={
-                                                    log.validationScore >= 8
-                                                        ? "success"
-                                                        : log.validationScore >= 5
-                                                            ? "warning"
-                                                            : "danger"
+                                        {(log.feedback && log.feedback.length > 0) || log.otherFeedback ? (
+                                            <Tooltip
+                                                variant="outlined"
+                                                arrow
+                                                placement="top-start"
+                                                title={
+                                                    <Stack spacing={0.5} sx={{ maxWidth: 300 }}>
+                                                        {log.feedback?.length > 0 && (
+                                                            <>
+                                                                <Typography level="body-xs" fontWeight="bold">Feedback:</Typography>
+                                                                <ul style={{ paddingLeft: '1rem', margin: 0 }}>
+                                                                    {log.feedback.map((f, i) => (
+                                                                        <li key={i} style={{ fontSize: '12px', lineHeight: 1.4 }}>{f}</li>
+                                                                    ))}
+                                                                </ul>
+                                                            </>
+                                                        )}
+                                                        {log.otherFeedback && (
+                                                            <>
+                                                                <Typography level="body-xs" fontWeight="bold">Other:</Typography>
+                                                                <Typography level="body-xs" sx={{ wordBreak: 'break-word' }}>
+                                                                    {log.otherFeedback}
+                                                                </Typography>
+                                                            </>
+                                                        )}
+                                                    </Stack>
                                                 }
-                                                sx={{ cursor: "help" }}
                                             >
-                                                {log.validationScore}
-                                            </Chip>
-                                        </Tooltip>
-                                    </td>
-                                    <td>
-                                        {log.rating !== undefined ? (
-                                            <Chip variant="soft" color={getRatingColor(log.rating)}>{log.rating}</Chip>
+                                                <Typography
+                                                    level="body-sm"
+                                                    sx={{
+                                                        maxWidth: 150,
+                                                        overflow: "hidden",
+                                                        textOverflow: "ellipsis",
+                                                        whiteSpace: "nowrap",
+                                                        cursor: "help",
+                                                    }}
+                                                >
+                                                    {log.feedback?.length || log.otherFeedback ? "View" : "—"}
+                                                </Typography>
+                                            </Tooltip>
                                         ) : (
                                             <Typography level="body-sm" sx={{ color: "text.tertiary" }}>—</Typography>
                                         )}
                                     </td>
-                                    <td>
-                                        <Chip
-                                            variant="soft"
-                                            color={log.wasIgnoreClicked ? "danger" : "neutral"}
-                                        >
-                                            {log.wasIgnoreClicked ? "Yes" : "No"}
-                                        </Chip>
-                                    </td>
-                                    <td>
-                                        <Chip
-                                            variant="soft"
-                                            color={log.wasUseSuggestionClicked ? "success" : "neutral"}
-                                        >
-                                            {log.wasUseSuggestionClicked ? "Yes" : "No"}
-                                        </Chip>
-                                    </td>
-                                    <td>
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                                            <Tooltip title={log.rawRequirement} placement="top-start">
-                                                <Typography
-                                                    level="body-sm"
-                                                    sx={{
-                                                        maxWidth: 250,
-                                                        overflow: "hidden",
-                                                        textOverflow: "ellipsis",
-                                                        whiteSpace: "nowrap",
-                                                    }}
-                                                >
-                                                    {log.rawRequirement}
-                                                </Typography>
-                                            </Tooltip>
-                                            <Tooltip title="Copy original">
-                                                <IconButton
-                                                    size="sm"
-                                                    variant="soft"
-                                                    onClick={() =>
-                                                        handleCopy(log.rawRequirement || "", originalKey)
-                                                    }
-                                                >
-                                                    <ContentCopy fontSize="small" />
-                                                </IconButton>
-                                            </Tooltip>
-                                        </Box>
-                                    </td>
-                                    <td>
-                                        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                                            <Tooltip title={log.correctedRequirement || "—"} placement="top-start">
-                                                <Typography
-                                                    level="body-sm"
-                                                    sx={{
-                                                        maxWidth: 250,
-                                                        overflow: "hidden",
-                                                        textOverflow: "ellipsis",
-                                                        whiteSpace: "nowrap",
-                                                    }}
-                                                >
-                                                    {log.correctedRequirement || "—"}
-                                                </Typography>
-                                            </Tooltip>
-                                            {log.correctedRequirement && (
-                                                <Tooltip title="Copy corrected">
-                                                    <IconButton
-                                                        size="sm"
-                                                        variant="soft"
-                                                        onClick={() =>
-                                                            handleCopy(log.correctedRequirement!, correctedKey)
-                                                        }
-                                                    >
-                                                        <ContentCopy fontSize="small" />
-                                                    </IconButton>
-                                                </Tooltip>
-                                            )}
-                                        </Box>
-                                    </td>
-                                    <td>
-                                        <Typography level="body-xs">
-                                            {new Date(log.timestamp).toLocaleString()}
-                                        </Typography>
-                                    </td>
+                                    <td><Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><Tooltip title={log.rawRequirement} placement="top-start"><Typography level="body-sm" sx={{ maxWidth: 250, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{log.rawRequirement}</Typography></Tooltip><Tooltip title="Copy original"><IconButton size="sm" variant="soft" onClick={() => handleCopy(log.rawRequirement || "", originalKey)}><ContentCopy fontSize="small" /></IconButton></Tooltip></Box></td>
+                                    <td><Box sx={{ display: "flex", alignItems: "center", gap: 1 }}><Tooltip title={log.correctedRequirement || "—"} placement="top-start"><Typography level="body-sm" sx={{ maxWidth: 250, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{log.correctedRequirement || "—"}</Typography></Tooltip>{log.correctedRequirement && (<Tooltip title="Copy corrected"><IconButton size="sm" variant="soft" onClick={() => handleCopy(log.correctedRequirement!, correctedKey)}><ContentCopy fontSize="small" /></IconButton></Tooltip>)}</Box></td>
+                                    <td><Typography level="body-xs">{new Date(log.timestamp).toLocaleString()}</Typography></td>
                                 </tr>
                             );
                         })}

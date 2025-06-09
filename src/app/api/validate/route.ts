@@ -20,17 +20,28 @@ export async function POST(req: NextRequest) {
     });
 
     const run = await openai.beta.threads.runs.create(thread.id, {
-      assistant_id: ASSISTANT_ID,
+      assistant_id: ASSISTANT_ID
     });
 
+    console.log("🧠 Assistant ID used:", ASSISTANT_ID);
+console.log("📎 Thread created:", thread.id);
+
+
     let status = run.status;
+
+    console.log("🧮 Estimated prompt length:", userMessage.length);
+
     while (status !== "completed" && status !== "failed") {
       await new Promise((res) => setTimeout(res, 1000));
       const updatedRun = await openai.beta.threads.runs.retrieve(thread.id, run.id);
       status = updatedRun.status;
     }
 
-    if (status === "failed") throw new Error("Assistant run failed");
+    if (status === "failed") {
+  const runInfo = await openai.beta.threads.runs.retrieve(thread.id, run.id);
+  console.error("❌ Run failed detail:", JSON.stringify(runInfo, null, 2));
+  throw new Error("Assistant run failed");
+}
 
     const messages = await openai.beta.threads.messages.list(thread.id);
     const last = messages.data.find((msg) => msg.role === "assistant");
@@ -62,9 +73,19 @@ export async function POST(req: NextRequest) {
 
     // 🔍 Extract Suggested Requirement & Explanation
     let parsed = "";
-    if (total !== 3) {
-  const match = text.match(/(?:\*\*\s*)?Suggested requirement\s*[:：]?\s*(.*?)\s*(?:\n+|$)(?:\*\*\s*)?Explanation\s*[:：]?\s*(.+)?/is);
-  let parsed = "";
+    // Special NFR rejection message case
+if (/please try better, it is not nfr\s*[:(]/i.test(text)) {
+  return NextResponse.json({
+    analysis: "Please try better, it is not NFR :(",
+    score: 0,
+    unambiguous: 0,
+    measurable: 0,
+    individuallyCompleted: 0,
+  });
+}
+else if (total !== 3) {
+ const match = text.match(/(?:\*\*\s*)?Suggested requirement\s*[:：]?\s*([\s\S]*?)\n+(?:\*\*\s*)?Explanation\s*[:：]?\s*([\s\S]*)/i);
+ let parsed = "";
   if (match) {
     const suggested = match[1]?.trim();
     const explanation = match[2]?.trim();
