@@ -28,6 +28,11 @@ const Profile = () => {
 						<Typography level="title-md">ID</Typography>
 						<Typography level="h4">{user?.id}</Typography>
 					</Stack>
+
+					<Stack gap={0}>
+						<Typography level="title-md">Rola użytkownika</Typography>
+						<Typography level="h4">{user?.role}</Typography>
+					</Stack>
 					<Button
 						color="primary"
 						onClick={handleLogout}
