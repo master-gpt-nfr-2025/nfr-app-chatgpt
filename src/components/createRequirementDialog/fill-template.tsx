@@ -242,23 +242,6 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 		setValidationModalOpen(false);
 		setWasIgnoreClicked(wasIgnoreClicked);
 
-		try {
-			await fetch("/api/log-validation", {
-				method: "PUT",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					id: logId,
-					rating,
-					wasIgnoreClicked,
-					wasUseSuggestionClicked,
-					feedback,
-					otherFeedback,
-				}),
-			});
-			console.log("📝 Modal close update sent.");
-		} catch (err) {
-			console.error("❌ Failed to update log on close:", err);
-		}
 	};
 
 	const handleCopy = async ({
@@ -278,24 +261,6 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 		await navigator.clipboard.writeText(corrected);
 		setCopied(true);
 		setTimeout(() => setCopied(false), 2000);
-
-		try {
-			await fetch("/api/log-validation", {
-				method: "PUT",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					id: logId,
-					rating,
-					wasIgnoreClicked,
-					wasUseSuggestionClicked,
-					feedback,
-					otherFeedback,
-				}),
-			});
-			console.log("📥 Use suggestion update sent.");
-		} catch (err) {
-			console.error("❌ Failed to update log on use suggestion:", err);
-		}
 	};
 
 
