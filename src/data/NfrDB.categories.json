@@ -1,0 +1,210 @@
+[{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca3f6"
+  },
+  "categoryName": "Dopasowanie funkcjonalne",
+  "categoryId": "cat1",
+  "subcategories": [
+    {
+      "$oid": "66ccb7c890b83fc743aca408"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca44d"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca450"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca3f8"
+  },
+  "categoryName": "Niezawodność",
+  "categoryId": "cat5",
+  "subcategories": [
+    {
+      "$oid": "66ccb7c890b83fc743aca40b"
+    },
+    {
+      "$oid": "66ccb7c890b83fc743aca40e"
+    },
+    {
+      "$oid": "66ccb7c890b83fc743aca411"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca45c"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca3fa"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategories": [
+    {
+      "$oid": "66ccb7c890b83fc743aca414"
+    },
+    {
+      "$oid": "66ccb7c890b83fc743aca417"
+    },
+    {
+      "$oid": "66ccb7c890b83fc743aca41a"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca41d"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca420"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca423"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca426"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca429"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca3fc"
+  },
+  "categoryName": "Łatwość utrzymania",
+  "categoryId": "cat7",
+  "subcategories": [
+    {
+      "$oid": "66ccb7c990b83fc743aca42c"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca42f"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca432"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca45f"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca462"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca3fe"
+  },
+  "categoryName": "Bezpieczeństwo",
+  "categoryId": "cat6",
+  "subcategories": [
+    {
+      "$oid": "66ccb7c990b83fc743aca435"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca438"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca43b"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca43e"
+    },
+    {
+      "$oid": "66ccb7c990b83fc743aca441"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca444"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca400"
+  },
+  "categoryName": "Wydajność",
+  "categoryId": "cat2",
+  "subcategories": [
+    {
+      "$oid": "66ccb7ca90b83fc743aca447"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca44a"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca453"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca402"
+  },
+  "categoryName": "Kompatybilność",
+  "categoryId": "cat3",
+  "subcategories": [
+    {
+      "$oid": "66ccb7ca90b83fc743aca456"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca459"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca404"
+  },
+  "categoryName": "Elastyczność",
+  "categoryId": "cat8",
+  "subcategories": [
+    {
+      "$oid": "66ccb7ca90b83fc743aca465"
+    },
+    {
+      "$oid": "66ccb7ca90b83fc743aca468"
+    },
+    {
+      "$oid": "66ccb7cb90b83fc743aca46b"
+    },
+    {
+      "$oid": "66ccb7cb90b83fc743aca46e"
+    }
+  ],
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66ccb7bc90b83fc743aca406"
+  },
+  "categoryName": "Bezpieczeństwo (wolność od ryzyka)",
+  "categoryId": "cat9",
+  "subcategories": [
+    {
+      "$oid": "66ccb7cb90b83fc743aca471"
+    },
+    {
+      "$oid": "66ccb7cb90b83fc743aca474"
+    },
+    {
+      "$oid": "66ccb7cb90b83fc743aca477"
+    },
+    {
+      "$oid": "66ccb7cb90b83fc743aca47a"
+    },
+    {
+      "$oid": "66ccb7cb90b83fc743aca47d"
+    }
+  ],
+  "__v": 0
+}]

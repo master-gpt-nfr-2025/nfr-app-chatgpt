@@ -1,0 +1,3790 @@
+[{
+  "_id": {
+    "$oid": "66ccb7c890b83fc743aca408"
+  },
+  "categoryName": "Dopasowanie funkcjonalne",
+  "categoryId": "cat1",
+  "subcategoryName": "Poprawność funkcjonalna",
+  "subcategoryId": "sub102",
+  "description": "Stopień, w jakim produkt zapewnia prawidłowe wyniki z wymaganą dokładnością.",
+  "icon": "check-circle",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce731383091d"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830922"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830927"
+    },
+    {
+      "$oid": "66ccc31d4652ce731383092c"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a99"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0d85f2786f8f901f2a94f"
+    },
+    {
+      "$oid": "66d0d8b62786f8f901f2a973"
+    },
+    {
+      "$oid": "66d0e1ef2786f8f901f2abfa"
+    },
+    {
+      "$oid": "66d0e3bd2786f8f901f2accb"
+    },
+    {
+      "$oid": "66d102892786f8f901f2b1a5"
+    },
+    {
+      "$oid": "66d102a72786f8f901f2b1c2"
+    },
+    {
+      "$oid": "66d1cf882786f8f901f2b365"
+    },
+    {
+      "$oid": "66d1d08d2786f8f901f2b40e"
+    },
+    {
+      "$oid": "66d83c9b9cbc9acca3b1bf95"
+    },
+    {
+      "$oid": "66d845da9cbc9acca3b1c06a"
+    },
+    {
+      "$oid": "66d9794737892af2377f8c07"
+    },
+    {
+      "$oid": "66d99d0e6c3e49eff09045bf"
+    },
+    {
+      "$oid": "66d99d326c3e49eff09045d5"
+    },
+    {
+      "$oid": "66d99da36c3e49eff09045f1"
+    },
+    {
+      "$oid": "66d99dc86c3e49eff0904609"
+    },
+    {
+      "$oid": "66d99de46c3e49eff090461b"
+    },
+    {
+      "$oid": "66d99e206c3e49eff090462d"
+    },
+    {
+      "$oid": "66d9a4ab6c3e49eff0904702"
+    },
+    {
+      "$oid": "66d9a4bf6c3e49eff0904718"
+    },
+    {
+      "$oid": "66d9b2a46c3e49eff0905657"
+    },
+    {
+      "$oid": "66d9b2b76c3e49eff090566d"
+    },
+    {
+      "$oid": "66d9b2c26c3e49eff0905683"
+    },
+    {
+      "$oid": "66d9b2fb6c3e49eff09056a3"
+    },
+    {
+      "$oid": "66d9d6ce6c3e49eff0905871"
+    },
+    {
+      "$oid": "66d9de9d6c3e49eff0905965"
+    },
+    {
+      "$oid": "66dde2326c3e49eff0905e2b"
+    },
+    {
+      "$oid": "66de4ffe6c3e49eff09065e8"
+    },
+    {
+      "$oid": "66de50186c3e49eff09065f8"
+    },
+    {
+      "$oid": "66de50466c3e49eff090661a"
+    },
+    {
+      "$oid": "66de51b46c3e49eff0906634"
+    },
+    {
+      "$oid": "66de51e76c3e49eff0906655"
+    },
+    {
+      "$oid": "66df44ea6c3e49eff0906b4c"
+    },
+    {
+      "$oid": "66df46bd6c3e49eff0906b6e"
+    },
+    {
+      "$oid": "66df46cd6c3e49eff0906b85"
+    },
+    {
+      "$oid": "66e0bb1c6c3e49eff090755f"
+    },
+    {
+      "$oid": "66e0bb496c3e49eff0907575"
+    },
+    {
+      "$oid": "66e0bb7e6c3e49eff0907591"
+    },
+    {
+      "$oid": "670689796c3e49eff0907cf8"
+    },
+    {
+      "$oid": "670689c56c3e49eff0907d12"
+    },
+    {
+      "$oid": "67614e9d8c10a26980bc0ec5"
+    },
+    {
+      "$oid": "67bdc9b1874af7b1bb833f16"
+    },
+    {
+      "$oid": "67c849ed874af7b1bb833ffa"
+    },
+    {
+      "$oid": "67c84a09874af7b1bb83401a"
+    },
+    {
+      "$oid": "67c84ab3874af7b1bb8340b5"
+    },
+    {
+      "$oid": "67c84ad6874af7b1bb8340cd"
+    },
+    {
+      "$oid": "67c84b06874af7b1bb834130"
+    },
+    {
+      "$oid": "67c84bb0874af7b1bb83422b"
+    },
+    {
+      "$oid": "67c84c10874af7b1bb8342ac"
+    },
+    {
+      "$oid": "67c84c49874af7b1bb83431f"
+    },
+    {
+      "$oid": "67cb5888874af7b1bb835129"
+    },
+    {
+      "$oid": "6810bd19874af7b1bb835b04"
+    },
+    {
+      "$oid": "6818acbd874af7b1bb835d03"
+    },
+    {
+      "$oid": "6818ad14874af7b1bb835d8b"
+    },
+    {
+      "$oid": "6818ad7b874af7b1bb835e5e"
+    },
+    {
+      "$oid": "6818ad84874af7b1bb835e9a"
+    },
+    {
+      "$oid": "6818ad84874af7b1bb835ed3"
+    },
+    {
+      "$oid": "6818ad96874af7b1bb835f0f"
+    },
+    {
+      "$oid": "6818ad9d874af7b1bb835f4e"
+    },
+    {
+      "$oid": "6818ada8874af7b1bb835f89"
+    },
+    {
+      "$oid": "6818adba874af7b1bb835faa"
+    },
+    {
+      "$oid": "6818adc6874af7b1bb835fbe"
+    },
+    {
+      "$oid": "6818add5874af7b1bb83602d"
+    },
+    {
+      "$oid": "6818add7874af7b1bb836050"
+    },
+    {
+      "$oid": "6818ae20874af7b1bb8360fd"
+    },
+    {
+      "$oid": "6818ae31874af7b1bb836154"
+    },
+    {
+      "$oid": "6818ae32874af7b1bb836165"
+    },
+    {
+      "$oid": "6818ae46874af7b1bb8361d2"
+    },
+    {
+      "$oid": "6818ae4e874af7b1bb8361fa"
+    },
+    {
+      "$oid": "6818ae68874af7b1bb83621f"
+    },
+    {
+      "$oid": "6818ae9c874af7b1bb8362eb"
+    },
+    {
+      "$oid": "6818aef7874af7b1bb836461"
+    },
+    {
+      "$oid": "6818aefd874af7b1bb836477"
+    },
+    {
+      "$oid": "6818af0e874af7b1bb836516"
+    },
+    {
+      "$oid": "6818af2d874af7b1bb8365d2"
+    },
+    {
+      "$oid": "6818af35874af7b1bb8365ed"
+    },
+    {
+      "$oid": "6818af64874af7b1bb83662b"
+    },
+    {
+      "$oid": "6818b0aa874af7b1bb836b9e"
+    },
+    {
+      "$oid": "6818b132874af7b1bb836dee"
+    },
+    {
+      "$oid": "6818b245874af7b1bb8372cf"
+    },
+    {
+      "$oid": "6818b9e5874af7b1bb839830"
+    }
+  ],
+  "__v": 80
+},
+{
+  "_id": {
+    "$oid": "66ccb7c890b83fc743aca40b"
+  },
+  "categoryName": "Niezawodność",
+  "categoryId": "cat5",
+  "subcategoryName": "Dostępność techniczna",
+  "subcategoryId": "sub502",
+  "description": "Stopień, w jakim system jest dostępny i działa w określonym czasie.",
+  "icon": "clock",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830931"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830935"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830938"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ab9"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0d92b2786f8f901f2a9a5"
+    },
+    {
+      "$oid": "66d0d96e2786f8f901f2a9b8"
+    },
+    {
+      "$oid": "66d0d9b92786f8f901f2a9cb"
+    },
+    {
+      "$oid": "66d0e4892786f8f901f2ad45"
+    },
+    {
+      "$oid": "66d103172786f8f901f2b1e3"
+    },
+    {
+      "$oid": "66d1033e2786f8f901f2b1f5"
+    },
+    {
+      "$oid": "66d1d1c72786f8f901f2b46e"
+    },
+    {
+      "$oid": "66d9791b37892af2377f8bf2"
+    },
+    {
+      "$oid": "66d99e6d6c3e49eff0904644"
+    },
+    {
+      "$oid": "66d99e976c3e49eff0904660"
+    },
+    {
+      "$oid": "66d99f2e6c3e49eff0904676"
+    },
+    {
+      "$oid": "66d9a5186c3e49eff090474b"
+    },
+    {
+      "$oid": "66d9aa006c3e49eff0904b67"
+    },
+    {
+      "$oid": "66d9b3716c3e49eff0905768"
+    },
+    {
+      "$oid": "66d9d41b6c3e49eff090584f"
+    },
+    {
+      "$oid": "66d9df326c3e49eff0905988"
+    },
+    {
+      "$oid": "66d9dfb56c3e49eff09059b1"
+    },
+    {
+      "$oid": "66d9e17f6c3e49eff09059c7"
+    },
+    {
+      "$oid": "66dde2b86c3e49eff0905e59"
+    },
+    {
+      "$oid": "66de4b956c3e49eff0906541"
+    },
+    {
+      "$oid": "66de522d6c3e49eff090666d"
+    },
+    {
+      "$oid": "66df46e16c3e49eff0906ba1"
+    },
+    {
+      "$oid": "66e0bb966c3e49eff09075ac"
+    },
+    {
+      "$oid": "66d0e8962786f8f901f2af36"
+    },
+    {
+      "$oid": "66d1d3002786f8f901f2b528"
+    },
+    {
+      "$oid": "66d9edfe6c3e49eff0905d46"
+    },
+    {
+      "$oid": "66de5aca6c3e49eff0906812"
+    },
+    {
+      "$oid": "66df4a7c6c3e49eff0906d44"
+    },
+    {
+      "$oid": "66f2ad906c3e49eff0907ab6"
+    },
+    {
+      "$oid": "66f2ae946c3e49eff0907b21"
+    },
+    {
+      "$oid": "67c84a43874af7b1bb834033"
+    },
+    {
+      "$oid": "67c84a7e874af7b1bb83409c"
+    },
+    {
+      "$oid": "67c84af4874af7b1bb834100"
+    },
+    {
+      "$oid": "67cb596b874af7b1bb835150"
+    },
+    {
+      "$oid": "6818ad94874af7b1bb835ef8"
+    },
+    {
+      "$oid": "6818adc8874af7b1bb835ffb"
+    },
+    {
+      "$oid": "6818ae01874af7b1bb8360a1"
+    },
+    {
+      "$oid": "6818ae24874af7b1bb83612b"
+    },
+    {
+      "$oid": "6818ae39874af7b1bb836176"
+    },
+    {
+      "$oid": "6818ae85874af7b1bb836270"
+    },
+    {
+      "$oid": "6818ae95874af7b1bb83629c"
+    },
+    {
+      "$oid": "6818aea8874af7b1bb83630b"
+    },
+    {
+      "$oid": "6818aeb4874af7b1bb83632b"
+    },
+    {
+      "$oid": "6818aeb7874af7b1bb836342"
+    },
+    {
+      "$oid": "6818aeba874af7b1bb83639c"
+    },
+    {
+      "$oid": "6818aec9874af7b1bb8363d0"
+    },
+    {
+      "$oid": "6818aed2874af7b1bb8363e1"
+    },
+    {
+      "$oid": "6818aee7874af7b1bb836442"
+    },
+    {
+      "$oid": "6818af04874af7b1bb836489"
+    },
+    {
+      "$oid": "6818af07874af7b1bb8364a3"
+    },
+    {
+      "$oid": "6818af6d874af7b1bb836665"
+    },
+    {
+      "$oid": "6818af84874af7b1bb8366ed"
+    },
+    {
+      "$oid": "6818aff2874af7b1bb836821"
+    },
+    {
+      "$oid": "6818b102874af7b1bb836d14"
+    },
+    {
+      "$oid": "6818b143874af7b1bb836eed"
+    },
+    {
+      "$oid": "6818b1d7874af7b1bb83716a"
+    },
+    {
+      "$oid": "6818b1ff874af7b1bb8371ff"
+    },
+    {
+      "$oid": "6818b29e874af7b1bb83752f"
+    },
+    {
+      "$oid": "6818b396874af7b1bb837912"
+    }
+  ],
+  "__v": 59
+},
+{
+  "_id": {
+    "$oid": "66ccb7c890b83fc743aca40e"
+  },
+  "categoryName": "Niezawodność",
+  "categoryId": "cat5",
+  "subcategoryName": "Tolerancja błędów",
+  "subcategoryId": "sub503",
+  "description": "Stopień, w jakim system kontynuuje działanie mimo błędów.",
+  "icon": "egg-crack",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce731383093f"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830941"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830946"
+    },
+    {
+      "$oid": "66ccc31d4652ce731383094b"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830951"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830abb"
+    },
+    {
+      "$oid": "66d0c59b5068ed856d321695"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0d9d32786f8f901f2a9dc"
+    },
+    {
+      "$oid": "66d0da062786f8f901f2a9ef"
+    },
+    {
+      "$oid": "66d0daba2786f8f901f2aa0c"
+    },
+    {
+      "$oid": "66d0daf22786f8f901f2aa2c"
+    },
+    {
+      "$oid": "66d103522786f8f901f2b20a"
+    },
+    {
+      "$oid": "66d1037e2786f8f901f2b21d"
+    },
+    {
+      "$oid": "66d103c42786f8f901f2b234"
+    },
+    {
+      "$oid": "66d104432786f8f901f2b254"
+    },
+    {
+      "$oid": "66d1d1d52786f8f901f2b47f"
+    },
+    {
+      "$oid": "66d1d2382786f8f901f2b49b"
+    },
+    {
+      "$oid": "66d1d2602786f8f901f2b4b2"
+    },
+    {
+      "$oid": "66d1d2e32786f8f901f2b505"
+    },
+    {
+      "$oid": "66d83ce89cbc9acca3b1bfd7"
+    },
+    {
+      "$oid": "66d99f3a6c3e49eff0904691"
+    },
+    {
+      "$oid": "66d9a4756c3e49eff09046f1"
+    },
+    {
+      "$oid": "66d9a5e76c3e49eff09047b5"
+    },
+    {
+      "$oid": "66d9a6146c3e49eff09047ce"
+    },
+    {
+      "$oid": "66d9aa706c3e49eff0904bb5"
+    },
+    {
+      "$oid": "66d9e2166c3e49eff09059e8"
+    },
+    {
+      "$oid": "66d9e24d6c3e49eff09059f9"
+    },
+    {
+      "$oid": "66d9e4176c3e49eff0905a24"
+    },
+    {
+      "$oid": "66d9e4576c3e49eff0905a36"
+    },
+    {
+      "$oid": "66d9e49b6c3e49eff0905a48"
+    },
+    {
+      "$oid": "66d9e5306c3e49eff0905a68"
+    },
+    {
+      "$oid": "66dde3906c3e49eff0905f09"
+    },
+    {
+      "$oid": "66de52396c3e49eff0906694"
+    },
+    {
+      "$oid": "66de52656c3e49eff09066a4"
+    },
+    {
+      "$oid": "66de52d26c3e49eff09066c9"
+    },
+    {
+      "$oid": "66df46eb6c3e49eff0906bbb"
+    },
+    {
+      "$oid": "66df47166c3e49eff0906bcb"
+    },
+    {
+      "$oid": "66df475d6c3e49eff0906be9"
+    },
+    {
+      "$oid": "66df88bc6c3e49eff0907061"
+    },
+    {
+      "$oid": "66df9cda6c3e49eff0907245"
+    },
+    {
+      "$oid": "66df9cfc6c3e49eff0907256"
+    },
+    {
+      "$oid": "66e0bba26c3e49eff09075c7"
+    },
+    {
+      "$oid": "66e0bbc96c3e49eff09075e1"
+    },
+    {
+      "$oid": "66e0be726c3e49eff0907606"
+    },
+    {
+      "$oid": "673a0eaf8c10a26980bc0892"
+    },
+    {
+      "$oid": "6798ce228c10a26980bc10b9"
+    },
+    {
+      "$oid": "67c84a49874af7b1bb83404e"
+    },
+    {
+      "$oid": "67c84a4e874af7b1bb834066"
+    },
+    {
+      "$oid": "67c84ae7874af7b1bb8340eb"
+    },
+    {
+      "$oid": "67c84afb874af7b1bb83411c"
+    },
+    {
+      "$oid": "67c84b24874af7b1bb83416e"
+    },
+    {
+      "$oid": "67c84b50874af7b1bb8341c0"
+    },
+    {
+      "$oid": "67c84b87874af7b1bb8341f8"
+    },
+    {
+      "$oid": "67c84bed874af7b1bb834277"
+    },
+    {
+      "$oid": "67c84c5f874af7b1bb834351"
+    },
+    {
+      "$oid": "67c84c87874af7b1bb8343bf"
+    },
+    {
+      "$oid": "67cb60d0874af7b1bb835321"
+    },
+    {
+      "$oid": "6818ae69874af7b1bb83622e"
+    },
+    {
+      "$oid": "6818aeb9874af7b1bb836388"
+    },
+    {
+      "$oid": "6818af0c874af7b1bb8364c6"
+    },
+    {
+      "$oid": "6818af0e874af7b1bb83650c"
+    },
+    {
+      "$oid": "6818af15874af7b1bb836535"
+    },
+    {
+      "$oid": "6818af26874af7b1bb836573"
+    },
+    {
+      "$oid": "6818af29874af7b1bb836584"
+    },
+    {
+      "$oid": "6818af55874af7b1bb83660a"
+    },
+    {
+      "$oid": "6818af76874af7b1bb8366af"
+    },
+    {
+      "$oid": "6818af84874af7b1bb836704"
+    },
+    {
+      "$oid": "6818afa4874af7b1bb83674e"
+    },
+    {
+      "$oid": "6818afac874af7b1bb83677f"
+    },
+    {
+      "$oid": "6818afad874af7b1bb836790"
+    },
+    {
+      "$oid": "6818afb7874af7b1bb8367ad"
+    },
+    {
+      "$oid": "6818afc7874af7b1bb8367e4"
+    },
+    {
+      "$oid": "6818afe5874af7b1bb83680b"
+    },
+    {
+      "$oid": "6818aff4874af7b1bb83682e"
+    },
+    {
+      "$oid": "6818aff6874af7b1bb836840"
+    },
+    {
+      "$oid": "6818affb874af7b1bb8368c4"
+    },
+    {
+      "$oid": "6818b011874af7b1bb83690a"
+    },
+    {
+      "$oid": "6818b021874af7b1bb83698e"
+    },
+    {
+      "$oid": "6818b04b874af7b1bb836a59"
+    },
+    {
+      "$oid": "6818b053874af7b1bb836a73"
+    },
+    {
+      "$oid": "6818b081874af7b1bb836b20"
+    },
+    {
+      "$oid": "6818b087874af7b1bb836b33"
+    },
+    {
+      "$oid": "6818b09e874af7b1bb836b74"
+    },
+    {
+      "$oid": "6818b0aa874af7b1bb836bb3"
+    },
+    {
+      "$oid": "6818b11f874af7b1bb836dd3"
+    },
+    {
+      "$oid": "6818b136874af7b1bb836e95"
+    },
+    {
+      "$oid": "6818b192874af7b1bb837053"
+    },
+    {
+      "$oid": "6818b27b874af7b1bb8374ab"
+    },
+    {
+      "$oid": "6818b2b1874af7b1bb83757f"
+    },
+    {
+      "$oid": "6818b37c874af7b1bb8378aa"
+    },
+    {
+      "$oid": "6818b39d874af7b1bb837954"
+    },
+    {
+      "$oid": "6818b3ba874af7b1bb8379d3"
+    },
+    {
+      "$oid": "6818b3e4874af7b1bb837b48"
+    },
+    {
+      "$oid": "6818b51a874af7b1bb8381c9"
+    },
+    {
+      "$oid": "6818b51f874af7b1bb83821b"
+    },
+    {
+      "$oid": "6818b563874af7b1bb83831b"
+    },
+    {
+      "$oid": "6818b59a874af7b1bb838451"
+    },
+    {
+      "$oid": "6818b5ca874af7b1bb838551"
+    },
+    {
+      "$oid": "6818b6bb874af7b1bb838af4"
+    }
+  ],
+  "__v": 92
+},
+{
+  "_id": {
+    "$oid": "66ccb7c890b83fc743aca411"
+  },
+  "categoryName": "Niezawodność",
+  "categoryId": "cat5",
+  "subcategoryName": "Odtwarzalność",
+  "subcategoryId": "sub504",
+  "description": "Stopień, w jakim system odzyskuje funkcje po awarii.",
+  "icon": "bandage",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830911"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830957"
+    },
+    {
+      "$oid": "66ccc31d4652ce731383095e"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830abd"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0db7e2786f8f901f2aa59"
+    },
+    {
+      "$oid": "66d0dba82786f8f901f2aa7b"
+    },
+    {
+      "$oid": "66d0dbd02786f8f901f2aa90"
+    },
+    {
+      "$oid": "66d0e4cb2786f8f901f2ad97"
+    },
+    {
+      "$oid": "66d1cddf2786f8f901f2b2bb"
+    },
+    {
+      "$oid": "66d1d4782786f8f901f2b5c2"
+    },
+    {
+      "$oid": "66d1d4c12786f8f901f2b5d9"
+    },
+    {
+      "$oid": "66d842c31d06c88b666b2852"
+    },
+    {
+      "$oid": "66d9a6a96c3e49eff090483a"
+    },
+    {
+      "$oid": "66d9ab006c3e49eff0904c5e"
+    },
+    {
+      "$oid": "66d9ab916c3e49eff0904d37"
+    },
+    {
+      "$oid": "66d9e6016c3e49eff0905a89"
+    },
+    {
+      "$oid": "66d9e64e6c3e49eff0905ab8"
+    },
+    {
+      "$oid": "66d9e6a66c3e49eff0905ada"
+    },
+    {
+      "$oid": "66dde33f6c3e49eff0905ea3"
+    },
+    {
+      "$oid": "66de4fbe6c3e49eff0906588"
+    },
+    {
+      "$oid": "66de532f6c3e49eff09066ef"
+    },
+    {
+      "$oid": "66df479a6c3e49eff0906c0f"
+    },
+    {
+      "$oid": "66e0beb76c3e49eff0907627"
+    },
+    {
+      "$oid": "66e0bed26c3e49eff0907656"
+    },
+    {
+      "$oid": "67c84c2a874af7b1bb8342cc"
+    },
+    {
+      "$oid": "67c84c6c874af7b1bb83437f"
+    },
+    {
+      "$oid": "6818b04a874af7b1bb8369ff"
+    },
+    {
+      "$oid": "6818b0b0874af7b1bb836bd4"
+    },
+    {
+      "$oid": "6818b0f0874af7b1bb836c52"
+    },
+    {
+      "$oid": "6818b100874af7b1bb836cf2"
+    },
+    {
+      "$oid": "6818b105874af7b1bb836d37"
+    },
+    {
+      "$oid": "6818b11c874af7b1bb836d89"
+    },
+    {
+      "$oid": "6818b133874af7b1bb836e58"
+    },
+    {
+      "$oid": "6818b13e874af7b1bb836ec5"
+    },
+    {
+      "$oid": "6818b174874af7b1bb836f40"
+    },
+    {
+      "$oid": "6818b17d874af7b1bb836fa9"
+    },
+    {
+      "$oid": "6818b18a874af7b1bb837032"
+    },
+    {
+      "$oid": "6818b199874af7b1bb837075"
+    },
+    {
+      "$oid": "6818b1b4874af7b1bb8370c0"
+    },
+    {
+      "$oid": "6818b1c1874af7b1bb8370ee"
+    },
+    {
+      "$oid": "6818b1c9874af7b1bb837115"
+    },
+    {
+      "$oid": "6818b200874af7b1bb83720d"
+    },
+    {
+      "$oid": "6818b251874af7b1bb837389"
+    },
+    {
+      "$oid": "6818b26e874af7b1bb837447"
+    },
+    {
+      "$oid": "6818b336874af7b1bb83775f"
+    },
+    {
+      "$oid": "6818b3ab874af7b1bb83797e"
+    },
+    {
+      "$oid": "6818b438874af7b1bb837dc6"
+    },
+    {
+      "$oid": "6818b648874af7b1bb8388d9"
+    },
+    {
+      "$oid": "6818b718874af7b1bb838d10"
+    },
+    {
+      "$oid": "6818b7f0874af7b1bb8391cd"
+    },
+    {
+      "$oid": "6818b846874af7b1bb8394e3"
+    }
+  ],
+  "__v": 47
+},
+{
+  "_id": {
+    "$oid": "66ccb7c890b83fc743aca414"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Łatwość nauki",
+  "subcategoryId": "sub402",
+  "description": "Stopień, w jakim system umożliwia efektywność i satysfakcję przy nauce.",
+  "icon": "graduation-cap",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308f5"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aa9"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1d5602786f8f901f2b631"
+    },
+    {
+      "$oid": "66d9675f711447843410f59a"
+    },
+    {
+      "$oid": "66d967bc711447843410f5e2"
+    },
+    {
+      "$oid": "66d9a7126c3e49eff090489d"
+    },
+    {
+      "$oid": "66d9ab336c3e49eff0904caa"
+    },
+    {
+      "$oid": "66d9ad776c3e49eff0904f65"
+    },
+    {
+      "$oid": "66d9e7586c3e49eff0905af9"
+    },
+    {
+      "$oid": "66dde4766c3e49eff0905f48"
+    },
+    {
+      "$oid": "66de538e6c3e49eff090672d"
+    },
+    {
+      "$oid": "66e0bf1f6c3e49eff0907681"
+    },
+    {
+      "$oid": "67c84bdb874af7b1bb834244"
+    },
+    {
+      "$oid": "67c84d00874af7b1bb83443e"
+    },
+    {
+      "$oid": "67c84d4b874af7b1bb83449e"
+    },
+    {
+      "$oid": "67c84dac874af7b1bb8344c6"
+    },
+    {
+      "$oid": "67cb6413874af7b1bb8353ff"
+    },
+    {
+      "$oid": "6818b133874af7b1bb836dff"
+    },
+    {
+      "$oid": "6818b1d2874af7b1bb837142"
+    },
+    {
+      "$oid": "6818b1f2874af7b1bb8371ce"
+    },
+    {
+      "$oid": "6818b246874af7b1bb837308"
+    },
+    {
+      "$oid": "6818b266874af7b1bb8373eb"
+    },
+    {
+      "$oid": "6818b3d6874af7b1bb837aa0"
+    },
+    {
+      "$oid": "6818b3ef874af7b1bb837bcd"
+    },
+    {
+      "$oid": "6818b4c0874af7b1bb838056"
+    },
+    {
+      "$oid": "6818b8c0874af7b1bb83971a"
+    }
+  ],
+  "__v": 24
+},
+{
+  "_id": {
+    "$oid": "66ccb7c890b83fc743aca417"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Łatwość operowania",
+  "subcategoryId": "sub403",
+  "description": "Stopień, w jakim system ułatwia operację i kontrolę.",
+  "icon": "cogs",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830969"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830973"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830976"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830982"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830989"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aab"
+    },
+    {
+      "$oid": "66d0c1d95068ed856d321678"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0dcc62786f8f901f2aacd"
+    },
+    {
+      "$oid": "66d0e36c2786f8f901f2aca5"
+    },
+    {
+      "$oid": "66d100e72786f8f901f2b141"
+    },
+    {
+      "$oid": "66d1ce1a2786f8f901f2b2df"
+    },
+    {
+      "$oid": "66d1ce372786f8f901f2b2f6"
+    },
+    {
+      "$oid": "66d1cf082786f8f901f2b333"
+    },
+    {
+      "$oid": "66d1d5892786f8f901f2b669"
+    },
+    {
+      "$oid": "66d1d5a22786f8f901f2b68a"
+    },
+    {
+      "$oid": "66d1d6322786f8f901f2b6ec"
+    },
+    {
+      "$oid": "66d1d69e2786f8f901f2b711"
+    },
+    {
+      "$oid": "66d9a72b6c3e49eff09048e3"
+    },
+    {
+      "$oid": "66d9a73c6c3e49eff09048fa"
+    },
+    {
+      "$oid": "66d9a74e6c3e49eff0904915"
+    },
+    {
+      "$oid": "66d9a7a06c3e49eff090494e"
+    },
+    {
+      "$oid": "66d9ab5d6c3e49eff0904cec"
+    },
+    {
+      "$oid": "66d9ac776c3e49eff0904e7b"
+    },
+    {
+      "$oid": "66d9e7a96c3e49eff0905b31"
+    },
+    {
+      "$oid": "66d9e7c16c3e49eff0905b41"
+    },
+    {
+      "$oid": "66d9e7d46c3e49eff0905b51"
+    },
+    {
+      "$oid": "66d9e8996c3e49eff0905b82"
+    },
+    {
+      "$oid": "66d9e92d6c3e49eff0905ba4"
+    },
+    {
+      "$oid": "66dde4be6c3e49eff0905f9f"
+    },
+    {
+      "$oid": "66de58e96c3e49eff090677e"
+    },
+    {
+      "$oid": "66df49806c3e49eff0906c5d"
+    },
+    {
+      "$oid": "66df499b6c3e49eff0906c7b"
+    },
+    {
+      "$oid": "66df49a76c3e49eff0906c93"
+    },
+    {
+      "$oid": "66e0b4346c3e49eff090740e"
+    },
+    {
+      "$oid": "66e0b6236c3e49eff09074ee"
+    },
+    {
+      "$oid": "66e0cce06c3e49eff09076af"
+    },
+    {
+      "$oid": "67c84bf2874af7b1bb83428b"
+    },
+    {
+      "$oid": "67c84c38874af7b1bb834301"
+    },
+    {
+      "$oid": "67c85054874af7b1bb834893"
+    },
+    {
+      "$oid": "67c85067874af7b1bb8348a7"
+    },
+    {
+      "$oid": "67c850d5874af7b1bb834944"
+    },
+    {
+      "$oid": "6818b189874af7b1bb836fe4"
+    },
+    {
+      "$oid": "6818b1b7874af7b1bb8370d5"
+    },
+    {
+      "$oid": "6818b228874af7b1bb837289"
+    },
+    {
+      "$oid": "6818b236874af7b1bb837299"
+    },
+    {
+      "$oid": "6818b23d874af7b1bb8372bc"
+    },
+    {
+      "$oid": "6818b257874af7b1bb83739c"
+    },
+    {
+      "$oid": "6818b265874af7b1bb8373dc"
+    },
+    {
+      "$oid": "6818b279874af7b1bb837491"
+    },
+    {
+      "$oid": "6818b288874af7b1bb8374d7"
+    },
+    {
+      "$oid": "6818b294874af7b1bb83751f"
+    },
+    {
+      "$oid": "6818b2e0874af7b1bb8375fb"
+    },
+    {
+      "$oid": "6818b2e3874af7b1bb83761b"
+    },
+    {
+      "$oid": "6818b2f7874af7b1bb837633"
+    },
+    {
+      "$oid": "6818b30a874af7b1bb837672"
+    },
+    {
+      "$oid": "6818b314874af7b1bb8376a2"
+    },
+    {
+      "$oid": "6818b339874af7b1bb837775"
+    },
+    {
+      "$oid": "6818b369874af7b1bb83783b"
+    },
+    {
+      "$oid": "6818b376874af7b1bb83788b"
+    },
+    {
+      "$oid": "6818b385874af7b1bb8378dc"
+    },
+    {
+      "$oid": "6818b38a874af7b1bb837900"
+    },
+    {
+      "$oid": "6818b3a5874af7b1bb837966"
+    },
+    {
+      "$oid": "6818b40f874af7b1bb837d27"
+    },
+    {
+      "$oid": "6818b454874af7b1bb837e35"
+    },
+    {
+      "$oid": "6818b47f874af7b1bb837eda"
+    },
+    {
+      "$oid": "6818b484874af7b1bb837eed"
+    },
+    {
+      "$oid": "6818b4a6874af7b1bb837fc5"
+    },
+    {
+      "$oid": "6818b50c874af7b1bb83815f"
+    },
+    {
+      "$oid": "6818b53f874af7b1bb838277"
+    },
+    {
+      "$oid": "6818b5e1874af7b1bb838601"
+    },
+    {
+      "$oid": "6818b60b874af7b1bb838705"
+    }
+  ],
+  "__v": 64
+},
+{
+  "_id": {
+    "$oid": "66ccb7c890b83fc743aca41a"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Ochrona użytkownika przed błędami",
+  "subcategoryId": "sub404",
+  "description": "Stopień, w jakim system chroni użytkowników przed popełnianiem błędów.",
+  "icon": "face-x",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830990"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830995"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aad"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0d8102786f8f901f2a90a"
+    },
+    {
+      "$oid": "66d0e4812786f8f901f2ad2d"
+    },
+    {
+      "$oid": "66d0e49a2786f8f901f2ad59"
+    },
+    {
+      "$oid": "66d1cfb12786f8f901f2b3b1"
+    },
+    {
+      "$oid": "66d1d70e2786f8f901f2b78c"
+    },
+    {
+      "$oid": "66d1d7392786f8f901f2b7a7"
+    },
+    {
+      "$oid": "66d9a7ba6c3e49eff090497e"
+    },
+    {
+      "$oid": "66d9a7e36c3e49eff09049bb"
+    },
+    {
+      "$oid": "66d9abe86c3e49eff0904dd6"
+    },
+    {
+      "$oid": "66d9b14b6c3e49eff090548a"
+    },
+    {
+      "$oid": "66de59156c3e49eff090679c"
+    },
+    {
+      "$oid": "66df49b26c3e49eff0906cb1"
+    },
+    {
+      "$oid": "66df49e26c3e49eff0906cc8"
+    },
+    {
+      "$oid": "66df9b306c3e49eff09071d7"
+    },
+    {
+      "$oid": "66e0cd7d6c3e49eff09076d9"
+    },
+    {
+      "$oid": "66e0cd986c3e49eff09076f8"
+    },
+    {
+      "$oid": "67c84c53874af7b1bb834332"
+    },
+    {
+      "$oid": "67c84e4e874af7b1bb8345d2"
+    },
+    {
+      "$oid": "67c84e82874af7b1bb834620"
+    },
+    {
+      "$oid": "67c84f72874af7b1bb834748"
+    },
+    {
+      "$oid": "67c850f8874af7b1bb834966"
+    },
+    {
+      "$oid": "67c85146874af7b1bb834998"
+    },
+    {
+      "$oid": "6818b01b874af7b1bb836938"
+    },
+    {
+      "$oid": "6818b1eb874af7b1bb837186"
+    },
+    {
+      "$oid": "6818b24a874af7b1bb837339"
+    },
+    {
+      "$oid": "6818b262874af7b1bb8373c2"
+    },
+    {
+      "$oid": "6818b277874af7b1bb837480"
+    },
+    {
+      "$oid": "6818b28e874af7b1bb837509"
+    },
+    {
+      "$oid": "6818b2cb874af7b1bb837598"
+    },
+    {
+      "$oid": "6818b30a874af7b1bb837655"
+    },
+    {
+      "$oid": "6818b329874af7b1bb8376fe"
+    },
+    {
+      "$oid": "6818b332874af7b1bb837733"
+    },
+    {
+      "$oid": "6818b344874af7b1bb8377b4"
+    },
+    {
+      "$oid": "6818b36b874af7b1bb83784f"
+    },
+    {
+      "$oid": "6818b3b8874af7b1bb8379bf"
+    },
+    {
+      "$oid": "6818b3cf874af7b1bb837a5b"
+    },
+    {
+      "$oid": "6818b3e2874af7b1bb837b2e"
+    },
+    {
+      "$oid": "6818b3f7874af7b1bb837c06"
+    },
+    {
+      "$oid": "6818b461874af7b1bb837e62"
+    },
+    {
+      "$oid": "6818b4c0874af7b1bb838045"
+    },
+    {
+      "$oid": "6818b510874af7b1bb838191"
+    },
+    {
+      "$oid": "6818b563874af7b1bb8382f9"
+    },
+    {
+      "$oid": "6818b5f4874af7b1bb838691"
+    },
+    {
+      "$oid": "6818b60f874af7b1bb838744"
+    },
+    {
+      "$oid": "6818b663874af7b1bb838947"
+    }
+  ],
+  "__v": 45
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca41d"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Zaangażowanie użytkownika",
+  "subcategoryId": "sub405",
+  "description": "Stopień, w jakim system angażuje użytkowników.",
+  "icon": "heart",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138309a4"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aaf"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e51d2786f8f901f2adda"
+    },
+    {
+      "$oid": "66d1d7652786f8f901f2b7ce"
+    },
+    {
+      "$oid": "66d9a7fb6c3e49eff09049e0"
+    },
+    {
+      "$oid": "66d9b1786c3e49eff09054cb"
+    },
+    {
+      "$oid": "66d9ec056c3e49eff0905c98"
+    },
+    {
+      "$oid": "66df9d2e6c3e49eff0907271"
+    },
+    {
+      "$oid": "67c84c64874af7b1bb834361"
+    },
+    {
+      "$oid": "6818b37d874af7b1bb8378ba"
+    },
+    {
+      "$oid": "6818b46f874af7b1bb837eae"
+    },
+    {
+      "$oid": "6818b499874af7b1bb837f3d"
+    },
+    {
+      "$oid": "6818b4b3874af7b1bb837fed"
+    },
+    {
+      "$oid": "6818b5b0874af7b1bb838514"
+    },
+    {
+      "$oid": "6818b683874af7b1bb8389ce"
+    }
+  ],
+  "__v": 13
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca420"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Dostępność personalna",
+  "subcategoryId": "sub406",
+  "description": "Stopień, w jakim system jest dostępny i użyteczny dla osób z różnymi umiejętnościami.",
+  "icon": "caring-hand",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138309ac"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309b0"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309b4"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ab1"
+    },
+    {
+      "$oid": "66d0c9da5068ed856d3216a7"
+    },
+    {
+      "$oid": "66d0caad5068ed856d3216b7"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1cfd52786f8f901f2b3d7"
+    },
+    {
+      "$oid": "66d1cff02786f8f901f2b3f8"
+    },
+    {
+      "$oid": "66d1d2832786f8f901f2b4c9"
+    },
+    {
+      "$oid": "66d1d7942786f8f901f2b7fb"
+    },
+    {
+      "$oid": "66d1d7a92786f8f901f2b80d"
+    },
+    {
+      "$oid": "66d1d7da2786f8f901f2b84f"
+    },
+    {
+      "$oid": "66d9a81b6c3e49eff0904a10"
+    },
+    {
+      "$oid": "66d9aa716c3e49eff0904bed"
+    },
+    {
+      "$oid": "66d9ad956c3e49eff0904f9b"
+    },
+    {
+      "$oid": "66d9b1ee6c3e49eff090550d"
+    },
+    {
+      "$oid": "66d9b38c6c3e49eff090577a"
+    },
+    {
+      "$oid": "66d9b3996c3e49eff090578d"
+    },
+    {
+      "$oid": "66d9ec3c6c3e49eff0905cb3"
+    },
+    {
+      "$oid": "66d9ec9e6c3e49eff0905cca"
+    },
+    {
+      "$oid": "66d9ece56c3e49eff0905cdd"
+    },
+    {
+      "$oid": "66dde4e16c3e49eff0905fcb"
+    },
+    {
+      "$oid": "66de59386c3e49eff09067c0"
+    },
+    {
+      "$oid": "66de59496c3e49eff09067ce"
+    },
+    {
+      "$oid": "66de595f6c3e49eff09067e1"
+    },
+    {
+      "$oid": "66df4a126c3e49eff0906cf1"
+    },
+    {
+      "$oid": "66e0cdbd6c3e49eff0907719"
+    },
+    {
+      "$oid": "66e0cdc76c3e49eff090772f"
+    },
+    {
+      "$oid": "66f2aeca6c3e49eff0907b6e"
+    },
+    {
+      "$oid": "67c84fb2874af7b1bb8347ba"
+    },
+    {
+      "$oid": "67c84fc9874af7b1bb8347d0"
+    },
+    {
+      "$oid": "67c8515a874af7b1bb8349b4"
+    },
+    {
+      "$oid": "67c85591874af7b1bb834ed3"
+    },
+    {
+      "$oid": "6818b28e874af7b1bb8374f9"
+    },
+    {
+      "$oid": "6818b319874af7b1bb8376af"
+    },
+    {
+      "$oid": "6818b32e874af7b1bb837712"
+    },
+    {
+      "$oid": "6818b33e874af7b1bb8377a3"
+    },
+    {
+      "$oid": "6818b3b0874af7b1bb8379af"
+    },
+    {
+      "$oid": "6818b3bf874af7b1bb8379e3"
+    },
+    {
+      "$oid": "6818b3c0874af7b1bb8379f0"
+    },
+    {
+      "$oid": "6818b3dc874af7b1bb837b16"
+    },
+    {
+      "$oid": "6818b3f8874af7b1bb837c1d"
+    },
+    {
+      "$oid": "6818b405874af7b1bb837c90"
+    },
+    {
+      "$oid": "6818b419874af7b1bb837d47"
+    },
+    {
+      "$oid": "6818b430874af7b1bb837dab"
+    },
+    {
+      "$oid": "6818b463874af7b1bb837e7d"
+    },
+    {
+      "$oid": "6818b488874af7b1bb837f2d"
+    },
+    {
+      "$oid": "6818b49a874af7b1bb837f6b"
+    },
+    {
+      "$oid": "6818b4b2874af7b1bb837fdd"
+    },
+    {
+      "$oid": "6818b4c8874af7b1bb8380aa"
+    },
+    {
+      "$oid": "6818b4f2874af7b1bb838104"
+    },
+    {
+      "$oid": "6818b50d874af7b1bb83817c"
+    },
+    {
+      "$oid": "6818b608874af7b1bb8386d1"
+    },
+    {
+      "$oid": "6818b61e874af7b1bb83882b"
+    },
+    {
+      "$oid": "6818b646874af7b1bb8388b6"
+    },
+    {
+      "$oid": "6818b683874af7b1bb8389bf"
+    },
+    {
+      "$oid": "6818b6b4874af7b1bb838ab0"
+    },
+    {
+      "$oid": "6818b6de874af7b1bb838be6"
+    },
+    {
+      "$oid": "6818b6fc874af7b1bb838cbc"
+    },
+    {
+      "$oid": "6818b756874af7b1bb838f17"
+    },
+    {
+      "$oid": "6818b7ba874af7b1bb839114"
+    },
+    {
+      "$oid": "6818b7f1874af7b1bb8391e8"
+    }
+  ],
+  "__v": 56
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca423"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Wsparcie użytkownika",
+  "subcategoryId": "sub407",
+  "description": "Stopień, w jakim system oferuje pomoc i wsparcie użytkownikom.",
+  "icon": "help",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce731383097a"
+    },
+    {
+      "$oid": "66ccc31d4652ce731383097e"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ab3"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e1b42786f8f901f2ab83"
+    },
+    {
+      "$oid": "66d0e7192786f8f901f2aed7"
+    },
+    {
+      "$oid": "66d0e7312786f8f901f2aeee"
+    },
+    {
+      "$oid": "66d0fde22786f8f901f2b0bb"
+    },
+    {
+      "$oid": "66d1d2c02786f8f901f2b4e4"
+    },
+    {
+      "$oid": "66d9a8246c3e49eff0904a27"
+    },
+    {
+      "$oid": "66d9a8326c3e49eff0904a3a"
+    },
+    {
+      "$oid": "66d9b2066c3e49eff0905562"
+    },
+    {
+      "$oid": "66d9ed126c3e49eff0905cf2"
+    },
+    {
+      "$oid": "66d9ed746c3e49eff0905d26"
+    },
+    {
+      "$oid": "66dde5006c3e49eff0905ffa"
+    },
+    {
+      "$oid": "66df4a316c3e49eff0906d11"
+    },
+    {
+      "$oid": "66df4a426c3e49eff0906d24"
+    },
+    {
+      "$oid": "66df9d4a6c3e49eff0907290"
+    },
+    {
+      "$oid": "66df9d5b6c3e49eff09072a2"
+    },
+    {
+      "$oid": "67c85037874af7b1bb834861"
+    },
+    {
+      "$oid": "6818b2dc874af7b1bb8375b8"
+    },
+    {
+      "$oid": "6818b30b874af7b1bb837689"
+    },
+    {
+      "$oid": "6818b331874af7b1bb837724"
+    },
+    {
+      "$oid": "6818b347874af7b1bb837803"
+    },
+    {
+      "$oid": "6818b35b874af7b1bb837826"
+    },
+    {
+      "$oid": "6818b3e7874af7b1bb837b87"
+    },
+    {
+      "$oid": "6818b3fd874af7b1bb837c56"
+    },
+    {
+      "$oid": "6818b439874af7b1bb837e02"
+    },
+    {
+      "$oid": "6818b471874af7b1bb837ebe"
+    },
+    {
+      "$oid": "6818b4fa874af7b1bb838116"
+    },
+    {
+      "$oid": "6818b52a874af7b1bb83824b"
+    },
+    {
+      "$oid": "6818b61b874af7b1bb8387ee"
+    },
+    {
+      "$oid": "6818b6a7874af7b1bb838a78"
+    },
+    {
+      "$oid": "6818b7fc874af7b1bb839276"
+    },
+    {
+      "$oid": "6818b80c874af7b1bb8392c7"
+    }
+  ],
+  "__v": 31
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca426"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Samoopisywalność",
+  "subcategoryId": "sub408",
+  "description": "Stopień, w jakim system posiada cechy pomagające zrozumieć i używać go.",
+  "icon": "book-open",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce731383099d"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ab5"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9b23d6c3e49eff09055ae"
+    },
+    {
+      "$oid": "66e0dac86c3e49eff0907782"
+    },
+    {
+      "$oid": "67cb6572874af7b1bb835443"
+    },
+    {
+      "$oid": "6818b427874af7b1bb837d8d"
+    },
+    {
+      "$oid": "6818b4c7874af7b1bb838097"
+    },
+    {
+      "$oid": "6818b56e874af7b1bb838376"
+    }
+  ],
+  "__v": 6
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca429"
+  },
+  "categoryName": "Użyteczność",
+  "categoryId": "cat4",
+  "subcategoryName": "Kompletność kontekstowa",
+  "subcategoryId": "sub401",
+  "description": "Stopień, w jakim użytkownicy rozpoznają, czy system jest odpowiedni do ich potrzeb.",
+  "icon": "eye",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308c0"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138308c5"
+    },
+    {
+      "$oid": "66ccc31d4652ce731383090d"
+    },
+    {
+      "$oid": "66ccc31d4652ce731383096e"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aa7"
+    },
+    {
+      "$oid": "66d0cc1c5068ed856d3216c9"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e5182786f8f901f2adc5"
+    },
+    {
+      "$oid": "66d0e56f2786f8f901f2aded"
+    },
+    {
+      "$oid": "66d0e8962786f8f901f2af36"
+    },
+    {
+      "$oid": "66d0e8f32786f8f901f2af4d"
+    },
+    {
+      "$oid": "66d0e9622786f8f901f2af5b"
+    },
+    {
+      "$oid": "66d1d3002786f8f901f2b528"
+    },
+    {
+      "$oid": "66d1d36a2786f8f901f2b578"
+    },
+    {
+      "$oid": "66d1d4592786f8f901f2b5af"
+    },
+    {
+      "$oid": "66d1d5162786f8f901f2b5fc"
+    },
+    {
+      "$oid": "66d1d53a2786f8f901f2b60e"
+    },
+    {
+      "$oid": "66d1d97f2786f8f901f2b909"
+    },
+    {
+      "$oid": "66d9add16c3e49eff0904fc7"
+    },
+    {
+      "$oid": "66d9b26d6c3e49eff0905602"
+    },
+    {
+      "$oid": "66d9edfe6c3e49eff0905d46"
+    },
+    {
+      "$oid": "66d9ee0b6c3e49eff0905d6b"
+    },
+    {
+      "$oid": "66dde56a6c3e49eff0906037"
+    },
+    {
+      "$oid": "66dde5b26c3e49eff0906067"
+    },
+    {
+      "$oid": "66de5aca6c3e49eff0906812"
+    },
+    {
+      "$oid": "66de5ae56c3e49eff0906837"
+    },
+    {
+      "$oid": "66de5b246c3e49eff0906845"
+    },
+    {
+      "$oid": "66de5b406c3e49eff0906859"
+    },
+    {
+      "$oid": "66df4a7c6c3e49eff0906d44"
+    },
+    {
+      "$oid": "66df4a876c3e49eff0906d69"
+    },
+    {
+      "$oid": "66df4aae6c3e49eff0906d7d"
+    },
+    {
+      "$oid": "66df83b16c3e49eff0906f6d"
+    },
+    {
+      "$oid": "66df860e6c3e49eff0906f81"
+    },
+    {
+      "$oid": "66df86376c3e49eff0906f93"
+    },
+    {
+      "$oid": "66df867c6c3e49eff0906fa5"
+    },
+    {
+      "$oid": "66df86a26c3e49eff0906fb8"
+    },
+    {
+      "$oid": "67c84cde874af7b1bb834424"
+    },
+    {
+      "$oid": "67c84db2874af7b1bb8344f4"
+    },
+    {
+      "$oid": "67c84dec874af7b1bb834556"
+    },
+    {
+      "$oid": "67c84e3f874af7b1bb8345be"
+    },
+    {
+      "$oid": "67c84ebe874af7b1bb83465b"
+    },
+    {
+      "$oid": "67c84f2c874af7b1bb8346d1"
+    },
+    {
+      "$oid": "67c84f45874af7b1bb8346ee"
+    },
+    {
+      "$oid": "67c84f69874af7b1bb834721"
+    },
+    {
+      "$oid": "67c85000874af7b1bb8347fb"
+    },
+    {
+      "$oid": "67c850a1874af7b1bb8348e7"
+    },
+    {
+      "$oid": "67c850cf874af7b1bb834936"
+    },
+    {
+      "$oid": "67c85113874af7b1bb834980"
+    },
+    {
+      "$oid": "67c8515c874af7b1bb8349c8"
+    },
+    {
+      "$oid": "67c851c7874af7b1bb834a72"
+    },
+    {
+      "$oid": "67c851f2874af7b1bb834af1"
+    },
+    {
+      "$oid": "6818b371874af7b1bb83786d"
+    },
+    {
+      "$oid": "6818b383874af7b1bb8378cf"
+    },
+    {
+      "$oid": "6818b3d0874af7b1bb837a6c"
+    },
+    {
+      "$oid": "6818b422874af7b1bb837d6f"
+    },
+    {
+      "$oid": "6818b45d874af7b1bb837e4c"
+    },
+    {
+      "$oid": "6818b4eb874af7b1bb8380cf"
+    },
+    {
+      "$oid": "6818b500874af7b1bb83814b"
+    },
+    {
+      "$oid": "6818b50d874af7b1bb83816f"
+    },
+    {
+      "$oid": "6818b52a874af7b1bb83823b"
+    },
+    {
+      "$oid": "6818b551874af7b1bb8382b8"
+    },
+    {
+      "$oid": "6818b563874af7b1bb83830e"
+    },
+    {
+      "$oid": "6818b579874af7b1bb8383bc"
+    },
+    {
+      "$oid": "6818b588874af7b1bb8383e5"
+    },
+    {
+      "$oid": "6818b592874af7b1bb83841c"
+    },
+    {
+      "$oid": "6818b6e1874af7b1bb838c02"
+    },
+    {
+      "$oid": "6818b7a5874af7b1bb83907c"
+    },
+    {
+      "$oid": "6818b84a874af7b1bb839514"
+    },
+    {
+      "$oid": "6818b8a3874af7b1bb839661"
+    }
+  ],
+  "__v": 62
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca42c"
+  },
+  "categoryName": "Utrzymanie",
+  "categoryId": "cat7",
+  "subcategoryName": "Analizowalność",
+  "subcategoryId": "sub703",
+  "description": "Stopień, w jakim system może być łatwo analizowany.",
+  "icon": "circuit",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138309b8"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309bd"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309cb"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830acf"
+    },
+    {
+      "$oid": "66d0cdf35068ed856d3216dc"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e5a12786f8f901f2ae03"
+    },
+    {
+      "$oid": "66d0ebff2786f8f901f2af9c"
+    },
+    {
+      "$oid": "66d1d57e2786f8f901f2b65b"
+    },
+    {
+      "$oid": "66d1d5c22786f8f901f2b6a7"
+    },
+    {
+      "$oid": "66d9a9ae6c3e49eff0904b47"
+    },
+    {
+      "$oid": "66d9af9d6c3e49eff09051bd"
+    },
+    {
+      "$oid": "66d9b3b66c3e49eff09057a0"
+    },
+    {
+      "$oid": "66d9b3d16c3e49eff09057b4"
+    },
+    {
+      "$oid": "66d9ee4f6c3e49eff0905d89"
+    },
+    {
+      "$oid": "66dde5d06c3e49eff0906087"
+    },
+    {
+      "$oid": "66de5b5b6c3e49eff090687a"
+    },
+    {
+      "$oid": "66de5b6d6c3e49eff090688f"
+    },
+    {
+      "$oid": "66df4b6e6c3e49eff0906da0"
+    },
+    {
+      "$oid": "66df4b7b6c3e49eff0906db6"
+    },
+    {
+      "$oid": "66d0e8962786f8f901f2af36"
+    },
+    {
+      "$oid": "66d1d3002786f8f901f2b528"
+    },
+    {
+      "$oid": "66d9edfe6c3e49eff0905d46"
+    },
+    {
+      "$oid": "66de5aca6c3e49eff0906812"
+    },
+    {
+      "$oid": "66df4a7c6c3e49eff0906d44"
+    },
+    {
+      "$oid": "66d1d6d22786f8f901f2b754"
+    },
+    {
+      "$oid": "66d9a9806c3e49eff0904b29"
+    },
+    {
+      "$oid": "66dde6cb6c3e49eff0906123"
+    },
+    {
+      "$oid": "67c84dc6874af7b1bb83452f"
+    },
+    {
+      "$oid": "67c852ff874af7b1bb834bd5"
+    },
+    {
+      "$oid": "6818b4be874af7b1bb838034"
+    },
+    {
+      "$oid": "6818b58e874af7b1bb8383fe"
+    },
+    {
+      "$oid": "6818b5a4874af7b1bb8384ae"
+    },
+    {
+      "$oid": "6818b5b0874af7b1bb838523"
+    },
+    {
+      "$oid": "6818b5be874af7b1bb83853a"
+    },
+    {
+      "$oid": "6818b5cd874af7b1bb83857f"
+    },
+    {
+      "$oid": "6818b5de874af7b1bb8385f1"
+    },
+    {
+      "$oid": "6818b5e9874af7b1bb838629"
+    },
+    {
+      "$oid": "6818b7ef874af7b1bb8391b3"
+    },
+    {
+      "$oid": "6818b819874af7b1bb839390"
+    },
+    {
+      "$oid": "6818b82c874af7b1bb839428"
+    }
+  ],
+  "__v": 35
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca42f"
+  },
+  "categoryName": "Utrzymanie",
+  "categoryId": "cat7",
+  "subcategoryName": "Łatwość zmiany",
+  "subcategoryId": "sub704",
+  "description": "Stopień, w jakim system może być łatwo modyfikowany.",
+  "icon": "edit-square",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308ba"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ad1"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e5c82786f8f901f2ae1f"
+    },
+    {
+      "$oid": "66d9ae316c3e49eff0904fdd"
+    },
+    {
+      "$oid": "67cb5e42874af7b1bb83525a"
+    },
+    {
+      "$oid": "67cb5e81874af7b1bb83527c"
+    },
+    {
+      "$oid": "6818b5a6874af7b1bb8384c2"
+    },
+    {
+      "$oid": "6818b609874af7b1bb8386e0"
+    },
+    {
+      "$oid": "6818b8b5874af7b1bb8396ea"
+    }
+  ],
+  "__v": 7
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca432"
+  },
+  "categoryName": "Utrzymanie",
+  "categoryId": "cat7",
+  "subcategoryName": "Łatwość testowania",
+  "subcategoryId": "sub705",
+  "description": "Stopień, w jakim system może być łatwo testowany.",
+  "icon": "check-list",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138309c5"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309d5"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309dc"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ad3"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e5e42786f8f901f2ae39"
+    },
+    {
+      "$oid": "66d0ec3d2786f8f901f2afbd"
+    },
+    {
+      "$oid": "66d0ec602786f8f901f2afd7"
+    },
+    {
+      "$oid": "66d1d60e2786f8f901f2b6cd"
+    },
+    {
+      "$oid": "66d9afba6c3e49eff09051ff"
+    },
+    {
+      "$oid": "66dde68c6c3e49eff09060d4"
+    },
+    {
+      "$oid": "66df87816c3e49eff0906fea"
+    },
+    {
+      "$oid": "66df88e06c3e49eff0907071"
+    },
+    {
+      "$oid": "66df9abf6c3e49eff09071b9"
+    },
+    {
+      "$oid": "67c84e1a874af7b1bb83457b"
+    },
+    {
+      "$oid": "67c84e38874af7b1bb8345a6"
+    },
+    {
+      "$oid": "67c8535e874af7b1bb834c2c"
+    },
+    {
+      "$oid": "67c855aa874af7b1bb834f0f"
+    },
+    {
+      "$oid": "6818b617874af7b1bb8387d1"
+    },
+    {
+      "$oid": "6818b62d874af7b1bb83884c"
+    },
+    {
+      "$oid": "6818b632874af7b1bb83886c"
+    },
+    {
+      "$oid": "6818b644874af7b1bb838891"
+    },
+    {
+      "$oid": "6818b66d874af7b1bb838964"
+    },
+    {
+      "$oid": "6818b724874af7b1bb838d88"
+    },
+    {
+      "$oid": "6818b8d4874af7b1bb8397ac"
+    },
+    {
+      "$oid": "6818b8f1874af7b1bb8397d4"
+    }
+  ],
+  "__v": 21
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca435"
+  },
+  "categoryName": "Bezpieczeństwo",
+  "categoryId": "cat6",
+  "subcategoryName": "Poufność",
+  "subcategoryId": "sub601",
+  "description": "Stopień, w jakim system chroni dane przed nieautoryzowanym dostępem.",
+  "icon": "incognito",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308e2"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309e1"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309e5"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830abf"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1d7062786f8f901f2b774"
+    },
+    {
+      "$oid": "66d1d77f2786f8f901f2b7e2"
+    },
+    {
+      "$oid": "66d1d7c02786f8f901f2b82e"
+    },
+    {
+      "$oid": "66d96830711447843410f5fd"
+    },
+    {
+      "$oid": "66d9b0336c3e49eff09052c5"
+    },
+    {
+      "$oid": "66dde71c6c3e49eff0906181"
+    },
+    {
+      "$oid": "66de5bb96c3e49eff09068c8"
+    },
+    {
+      "$oid": "66de5bd56c3e49eff09068e2"
+    },
+    {
+      "$oid": "66df879a6c3e49eff0907010"
+    },
+    {
+      "$oid": "66df87b66c3e49eff0907025"
+    },
+    {
+      "$oid": "66df87cb6c3e49eff090703f"
+    },
+    {
+      "$oid": "67c84e77874af7b1bb8345fd"
+    },
+    {
+      "$oid": "67c851a4874af7b1bb834a35"
+    },
+    {
+      "$oid": "67c851b3874af7b1bb834a58"
+    },
+    {
+      "$oid": "67c851ee874af7b1bb834ac5"
+    },
+    {
+      "$oid": "67c853c3874af7b1bb834cac"
+    },
+    {
+      "$oid": "67c853fc874af7b1bb834cc1"
+    },
+    {
+      "$oid": "67c8541d874af7b1bb834cfd"
+    },
+    {
+      "$oid": "67c85680874af7b1bb835064"
+    },
+    {
+      "$oid": "67c85694874af7b1bb83509e"
+    },
+    {
+      "$oid": "6818affb874af7b1bb836898"
+    },
+    {
+      "$oid": "6818b063874af7b1bb836a9a"
+    },
+    {
+      "$oid": "6818b066874af7b1bb836ae1"
+    },
+    {
+      "$oid": "6818b66e874af7b1bb83897a"
+    },
+    {
+      "$oid": "6818b681874af7b1bb83899a"
+    },
+    {
+      "$oid": "6818b681874af7b1bb8389a9"
+    },
+    {
+      "$oid": "6818b68b874af7b1bb8389f3"
+    },
+    {
+      "$oid": "6818b692874af7b1bb838a2f"
+    },
+    {
+      "$oid": "6818b6af874af7b1bb838a8d"
+    },
+    {
+      "$oid": "6818b6c1874af7b1bb838b27"
+    },
+    {
+      "$oid": "6818b6c2874af7b1bb838b42"
+    },
+    {
+      "$oid": "6818b720874af7b1bb838d6a"
+    },
+    {
+      "$oid": "6818b77f874af7b1bb838fcf"
+    },
+    {
+      "$oid": "6818b788874af7b1bb839007"
+    },
+    {
+      "$oid": "6818b7af874af7b1bb8390cd"
+    },
+    {
+      "$oid": "6818b7c0874af7b1bb839129"
+    },
+    {
+      "$oid": "6818b836874af7b1bb839464"
+    }
+  ],
+  "__v": 37
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca438"
+  },
+  "categoryName": "Bezpieczeństwo",
+  "categoryId": "cat6",
+  "subcategoryName": "Integralność",
+  "subcategoryId": "sub602",
+  "description": "Stopień, w jakim system zapewnia dokładność i kompletność danych.",
+  "icon": "scales",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308f1"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309ee"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309f2"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ac1"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e5f72786f8f901f2ae4e"
+    },
+    {
+      "$oid": "66d0eff52786f8f901f2b023"
+    },
+    {
+      "$oid": "66d1d7ea2786f8f901f2b866"
+    },
+    {
+      "$oid": "66d9a8096c3e49eff09049f6"
+    },
+    {
+      "$oid": "66d9b04b6c3e49eff0905307"
+    },
+    {
+      "$oid": "66dde7356c3e49eff09061b5"
+    },
+    {
+      "$oid": "66de5c006c3e49eff090690b"
+    },
+    {
+      "$oid": "66df9eda6c3e49eff090733c"
+    },
+    {
+      "$oid": "66d9ebc56c3e49eff0905c6b"
+    },
+    {
+      "$oid": "66df9de56c3e49eff09072d7"
+    },
+    {
+      "$oid": "66d1d9f62786f8f901f2b94e"
+    },
+    {
+      "$oid": "67c84e92874af7b1bb834637"
+    },
+    {
+      "$oid": "67c85235874af7b1bb834b0a"
+    },
+    {
+      "$oid": "67c85458874af7b1bb834d44"
+    },
+    {
+      "$oid": "6818b6c0874af7b1bb838b14"
+    },
+    {
+      "$oid": "6818b6cf874af7b1bb838bac"
+    },
+    {
+      "$oid": "6818b6df874af7b1bb838bf3"
+    },
+    {
+      "$oid": "6818b6e4874af7b1bb838c15"
+    },
+    {
+      "$oid": "6818b712874af7b1bb838cdb"
+    },
+    {
+      "$oid": "6818b71d874af7b1bb838d41"
+    },
+    {
+      "$oid": "6818b727874af7b1bb838dc2"
+    },
+    {
+      "$oid": "6818b732874af7b1bb838e06"
+    },
+    {
+      "$oid": "6818b7c5874af7b1bb83913f"
+    },
+    {
+      "$oid": "6818b7f1874af7b1bb8391f6"
+    }
+  ],
+  "__v": 24
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca43b"
+  },
+  "categoryName": "Bezpieczeństwo (wolność od ryzyka)",
+  "categoryId": "cat6",
+  "subcategoryName": "Niezaprzeczalność",
+  "subcategoryId": "sub603",
+  "description": "Stopień, w jakim działania mogą być przypisane do danego podmiotu.",
+  "icon": "certificate",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830a00"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ac3"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1d8632786f8f901f2b89b"
+    },
+    {
+      "$oid": "66d1db962786f8f901f2b9df"
+    },
+    {
+      "$oid": "66d9b0746c3e49eff0905349"
+    },
+    {
+      "$oid": "66d9e9746c3e49eff0905bc3"
+    },
+    {
+      "$oid": "66dde79a6c3e49eff09061e4"
+    },
+    {
+      "$oid": "66de5c416c3e49eff090692e"
+    },
+    {
+      "$oid": "66df98de6c3e49eff09070c4"
+    },
+    {
+      "$oid": "67c85516874af7b1bb834e4b"
+    },
+    {
+      "$oid": "67cb61d4874af7b1bb835360"
+    },
+    {
+      "$oid": "6818b714874af7b1bb838cf5"
+    },
+    {
+      "$oid": "6818b772874af7b1bb838fa4"
+    },
+    {
+      "$oid": "6818b785874af7b1bb838ff0"
+    }
+  ],
+  "__v": 12
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca43e"
+  },
+  "categoryName": "Bezpieczeństwo",
+  "categoryId": "cat6",
+  "subcategoryName": "Identyfikowalność",
+  "subcategoryId": "sub604",
+  "description": "Stopień, w jakim działania mogą być przypisane odpowiednim podmiotom.",
+  "icon": "ordered-list",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830a06"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a0e"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a13"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ac5"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1d8bc2786f8f901f2b8b9"
+    },
+    {
+      "$oid": "66d1d8e72786f8f901f2b8d8"
+    },
+    {
+      "$oid": "66d9b0a46c3e49eff09053af"
+    },
+    {
+      "$oid": "66d9b2546c3e49eff09055f1"
+    },
+    {
+      "$oid": "66d9b3e76c3e49eff09057cb"
+    },
+    {
+      "$oid": "66d9e9c26c3e49eff0905bde"
+    },
+    {
+      "$oid": "66d9ea676c3e49eff0905bfb"
+    },
+    {
+      "$oid": "66dde7cf6c3e49eff0906219"
+    },
+    {
+      "$oid": "66df89056c3e49eff090708c"
+    },
+    {
+      "$oid": "66df97ee6c3e49eff09070a6"
+    },
+    {
+      "$oid": "67c85264874af7b1bb834b2d"
+    },
+    {
+      "$oid": "67c8527c874af7b1bb834b54"
+    },
+    {
+      "$oid": "67c852a4874af7b1bb834b72"
+    },
+    {
+      "$oid": "67c852be874af7b1bb834b86"
+    },
+    {
+      "$oid": "67c85566874af7b1bb834e9f"
+    },
+    {
+      "$oid": "6818b5d4874af7b1bb8385a4"
+    },
+    {
+      "$oid": "6818b73a874af7b1bb838e44"
+    },
+    {
+      "$oid": "6818b749874af7b1bb838ec2"
+    },
+    {
+      "$oid": "6818b754874af7b1bb838eff"
+    },
+    {
+      "$oid": "6818b761874af7b1bb838f30"
+    },
+    {
+      "$oid": "6818b7d3874af7b1bb839179"
+    },
+    {
+      "$oid": "6818b7f8874af7b1bb83922d"
+    },
+    {
+      "$oid": "6818b812874af7b1bb83935a"
+    },
+    {
+      "$oid": "6818b820874af7b1bb8393ad"
+    }
+  ],
+  "__v": 24
+},
+{
+  "_id": {
+    "$oid": "66ccb7c990b83fc743aca441"
+  },
+  "categoryName": "Bezpieczeństwo",
+  "categoryId": "cat6",
+  "subcategoryName": "Autentyczność",
+  "subcategoryId": "sub605",
+  "description": "Stopień, w jakim tożsamość użytkownika lub zasobu może być zweryfikowana.",
+  "icon": "fingerprint",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308d6"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a0a"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ac7"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1d9ae2786f8f901f2b923"
+    },
+    {
+      "$oid": "66d9a8df6c3e49eff0904aba"
+    },
+    {
+      "$oid": "66d9b0ca6c3e49eff09053f1"
+    },
+    {
+      "$oid": "66d9eace6c3e49eff0905c16"
+    },
+    {
+      "$oid": "66d9eb176c3e49eff0905c31"
+    },
+    {
+      "$oid": "66dde8046c3e49eff090624b"
+    },
+    {
+      "$oid": "66de5c6d6c3e49eff0906958"
+    },
+    {
+      "$oid": "66df9dbe6c3e49eff09072b7"
+    },
+    {
+      "$oid": "66df9ef56c3e49eff0907358"
+    },
+    {
+      "$oid": "66e0daf76c3e49eff09077b6"
+    },
+    {
+      "$oid": "66e0db146c3e49eff09077ca"
+    },
+    {
+      "$oid": "67c84f0b874af7b1bb834696"
+    },
+    {
+      "$oid": "67c852e5874af7b1bb834bb9"
+    },
+    {
+      "$oid": "67c8559d874af7b1bb834eef"
+    },
+    {
+      "$oid": "6818b0f3874af7b1bb836c80"
+    },
+    {
+      "$oid": "6818b175874af7b1bb836f55"
+    },
+    {
+      "$oid": "6818b737874af7b1bb838e25"
+    },
+    {
+      "$oid": "6818b7a0874af7b1bb83905b"
+    },
+    {
+      "$oid": "6818b7d0874af7b1bb839163"
+    },
+    {
+      "$oid": "6818b898874af7b1bb839611"
+    },
+    {
+      "$oid": "6818b8c7874af7b1bb839773"
+    }
+  ],
+  "__v": 21
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca444"
+  },
+  "categoryName": "Bezpieczeństwo",
+  "categoryId": "cat6",
+  "subcategoryName": "Odporność na ataki",
+  "subcategoryId": "sub606",
+  "description": "Stopień, w jakim system jest odporny na ataki.",
+  "icon": "shield",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830963"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830967"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309f8"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138309fc"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ac9"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e6092786f8f901f2ae63"
+    },
+    {
+      "$oid": "66d0fd842786f8f901f2b05c"
+    },
+    {
+      "$oid": "66d1d9f62786f8f901f2b94e"
+    },
+    {
+      "$oid": "66d8457f9cbc9acca3b1c018"
+    },
+    {
+      "$oid": "66d9b0ff6c3e49eff0905433"
+    },
+    {
+      "$oid": "66d9b3ef6c3e49eff09057e1"
+    },
+    {
+      "$oid": "66d9eb256c3e49eff0905c46"
+    },
+    {
+      "$oid": "66d9eb2d6c3e49eff0905c57"
+    },
+    {
+      "$oid": "66d9ebc56c3e49eff0905c6b"
+    },
+    {
+      "$oid": "66dde8136c3e49eff0906283"
+    },
+    {
+      "$oid": "66de5c736c3e49eff090696b"
+    },
+    {
+      "$oid": "66df9de56c3e49eff09072d7"
+    },
+    {
+      "$oid": "66e0dad96c3e49eff09077a3"
+    },
+    {
+      "$oid": "67c84f24874af7b1bb8346b8"
+    },
+    {
+      "$oid": "67c850a1874af7b1bb8348da"
+    },
+    {
+      "$oid": "67c855ac874af7b1bb834f2a"
+    },
+    {
+      "$oid": "6818ad44874af7b1bb835dd4"
+    },
+    {
+      "$oid": "6818b5e9874af7b1bb838638"
+    },
+    {
+      "$oid": "6818b60d874af7b1bb838712"
+    },
+    {
+      "$oid": "6818b6e9874af7b1bb838c6a"
+    },
+    {
+      "$oid": "6818b7e7874af7b1bb8391a2"
+    },
+    {
+      "$oid": "6818b7ef874af7b1bb8391bd"
+    },
+    {
+      "$oid": "6818b7f7874af7b1bb839224"
+    },
+    {
+      "$oid": "6818b7fe874af7b1bb839298"
+    },
+    {
+      "$oid": "6818b821874af7b1bb8393c1"
+    },
+    {
+      "$oid": "6818b840874af7b1bb839492"
+    },
+    {
+      "$oid": "6818b8b0874af7b1bb8396a4"
+    }
+  ],
+  "__v": 27
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca447"
+  },
+  "categoryName": "Wydajność",
+  "categoryId": "cat2",
+  "subcategoryName": "Charakterystyka czasowa",
+  "subcategoryId": "sub201",
+  "description": "Stopień, w jakim czas reakcji i przetwarzania spełnia wymagania.",
+  "icon": "hourglass",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308a8"
+    },
+    {
+      "$oid": "66ccc31d4652ce73138308b0"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a19"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a1f"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a26"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a9d"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1da512786f8f901f2b981"
+    },
+    {
+      "$oid": "66d1da712786f8f901f2b99a"
+    },
+    {
+      "$oid": "66d1dbb42786f8f901f2ba04"
+    },
+    {
+      "$oid": "66d1dbce2786f8f901f2ba34"
+    },
+    {
+      "$oid": "66d1dc732786f8f901f2ba49"
+    },
+    {
+      "$oid": "66d1dd182786f8f901f2ba7e"
+    },
+    {
+      "$oid": "66d9a53e6c3e49eff0904764"
+    },
+    {
+      "$oid": "66d9a5736c3e49eff0904797"
+    },
+    {
+      "$oid": "66d9a8756c3e49eff0904a66"
+    },
+    {
+      "$oid": "66d9aefd6c3e49eff0905104"
+    },
+    {
+      "$oid": "66dde83d6c3e49eff09062c5"
+    },
+    {
+      "$oid": "66de5cad6c3e49eff0906998"
+    },
+    {
+      "$oid": "66de5cc66c3e49eff09069cf"
+    },
+    {
+      "$oid": "66df44d76c3e49eff0906aff"
+    },
+    {
+      "$oid": "66df9e296c3e49eff09072fb"
+    },
+    {
+      "$oid": "67c84f62874af7b1bb834707"
+    },
+    {
+      "$oid": "67c8533b874af7b1bb834c12"
+    },
+    {
+      "$oid": "67c85375874af7b1bb834c53"
+    },
+    {
+      "$oid": "67c853be874af7b1bb834c80"
+    },
+    {
+      "$oid": "67c85407874af7b1bb834cdb"
+    },
+    {
+      "$oid": "67c8543e874af7b1bb834d17"
+    },
+    {
+      "$oid": "67c855ef874af7b1bb834fce"
+    },
+    {
+      "$oid": "6818b563874af7b1bb83832c"
+    },
+    {
+      "$oid": "6818b610874af7b1bb838769"
+    },
+    {
+      "$oid": "6818b6cb874af7b1bb838b7c"
+    },
+    {
+      "$oid": "6818b7ae874af7b1bb83909e"
+    },
+    {
+      "$oid": "6818b8c5874af7b1bb839760"
+    }
+  ],
+  "__v": 27
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca44a"
+  },
+  "categoryName": "Wydajność",
+  "categoryId": "cat2",
+  "subcategoryName": "Wykorzystanie zasobów",
+  "subcategoryId": "sub202",
+  "description": "Stopień, w jakim system wykorzystuje zasoby adekwatnie do obciążenia.",
+  "icon": "branching",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830a2e"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a32"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a38"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a9f"
+    },
+    {
+      "$oid": "66d1c2dd69aa1cc6952aa110"
+    },
+    {
+      "$oid": "66d603b9f3c9e9465eecade7"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9a6336c3e49eff09047e7"
+    },
+    {
+      "$oid": "66d9af276c3e49eff0905146"
+    },
+    {
+      "$oid": "66dde8966c3e49eff0906309"
+    },
+    {
+      "$oid": "6818b822874af7b1bb8393e3"
+    },
+    {
+      "$oid": "6818b84b874af7b1bb839530"
+    }
+  ],
+  "__v": 5
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca44d"
+  },
+  "categoryName": "Funkcjonalność",
+  "categoryId": "cat1",
+  "subcategoryName": "Kompletność funkcjonalna",
+  "subcategoryId": "sub101",
+  "description": "Stopień, w jakim funkcje obejmują wszystkie określone zadania i cele użytkownika.",
+  "icon": "chart",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830a97"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9b3246c3e49eff09056e5"
+    },
+    {
+      "$oid": "6818b345874af7b1bb8377c5"
+    }
+  ],
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca450"
+  },
+  "categoryName": "Funkcjonalność",
+  "categoryId": "cat1",
+  "subcategoryName": "Odpowiedniość funkcjonalna",
+  "subcategoryId": "sub103",
+  "description": "Stopień, w jakim funkcje pomagają osiągnąć cele użytkownika.",
+  "icon": "clap",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830a9b"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d978fe37892af2377f8bd5"
+    },
+    {
+      "$oid": "66d9790437892af2377f8be0"
+    },
+    {
+      "$oid": "66d9b3526c3e49eff0905727"
+    }
+  ],
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca453"
+  },
+  "categoryName": "Wydajność",
+  "categoryId": "cat2",
+  "subcategoryName": "Pojemność",
+  "subcategoryId": "sub203",
+  "description": "Stopień, w jakim granice wydajności systemu spełniają wymagania.",
+  "icon": "battery",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308e8"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aa1"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9a6906c3e49eff0904819"
+    },
+    {
+      "$oid": "66d9af626c3e49eff0905190"
+    },
+    {
+      "$oid": "66dde8c56c3e49eff0906353"
+    },
+    {
+      "$oid": "67c855e6874af7b1bb834f81"
+    },
+    {
+      "$oid": "6818b68b874af7b1bb838a0c"
+    },
+    {
+      "$oid": "6818b76b874af7b1bb838f52"
+    },
+    {
+      "$oid": "6818b847874af7b1bb8394f3"
+    }
+  ],
+  "__v": 7
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca456"
+  },
+  "categoryName": "Kompatybilność",
+  "categoryId": "cat3",
+  "subcategoryName": "Współistnienie",
+  "subcategoryId": "sub301",
+  "description": "Stopień, w jakim system działa z innymi produktami bez negatywnych skutków.",
+  "icon": "users",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308dc"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a55"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a59"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aa3"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9aeb46c3e49eff0905080"
+    },
+    {
+      "$oid": "66dde9026c3e49eff0906391"
+    },
+    {
+      "$oid": "67c8560f874af7b1bb835011"
+    },
+    {
+      "$oid": "67c85648874af7b1bb835043"
+    },
+    {
+      "$oid": "6818b60f874af7b1bb838737"
+    },
+    {
+      "$oid": "6818b65e874af7b1bb838929"
+    },
+    {
+      "$oid": "6818b875874af7b1bb839595"
+    },
+    {
+      "$oid": "6818b87f874af7b1bb8395c1"
+    }
+  ],
+  "__v": 8
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca459"
+  },
+  "categoryName": "Kompatybilność",
+  "categoryId": "cat3",
+  "subcategoryName": "Interoperacyjność",
+  "subcategoryId": "sub302",
+  "description": "Stopień, w jakim systemy mogą wymieniać informacje i używać danych.",
+  "icon": "shuffle",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138308ce"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830903"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a3f"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a4a"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830aa5"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9aed06c3e49eff09050c2"
+    },
+    {
+      "$oid": "66de5d4d6c3e49eff0906a15"
+    },
+    {
+      "$oid": "66df443e6c3e49eff0906a8e"
+    },
+    {
+      "$oid": "66df4bf06c3e49eff0906e1d"
+    },
+    {
+      "$oid": "66df4c146c3e49eff0906e48"
+    },
+    {
+      "$oid": "66df99b86c3e49eff0907125"
+    },
+    {
+      "$oid": "67c85474874af7b1bb834d8a"
+    },
+    {
+      "$oid": "67c85498874af7b1bb834db5"
+    },
+    {
+      "$oid": "67c854e4874af7b1bb834ddf"
+    },
+    {
+      "$oid": "67c8550b874af7b1bb834e17"
+    },
+    {
+      "$oid": "67c856fc874af7b1bb8350ec"
+    },
+    {
+      "$oid": "67cb5bbb874af7b1bb8351db"
+    },
+    {
+      "$oid": "67cb5c5f874af7b1bb835206"
+    },
+    {
+      "$oid": "6818b5eb874af7b1bb838653"
+    },
+    {
+      "$oid": "6818b8a2874af7b1bb83963d"
+    }
+  ],
+  "__v": 15
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca45c"
+  },
+  "categoryName": "Niezawodność",
+  "categoryId": "cat5",
+  "subcategoryName": "Odporność na wady",
+  "subcategoryId": "sub501",
+  "description": "Stopień, w jakim system jest wolny od usterek.",
+  "icon": "cloud-check",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830ab7"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d845c49cbc9acca3b1c03e"
+    },
+    {
+      "$oid": "66d9678a711447843410f5ce"
+    },
+    {
+      "$oid": "66d9aac56c3e49eff0904c16"
+    },
+    {
+      "$oid": "6818b7fb874af7b1bb839246"
+    }
+  ],
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca45f"
+  },
+  "categoryName": "Utrzymanie",
+  "categoryId": "cat7",
+  "subcategoryName": "Modułowość",
+  "subcategoryId": "sub701",
+  "description": "Stopień, w jakim system jest zbudowany z modułów modyfikowanych niezależnie.",
+  "icon": "puzzle",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830acb"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d61255ed9e89087ba38b2e"
+    },
+    {
+      "$oid": "66d9afd76c3e49eff0905241"
+    }
+  ],
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca462"
+  },
+  "categoryName": "Utrzymanie",
+  "categoryId": "cat7",
+  "subcategoryName": "Reużywalność",
+  "subcategoryId": "sub702",
+  "description": "Stopień, w jakim system lub jego części mogą być użyte ponownie.",
+  "icon": "recycle",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138309c1"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830acd"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d1d6d22786f8f901f2b754"
+    },
+    {
+      "$oid": "66d9a9806c3e49eff0904b29"
+    },
+    {
+      "$oid": "66d9b0056c3e49eff0905283"
+    },
+    {
+      "$oid": "66dde6cb6c3e49eff0906123"
+    },
+    {
+      "$oid": "67c84e55874af7b1bb8345e4"
+    },
+    {
+      "$oid": "6818b648874af7b1bb8388c9"
+    },
+    {
+      "$oid": "6818b697874af7b1bb838a49"
+    }
+  ],
+  "__v": 7
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca465"
+  },
+  "categoryName": "Elastyczność",
+  "categoryId": "cat8",
+  "subcategoryName": "Łatwość adaptacji",
+  "subcategoryId": "sub801",
+  "description": "Stopień, w jakim system może być dostosowany do różnych środowisk.",
+  "icon": "hand-eye",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce73138309cf"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a5d"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a7f"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a83"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a89"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ad5"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9a7ae6c3e49eff0904974"
+    },
+    {
+      "$oid": "66d9a7d76c3e49eff09049a4"
+    },
+    {
+      "$oid": "66d9acf86c3e49eff0904ee6"
+    },
+    {
+      "$oid": "66dde94b6c3e49eff09063c8"
+    },
+    {
+      "$oid": "66df4c296c3e49eff0906e83"
+    },
+    {
+      "$oid": "66df99ed6c3e49eff090714b"
+    },
+    {
+      "$oid": "6818b59a874af7b1bb838462"
+    },
+    {
+      "$oid": "6818b796874af7b1bb839030"
+    },
+    {
+      "$oid": "6818b810874af7b1bb8392fc"
+    },
+    {
+      "$oid": "6818b8a5874af7b1bb83968c"
+    }
+  ],
+  "__v": 10
+},
+{
+  "_id": {
+    "$oid": "66ccb7ca90b83fc743aca468"
+  },
+  "categoryName": "Elastyczność",
+  "categoryId": "cat8",
+  "subcategoryName": "Skalowalność",
+  "subcategoryId": "sub802",
+  "description": "Stopień, w jakim system może obsługiwać zwiększone obciążenie.",
+  "icon": "expand",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830ad7"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9ad586c3e49eff0904f28"
+    },
+    {
+      "$oid": "66dde97e6c3e49eff09063fb"
+    },
+    {
+      "$oid": "6818b6e6874af7b1bb838c2c"
+    }
+  ],
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "66ccb7cb90b83fc743aca46b"
+  },
+  "categoryName": "Elastyczność",
+  "categoryId": "cat8",
+  "subcategoryName": "Łatwość instalacji",
+  "subcategoryId": "sub803",
+  "description": "Stopień, w jakim system może być łatwo zainstalowany.",
+  "icon": "download",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830a62"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a68"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a6e"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a75"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a79"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830ad9"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e63c2786f8f901f2ae87"
+    },
+    {
+      "$oid": "66d0fe162786f8f901f2b102"
+    },
+    {
+      "$oid": "66d9ae626c3e49eff0904ffa"
+    },
+    {
+      "$oid": "66dde9a96c3e49eff0906429"
+    },
+    {
+      "$oid": "67c85692874af7b1bb83507a"
+    },
+    {
+      "$oid": "67cb5abb874af7b1bb8351a4"
+    },
+    {
+      "$oid": "6818b8c3874af7b1bb83974e"
+    }
+  ],
+  "__v": 7
+},
+{
+  "_id": {
+    "$oid": "66ccb7cb90b83fc743aca46e"
+  },
+  "categoryName": "Elastyczność",
+  "categoryId": "cat8",
+  "subcategoryName": "Łatwość zamiany",
+  "subcategoryId": "sub804",
+  "description": "Stopień, w jakim system lub jego komponenty mogą być wymieniane bez utraty funkcjonalności.",
+  "icon": "copy",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830a8b"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830a91"
+    },
+    {
+      "$oid": "66ccc31d4652ce7313830adb"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d0e2c22786f8f901f2ac66"
+    },
+    {
+      "$oid": "66d9a6bb6c3e49eff0904878"
+    },
+    {
+      "$oid": "66d9ae906c3e49eff0905042"
+    },
+    {
+      "$oid": "66dde9c16c3e49eff0906459"
+    },
+    {
+      "$oid": "66df9a626c3e49eff0907195"
+    },
+    {
+      "$oid": "66df9e816c3e49eff0907328"
+    },
+    {
+      "$oid": "67cb59dc874af7b1bb83516f"
+    },
+    {
+      "$oid": "67cb5a73874af7b1bb83518b"
+    },
+    {
+      "$oid": "6818b55d874af7b1bb8382de"
+    }
+  ],
+  "__v": 9
+},
+{
+  "_id": {
+    "$oid": "66ccb7cb90b83fc743aca471"
+  },
+  "categoryName": "Bezpieczeństwo (wolność od ryzyka)",
+  "categoryId": "cat9",
+  "subcategoryName": "Bezpieczne niepowodzenie",
+  "subcategoryId": "sub901",
+  "description": "Stopień, w jakim system może przejść w stan bezpieczny w przypadku awarii.",
+  "icon": "square-check",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830add"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9aba16c3e49eff0904d54"
+    },
+    {
+      "$oid": "67c85185874af7b1bb8349ec"
+    }
+  ],
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "66ccb7cb90b83fc743aca474"
+  },
+  "categoryName": "Bezpieczeństwo (wolność od ryzyka)",
+  "categoryId": "cat9",
+  "subcategoryName": "Ograniczenia operacyjne",
+  "subcategoryId": "sub902",
+  "description": "Stopień, w jakim system wprowadza ograniczenia operacyjne dla bezpieczeństwa.",
+  "icon": "lock",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830adf"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66ccc1a24652ce731383080b"
+    },
+    {
+      "$oid": "66d9abe06c3e49eff0904d96"
+    },
+    {
+      "$oid": "66ddea2f6c3e49eff09064aa"
+    },
+    {
+      "$oid": "675c27a48c10a26980bc0dc6"
+    }
+  ],
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "66ccb7cb90b83fc743aca477"
+  },
+  "categoryName": "Bezpieczeństwo (wolność od ryzyka)",
+  "categoryId": "cat9",
+  "subcategoryName": "Identyfikacja ryzyka",
+  "subcategoryId": "sub903",
+  "description": "Stopień, w jakim system identyfikuje potencjalne ryzyka.",
+  "icon": "magnifying-glass",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830ae1"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9ac276c3e49eff0904df6"
+    },
+    {
+      "$oid": "66d0e6092786f8f901f2ae63"
+    },
+    {
+      "$oid": "66d0fd842786f8f901f2b05c"
+    },
+    {
+      "$oid": "66d9b3ef6c3e49eff09057e1"
+    },
+    {
+      "$oid": "66d9eb2d6c3e49eff0905c57"
+    },
+    {
+      "$oid": "66de5c736c3e49eff090696b"
+    },
+    {
+      "$oid": "66e0dad96c3e49eff09077a3"
+    },
+    {
+      "$oid": "67c851df874af7b1bb834a85"
+    }
+  ],
+  "__v": 8
+},
+{
+  "_id": {
+    "$oid": "66ccb7cb90b83fc743aca47a"
+  },
+  "categoryName": "Bezpieczeństwo (wolność od ryzyka)",
+  "categoryId": "cat9",
+  "subcategoryName": "Ostrzeżenia o zagrożeniu (ryzyku)",
+  "subcategoryId": "sub904",
+  "description": "Stopień, w jakim system ostrzega użytkowników o zagrożeniach.",
+  "icon": "warning",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830ae3"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66d9ac616c3e49eff0904e38"
+    },
+    {
+      "$oid": "67c85023874af7b1bb83481a"
+    },
+    {
+      "$oid": "6818b49f874af7b1bb837f7c"
+    }
+  ],
+  "__v": 3
+},
+{
+  "_id": {
+    "$oid": "66ccb7cb90b83fc743aca47d"
+  },
+  "categoryName": "Bezpieczeństwo (wolność od ryzyka)",
+  "categoryId": "cat9",
+  "subcategoryName": "Bezpieczeństwo integracji",
+  "subcategoryId": "sub905",
+  "description": "Stopień, w jakim system może być zintegrowany bez wprowadzania ryzyka.",
+  "icon": "plug",
+  "templates": [
+    {
+      "$oid": "66ccc31d4652ce7313830ae5"
+    }
+  ],
+  "requirements": [
+    {
+      "$oid": "66ccc16f4652ce73138307e2"
+    },
+    {
+      "$oid": "66ccc2004652ce7313830835"
+    },
+    {
+      "$oid": "66d9ac856c3e49eff0904e95"
+    }
+  ],
+  "__v": 3
+}]
