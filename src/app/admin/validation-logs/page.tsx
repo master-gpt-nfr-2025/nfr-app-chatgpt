@@ -165,7 +165,6 @@ export default function ValidationLogsPage() {
                             <th>User</th>
                             <th>Template</th>
                             <th>Quality</th>
-                            <th>Rating</th>
                             <th>Ignore Button?</th>
                             <th>Suggest Button?</th>
                             <th>Feedback</th>
@@ -183,7 +182,6 @@ export default function ValidationLogsPage() {
                                     <td><Tooltip title={log.userId}><Typography level="body-sm" sx={{ maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{log.userId}</Typography></Tooltip></td>
                                     <td><Tooltip title={log.templateName || "—"}><Typography level="body-sm" sx={{ maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{log.templateName || "—"}</Typography></Tooltip></td>
                                     <td><Tooltip variant="soft" color="neutral" title={<Stack spacing={0.5}><Typography level="body-xs">Unambiguous: {log.unambiguous}</Typography><Typography level="body-xs">Measurable: {log.measurable}</Typography><Typography level="body-xs">Individually Completed: {log.individuallyCompleted}</Typography></Stack>} arrow placement="top"><Chip variant="soft" color={log.validationScore >= 8 ? "success" : log.validationScore >= 5 ? "warning" : "danger"} sx={{ cursor: "help" }}>{log.validationScore}</Chip></Tooltip></td>
-                                    <td>{log.rating !== undefined ? (<Chip variant="soft" color={getRatingColor(log.rating)}>{log.rating}</Chip>) : (<Typography level="body-sm" sx={{ color: "text.tertiary" }}>—</Typography>)}</td>
                                     <td><Chip variant="soft" color={log.wasIgnoreClicked ? "danger" : "neutral"}>{log.wasIgnoreClicked ? "Yes" : "No"}</Chip></td>
                                     <td><Chip variant="soft" color={log.wasUseSuggestionClicked ? "success" : "neutral"}>{log.wasUseSuggestionClicked ? "Yes" : "No"}</Chip></td>
                                     <td>
