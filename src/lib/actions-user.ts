@@ -7,9 +7,8 @@ import User from "@/models/user.model";
 import connect from "@/config/db";
 
 export async function createUser(name: string, id?: string) {
-	const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
-	const res = await fetch(`${baseUrl}/api/user`, {
+	const res = await fetch("/api/user", {
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({ name, id }),
