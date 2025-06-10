@@ -10,7 +10,7 @@ export async function GET(req: Request) {
 
 	await connectDB();
 
-	const user = await User.findById(userId).lean();
+	const user = await User.findById(userId);
 	if (!user) {
 		return NextResponse.json({ error: "User not found" }, { status: 404 });
 	}
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
 
 	// Try to find by ID first
 	if (id) {
-		user = await User.findById(id).lean();
+		user = await User.findById(id);
 		if (user && user.name === name) {
 			console.log(`✅ Found user by ID and name match: ${name}`);
 			return NextResponse.json({
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
 
 	// Try to find by name
 	if (!user) {
-		user = await User.findOne({ name }).lean();
+		user = await User.findOne({ name });
 		if (user) {
 			console.log(`✅ Found existing user by name: ${name}`);
 			return NextResponse.json({
