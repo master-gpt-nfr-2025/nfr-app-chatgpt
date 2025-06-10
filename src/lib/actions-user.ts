@@ -1,25 +1,49 @@
-// /lib/actions-user.ts
 "use server";
 
-import { headers } from "next/headers";
+import connect from "@/config/db";
+import User from "@/models/user.model";
 
 export async function createUser(name: string, id?: string) {
-	const headersList = headers();
-	const host = headersList.get("host");
-	const protocol = process.env.VERCEL_ENV === "production" ? "https" : "http";
-	const baseUrl = `${protocol}://${host}`;
+	await connect();
 
-	const res = await fetch(`${baseUrl}/api/user`, {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ name, id }),
-	});
+	let user = null;
 
-	if (!res.ok) {
-		throw new Error("❌ Failed to create or fetch user");
+	// Try to find by ID
+	if (id) {
+		user = await User.findById(id);
+		if (user && user.name === name) {
+			console.log("✅ Found user by ID");
+			return {
+				id: user._id.toString(),
+				name: user.name,
+				role: user.role,
+				createdAt: user.createdAt,
+			};
+		}
 	}
 
-	return await res.json();
+	// Try to find by name
+	if (!user) {
+		user = await User.findOne({ name });
+		if (user) {
+			console.log("✅ Found user by name");
+			return {
+				id: user._id.toString(),
+				name: user.name,
+				role: user.role,
+				createdAt: user.createdAt,
+			};
+		}
+	}
+
+	// Create new user
+	const newUser = await User.create({ name, role: "user" });
+	console.log("🆕 Created user");
+
+	return {
+		id: newUser._id.toString(),
+		name: newUser.name,
+		role: newUser.role,
+		createdAt: newUser.createdAt,
+	};
 }
