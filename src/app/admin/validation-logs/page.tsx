@@ -15,6 +15,8 @@ import Pagination from "@mui/material/Pagination";
 import { useEffect, useState } from "react";
 import { ContentCopy, FileDownload, Download } from "@mui/icons-material";
 import type { ColorPaletteProp } from "@mui/joy/styles/types";
+import { useUserContext } from "@/components/UserProvider";
+import { useRouter } from "next/navigation";
 
 type Log = {
     userId: string;
@@ -34,10 +36,18 @@ type Log = {
 };
 
 export default function ValidationLogsPage() {
+    const { user } = useUserContext();
+    const router = useRouter();
     const [logs, setLogs] = useState<Log[]>([]);
     const [copiedIndex, setCopiedIndex] = useState<string | null>(null);
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
+
+        useEffect(() => {
+        if (user && user.role !== "admin") {
+            router.push("/unauthorized");
+        }
+    }, [user]);
 
     useEffect(() => {
         const fetchLogs = async () => {
@@ -52,8 +62,10 @@ export default function ValidationLogsPage() {
             }
         };
 
-        fetchLogs();
-    }, []);
+        if (user?.role === "admin") {
+            fetchLogs();
+        }
+    }, [user]);
 
     const paginatedLogs = logs.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
@@ -192,7 +204,7 @@ export default function ValidationLogsPage() {
                                                 placement="top-start"
                                                 title={
                                                     <Stack spacing={0.5} sx={{ maxWidth: 300 }}>
-                                                        {log.feedback?.length > 0 && (
+                                                        {(log.feedback?.length ?? 0) > 0 && (
                                                             <>
                                                                 <Typography level="body-xs" fontWeight="bold">Feedback:</Typography>
                                                                 <ul style={{ paddingLeft: '1rem', margin: 0 }}>

@@ -1,10 +1,17 @@
-// components/NamePopup.tsx
 "use client";
 
 import React, { useState } from "react";
-import { Modal, Input, Button, DialogContent, DialogTitle, FormControl, ModalDialog } from "@mui/joy";
+import {
+	Modal,
+	Input,
+	Button,
+	DialogContent,
+	DialogTitle,
+	FormControl,
+	ModalDialog
+} from "@mui/joy";
 import { createUser } from "@/lib/actions-user";
-import { useUserContext } from "../UserProvider";
+import { useUserContext } from "@/components/UserProvider";
 
 interface NamePopupProps {
 	onComplete: () => void;
@@ -21,28 +28,49 @@ export function NamePopup({ onComplete }: NamePopupProps) {
 	};
 
 	const handleSubmit = async (e: React.FormEvent) => {
-		setLoading(true);
 		e.preventDefault();
-		if (name) {
-			const user = await createUser(name);
-			setUserStorage(user.id, user.name);
-			setOpen(false);
-			onComplete();
+		setLoading(true);
+
+		try {
+			const existingId = localStorage.getItem("userId");
+			const user = await createUser(name.trim(), existingId || undefined);
+
+			if (user?.id && user?.name) {
+				setUserStorage(user.name); // calls POST again only if needed
+				setOpen(false);
+				onComplete();
+			}
+		} catch (error) {
+			console.error("❌ Error in NamePopup submission:", error);
+		} finally {
+			setLoading(false);
 		}
-		setLoading(false);
 	};
 
 	return (
 		<Modal open={open}>
 			<ModalDialog size="md">
-				{/* <ModalClose variant="plain" color="danger" /> */}
 				<DialogTitle component="div">Podaj swoje imię</DialogTitle>
-				<DialogContent>Podaj imię, które będzie Cię identyfikować podczas korzystania z aplikacji</DialogContent>
+				<DialogContent>
+					Podaj imię, które będzie Cię identyfikować podczas korzystania z aplikacji
+				</DialogContent>
 
 				<form onSubmit={handleSubmit}>
 					<FormControl>
-						<Input placeholder="Wpisz swoje imię" variant="soft" value={name} onChange={handleChange} />
-						<Button variant="solid" color="primary" type="submit" sx={{ mt: 2 }} loading={loading}>
+						<Input
+							placeholder="Wpisz swoje imię"
+							variant="soft"
+							value={name}
+							onChange={handleChange}
+							required
+						/>
+						<Button
+							variant="solid"
+							color="primary"
+							type="submit"
+							sx={{ mt: 2 }}
+							loading={loading}
+						>
 							Zapisz
 						</Button>
 					</FormControl>

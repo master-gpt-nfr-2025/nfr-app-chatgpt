@@ -6,12 +6,13 @@ const ASSISTANT_ID = process.env.OPENAI_ASSISTANT_ID!;
 
 export async function POST(req: NextRequest) {
   try {
-    const { systemDescription, requirement } = await req.json();
+    const { systemDescription, requirement, template } = await req.json();
 
     console.log("🔧 New validation request");
     console.log("📝 Requirement:", requirement);
+    console.log("📝 Template:", template);
 
-    const userMessage = `I am a Requirements Engineer. I want to formulate a non-functional requirement. The non-functional requirement shall be of high quality.\nRequirement: ${requirement}\n`;
+    const userMessage = `I am a Requirements Engineer. I want to formulate a non-functional requirement. The non-functional requirement shall be of high quality.\nRequirement: ${requirement}\nTemplate: ${template}\nSystem Description: ${systemDescription}`;
 
     const thread = await openai.beta.threads.create();
     await openai.beta.threads.messages.create(thread.id, {
@@ -24,7 +25,7 @@ export async function POST(req: NextRequest) {
     });
 
     console.log("🧠 Assistant ID used:", ASSISTANT_ID);
-console.log("📎 Thread created:", thread.id);
+    console.log("📎 Thread created:", thread.id);
 
 
     let status = run.status;
