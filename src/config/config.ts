@@ -1,6 +1,6 @@
 const CONFIG = {
 	MONGO: {
-		connectionString: `mongodb+srv://${process.env.DB_login}:${process.env.DB_password}@${process.env.DB_host}/NfrDB?retryWrites=true&w=majority&appName=Cluster0`,
+		connectionString: 'mongodb+srv://vanyahaidov:AWiiNl3IuvZUrmh2@nfrcluster.uqazyaf.mongodb.net/?retryWrites=true&w=majority&appName=NFRCluster',
 	},
 };
 

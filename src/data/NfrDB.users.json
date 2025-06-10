@@ -1,0 +1,727 @@
+[{
+  "_id": {
+    "$oid": "66ca4acc118eb9ff1890e067"
+  },
+  "name": "Jakub Ratajczyk",
+  "role": "admin",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-08-24T21:04:12.920Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66cc8e641879ade3b0bb0cf6"
+  },
+  "name": "sylwia",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-08-26T14:17:08.612Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d0d6142786f8f901f2a8bd"
+  },
+  "name": "Jerzy Zasada",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-08-29T20:12:04.951Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d0dbfd2786f8f901f2aab6"
+  },
+  "name": "Jacek Ziętek",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-08-29T20:37:17.514Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d0e09d2786f8f901f2ab46"
+  },
+  "name": "Łukasz Bladziak",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-08-29T20:57:01.542Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d0fcaa2786f8f901f2b037"
+  },
+  "name": "Konstancja Bogusławska",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-08-29T22:56:42.797Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d59cd02786f8f901f2bbb2"
+  },
+  "name": "Admin",
+  "role": "admin",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-02T11:09:04.478Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d5e3aaf3c9e9465eecad39"
+  },
+  "name": "TADEK",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-02T16:11:22.638Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d842891d06c88b666b2837"
+  },
+  "name": "Fiona",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-04T11:20:41.657Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d83cd99cbc9acca3b1bfb4"
+  },
+  "name": "Testowy",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-04T10:56:25.997Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d8a9f437892af2377f8b73"
+  },
+  "name": "Kuba testowy",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-04T18:41:56.190Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d978b437892af2377f8bc1"
+  },
+  "name": "Antonina",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T09:24:04.556Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d99c0b6c3e49eff090453b"
+  },
+  "name": "Adam tadam",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T11:54:51.154Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d99ccb6c3e49eff090458d"
+  },
+  "name": "Olka",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T11:58:03.769Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9a38c6c3e49eff09046dc"
+  },
+  "name": "WielkiRyszard",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T12:26:52.490Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9a4fb6c3e49eff0904739"
+  },
+  "name": "Małpa",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T12:32:59.918Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9a6e06c3e49eff090488e"
+  },
+  "name": "Adam",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T12:41:04.365Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9a8db6c3e49eff0904ab6"
+  },
+  "name": "Wojciech",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T12:49:31.302Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9a9436c3e49eff0904b14"
+  },
+  "name": "Adam",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T12:51:15.067Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9adbe6c3e49eff0904fb8"
+  },
+  "name": "JohnTravolta",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T13:10:22.962Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9b1f96c3e49eff0905554"
+  },
+  "name": "Kuba",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T13:28:25.355Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9be866c3e49eff0905805"
+  },
+  "name": "Test",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T14:21:58.605Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9d0e66c3e49eff090581e"
+  },
+  "name": "Filip",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T15:40:22.316Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66d9ddd66c3e49eff090593e"
+  },
+  "name": "Jakub ",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-05T16:35:34.665Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66dde1bf6c3e49eff0905e07"
+  },
+  "name": "Cezary",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-08T17:41:19.682Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66df43d96c3e49eff0906a78"
+  },
+  "name": "Piotr Połać",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-09T18:52:09.209Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66df7f236c3e49eff0906f2a"
+  },
+  "name": "ADMIN master",
+  "role": "admin",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-09T23:05:07.002Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66e9d2476c3e49eff0907a6d"
+  },
+  "name": "FRAKEN",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-17T19:02:31.899Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66eaa5dd6c3e49eff0907a8d"
+  },
+  "name": "Obrona",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-18T10:05:17.821Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "66f2bb1f6c3e49eff0907bf0"
+  },
+  "name": "Kasia",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-09-24T13:14:07.910Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670bf1df6c3e49eff0907ea5"
+  },
+  "name": "Ivan",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-13T16:14:23.945Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d7306d0ec4aaf5ac4948a"
+  },
+  "name": "Kuba R",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-14T19:37:42.852Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d76e8d0ec4aaf5ac4948d"
+  },
+  "name": "Kuba R",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-14T19:54:16.221Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d771cd0ec4aaf5ac49490"
+  },
+  "name": "Kuba R",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-14T19:55:08.936Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "670d7b76d0ec4aaf5ac49493"
+  },
+  "name": "Kuba R",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-14T20:13:42.146Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67117890bc4dda556b8badef"
+  },
+  "name": "Kuba",
+  "email": "kuba.ratajczyk.kr@gmail.com",
+  "password": "$2a$10$TT6si15idRY5gr8y5epdiuP1Q.wclkzg6y1yeePGPveZigaXkvVqS",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-17T20:50:24.307Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67117926bc4dda556b8badf6"
+  },
+  "name": "Jakub Ratajczyk",
+  "email": "kuba.ratajczyk.biz@gmail.com",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-17T20:52:54.172Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6716c586f6d5b60a835100b2"
+  },
+  "name": "Kuba",
+  "email": "kuba.ratajczyk@aproco.io",
+  "password": "$2a$10$BMkbB0uEvPPS.AzPeAJF5OSGBclw8l5pMX8KTDYprlhux5FoK0dRq",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-10-21T21:20:06.790Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "672b88356c3e49eff0907f69"
+  },
+  "name": "Marek",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-11-06T15:16:05.313Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "673a0e488c10a26980bc086f"
+  },
+  "name": "Piotr",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-11-17T15:39:52.016Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "675189aae13f87e6c0cb0f17"
+  },
+  "name": "Sylwia",
+  "email": "sylwia.kopczynska@cs.put.poznan.pl",
+  "password": "$2a$10$qDT5kREFr0PhqER4FqiAvOWZZkazNqGrwi.0nt89RBgDgmANByQs2",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-12-05T11:08:26.750Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6751fae28c10a26980bc0aa1"
+  },
+  "name": "Kasia",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2024-12-05T19:11:30.028Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67ac60f2cd7beed8bfe4c2c1"
+  },
+  "name": "kuba",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-02-12T08:50:58.374Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67b47233874af7b1bb833db5"
+  },
+  "name": "Kasia",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-02-18T11:42:43.436Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67bdc8c7874af7b1bb833eb3"
+  },
+  "name": "Kasia",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-02-25T13:42:31.924Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c8493a874af7b1bb833f6d"
+  },
+  "name": "101",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-03-05T12:53:14.154Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c8493a874af7b1bb833f6f"
+  },
+  "name": "102",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-03-05T12:53:14.262Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67c8498b874af7b1bb833f8f"
+  },
+  "name": "100",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-03-05T12:54:35.013Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "67cb5719874af7b1bb835114"
+  },
+  "name": "#243",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-03-07T20:29:13.553Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac14874af7b1bb835c04"
+  },
+  "name": "1012",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:16:20.310Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac27874af7b1bb835c17"
+  },
+  "name": "1019",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:16:39.262Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac35874af7b1bb835c37"
+  },
+  "name": "1018",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:16:53.525Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac3f874af7b1bb835c5e"
+  },
+  "name": "1013",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:17:03.926Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac43874af7b1bb835c67"
+  },
+  "name": "1017",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:17:07.939Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac4d874af7b1bb835c81"
+  },
+  "name": "1015",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:17:17.151Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac4e874af7b1bb835c83"
+  },
+  "name": "1016",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:17:18.584Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac51874af7b1bb835c85"
+  },
+  "name": "1014",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:17:21.719Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac75874af7b1bb835c94"
+  },
+  "name": "1011",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:17:57.388Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ac77874af7b1bb835c99"
+  },
+  "name": "1010",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:17:59.033Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6818ace7874af7b1bb835d41"
+  },
+  "name": "Szymon Haj 153059",
+  "role": "user",
+  "requirements": [],
+  "createdAt": {
+    "$date": "2025-05-05T12:19:51.858Z"
+  },
+  "__v": 0
+}]
