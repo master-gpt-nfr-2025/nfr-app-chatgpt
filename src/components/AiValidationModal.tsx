@@ -26,6 +26,11 @@ type Props = {
     feedback: string[];
     otherFeedback: string;
   }) => void;
+  onUseSuggestion: (params: {
+    wasUseSuggestionClicked: boolean;
+    feedback: string[];
+    otherFeedback: string;
+  }) => void;
   validationId: string;
   loading: boolean;
   original: string;
@@ -33,6 +38,7 @@ type Props = {
   explanation: string;
   score: number;
 };
+
 
 const iconMap: Record<number, React.ReactNode> = {
   3: <CheckCircle sx={{ color: "#22c55e" }} />,
@@ -51,6 +57,7 @@ const scoreTextMap: Record<number, string> = {
 const AiValidationModal = ({
   open,
   onClose,
+  onUseSuggestion,
   validationId,
   loading,
   original,
@@ -58,6 +65,7 @@ const AiValidationModal = ({
   explanation,
   score,
 }: Props) => {
+
   const icon = iconMap[score];
   const scoreText = scoreTextMap[score];
   const [feedback, setFeedback] = useState<string[]>([]);
@@ -244,10 +252,18 @@ const AiValidationModal = ({
                     <Button
                       variant="solid"
                       color="success"
-                      onClick={() => handleClose("use")}
+                      onClick={() => {
+                        onUseSuggestion({
+                          wasUseSuggestionClicked: true,
+                          feedback,
+                          otherFeedback: other,
+                        });
+                        handleClose("use");
+                      }}
                     >
                       Use Suggested Requirement
                     </Button>
+
                   </Stack>
                 </>
               )}

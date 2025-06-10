@@ -208,7 +208,8 @@ export default function ValidationLogsPage() {
                                                             <>
                                                                 <Typography level="body-xs" fontWeight="bold">Feedback:</Typography>
                                                                 <ul style={{ paddingLeft: '1rem', margin: 0 }}>
-                                                                    {log.feedback.map((f, i) => (
+                                                                    {(log.feedback ?? []).map((f, i) => (
+
                                                                         <li key={i} style={{ fontSize: '12px', lineHeight: 1.4 }}>{f}</li>
                                                                     ))}
                                                                 </ul>

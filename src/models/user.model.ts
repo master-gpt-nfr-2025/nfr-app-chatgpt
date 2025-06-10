@@ -1,6 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const UserSchema = new mongoose.Schema({
+		_id: {
+		type: Schema.Types.ObjectId,
+		auto: true, // let Mongoose generate it
+	},
 	name: {
 		type: String,
 		required: [true, "Please provide a name"],
