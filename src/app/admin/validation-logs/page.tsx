@@ -204,7 +204,7 @@ export default function ValidationLogsPage() {
                                                 placement="top-start"
                                                 title={
                                                     <Stack spacing={0.5} sx={{ maxWidth: 300 }}>
-                                                        {log.feedback?.length > 0 && (
+                                                        {(log.feedback?.length ?? 0) > 0 && (
                                                             <>
                                                                 <Typography level="body-xs" fontWeight="bold">Feedback:</Typography>
                                                                 <ul style={{ paddingLeft: '1rem', margin: 0 }}>
