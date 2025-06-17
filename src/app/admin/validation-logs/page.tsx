@@ -1,3 +1,5 @@
+// Full updated file: keeps the original table and adds date filtering + stats chart above the table
+
 "use client";
 
 import {
@@ -10,13 +12,29 @@ import {
     IconButton,
     Stack,
     Button,
+    Input as JoyInput,
+    Checkbox
 } from "@mui/joy";
 import Pagination from "@mui/material/Pagination";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { ContentCopy, FileDownload, Download } from "@mui/icons-material";
 import type { ColorPaletteProp } from "@mui/joy/styles/types";
 import { useUserContext } from "@/components/UserProvider";
 import { useRouter } from "next/navigation";
+
+import { Line } from "react-chartjs-2";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip as ChartTooltip,
+    Legend,
+    Filler,
+} from "chart.js";
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, ChartTooltip, Legend, Filler);
 
 type Log = {
     userId: string;
@@ -43,7 +61,14 @@ export default function ValidationLogsPage() {
     const [page, setPage] = useState(1);
     const rowsPerPage = 10;
 
-        useEffect(() => {
+    const [fromDate, setFromDate] = useState<string>("");
+    const [toDate, setToDate] = useState<string>("");
+    const [filterUserId, setFilterUserId] = useState<string>("");
+    const [showStats, setShowStats] = useState<boolean>(false);
+    const [showAggregated, setShowAggregated] = useState<boolean>(false);
+    const [aggregateRequirements, setAggregateRequirements] = useState<boolean>(false);
+
+    useEffect(() => {
         if (user && user.role !== "admin") {
             router.push("/unauthorized");
         }
@@ -57,7 +82,7 @@ export default function ValidationLogsPage() {
                 const data = JSON.parse(text);
                 setLogs(data.logs || []);
             } catch (error) {
-                console.error("❌ Failed to fetch logs:", error);
+                console.error("\u274C Failed to fetch logs:", error);
                 setLogs([]);
             }
         };
@@ -67,7 +92,16 @@ export default function ValidationLogsPage() {
         }
     }, [user]);
 
-    const paginatedLogs = logs.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+    const filteredLogs = logs.filter((log) => {
+        const matchesUser = !filterUserId || log.userId.includes(filterUserId);
+        if (!fromDate && !toDate) return matchesUser;
+        const date = new Date(log.timestamp);
+        const from = fromDate ? new Date(fromDate) : null;
+        const to = toDate ? new Date(toDate) : null;
+        return matchesUser && (!from || date >= from) && (!to || date <= to);
+    });
+
+    const paginatedLogs = filteredLogs.slice((page - 1) * rowsPerPage, page * rowsPerPage);
 
     const handleCopy = async (text: string, key: string) => {
         try {
@@ -75,7 +109,7 @@ export default function ValidationLogsPage() {
             setCopiedIndex(key);
             setTimeout(() => setCopiedIndex(null), 1500);
         } catch (err) {
-            console.error("❌ Copy failed:", err);
+            console.error("\u274C Copy failed:", err);
         }
     };
 
@@ -89,6 +123,20 @@ export default function ValidationLogsPage() {
         const url = URL.createObjectURL(blob);
         triggerDownload(url, "validation-logs.json");
     };
+
+ const aggregatedLogs = useMemo(() => {
+        const map = new Map<string, { rawRequirement: string; userId: string; count: number }>();
+        for (const log of filteredLogs) {
+            const key = `${log.rawRequirement}||${log.userId}`;
+            if (map.has(key)) {
+                map.get(key)!.count++;
+            } else {
+                map.set(key, { rawRequirement: log.rawRequirement, userId: log.userId, count: 1 });
+            }
+        }
+        return Array.from(map.values());
+    }, [filteredLogs]);
+
 
     const exportToCsv = () => {
         const header = [
@@ -131,12 +179,139 @@ export default function ValidationLogsPage() {
         URL.revokeObjectURL(url);
     };
 
-    return (
-        <Box sx={{ maxWidth: "100%", px: 2, py: 4 }}>
-            <Typography level="h2" sx={{ mb: 3, textAlign: "center" }}>
-                Validation Logs
-            </Typography>
 
+  return (
+        <Box sx={{ maxWidth: "100%", px: 2, py: 4 }}>
+    <Stack spacing={3} alignItems="center" sx={{ my: 3 }}>
+  <Stack
+    direction={{ xs: "column", sm: "row" }}
+    spacing={2}
+    alignItems="center"
+    justifyContent="center"
+    flexWrap="wrap"
+  >
+    <JoyInput
+      placeholder="Filter by User ID"
+      value={filterUserId}
+      onChange={(e) => setFilterUserId(e.target.value)}
+      size="sm"
+      sx={{ minWidth: 220 }}
+    />
+    <JoyInput
+      type="date"
+      value={fromDate}
+      onChange={(e) => setFromDate(e.target.value)}
+      size="sm"
+    />
+    <JoyInput
+      type="date"
+      value={toDate}
+      onChange={(e) => setToDate(e.target.value)}
+      size="sm"
+    />
+    <Checkbox
+      checked={aggregateRequirements}
+      onChange={(e) => setAggregateRequirements(e.target.checked)}
+      label="Aggregate repeated requirements"
+      sx={{ whiteSpace: "nowrap", my: { xs: 1, sm: 0 } }}
+    />
+  </Stack>
+
+  <Button
+    variant="soft"
+    onClick={() => setShowStats((s) => !s)}
+    color="neutral"
+    size="sm"
+  >
+    {showStats ? "Hide Statistics" : "Show Statistics"}
+  </Button>
+</Stack>
+
+
+      {aggregateRequirements && (
+        <Sheet variant="outlined" sx={{ borderRadius: "md", boxShadow: "md", overflow: "auto", my: 4 }}>
+          <Table size="md" stickyHeader hoverRow>
+            <thead>
+              <tr>
+                <th>Requirement</th>
+                <th>User</th>
+                <th>Repetitions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {aggregatedLogs.map((item, i) => (
+                <tr key={i}>
+                  <td>
+                    <Tooltip title={item.rawRequirement}>
+                      <Typography level="body-sm" sx={{ maxWidth: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        {item.rawRequirement}
+                      </Typography>
+                    </Tooltip>
+                  </td>
+                  <td>{item.userId}</td>
+                  <td><Chip color="primary" variant="soft">{item.count}</Chip></td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </Sheet>
+      )}
+            {showStats && (
+                <Box sx={{ my: 2 }}>
+                    <Typography level="body-lg" sx={{ mb: 1 }}>Total OpenAI Requests: {filteredLogs.length}</Typography>
+                    <Box sx={{ maxWidth: 1000 }}>
+                        <Line
+                            data={{
+                                labels: filteredLogs.map((log) => new Date(log.timestamp).toLocaleDateString()),
+                                datasets: [
+                                    {
+                                        label: "Overall Score",
+                                        data: filteredLogs.map((log) => log.validationScore),
+                                        borderColor: "orange",
+                                        tension: 0.3,
+                                        fill: false,
+                                    },
+                                    {
+                                        label: "Unambiguous",
+                                        data: filteredLogs.map((log) => log.unambiguous),
+                                        borderColor: "red",
+                                        tension: 0.3,
+                                        borderDash: [5, 5],
+                                        fill: false,
+                                    },
+                                    {
+                                        label: "Measurable",
+                                        data: filteredLogs.map((log) => log.measurable),
+                                        borderColor: "blue",
+                                        tension: 0.3,
+                                        borderDash: [5, 5],
+                                        fill: false,
+                                    },
+                                    {
+                                        label: "Individually Completed",
+                                        data: filteredLogs.map((log) => log.individuallyCompleted),
+                                        borderColor: "green",
+                                        tension: 0.3,
+                                        borderDash: [5, 5],
+                                        fill: false,
+                                    },
+                                ],
+                            }}
+                            options={{
+                                responsive: true,
+                                plugins: {
+                                    legend: { position: "top" },
+                                    title: {
+                                        display: true,
+                                        text: "Validation Quality Scores Over Time",
+                                    },
+                                },
+                            }}
+                        />
+                    </Box>
+                </Box>
+            )}
+            
             <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4 }}>
                 <Button
                     variant="outlined"
@@ -208,8 +383,7 @@ export default function ValidationLogsPage() {
                                                             <>
                                                                 <Typography level="body-xs" fontWeight="bold">Feedback:</Typography>
                                                                 <ul style={{ paddingLeft: '1rem', margin: 0 }}>
-                                                                    {(log.feedback ?? []).map((f, i) => (
-
+                                                                    {log.feedback.map((f, i) => (
                                                                         <li key={i} style={{ fontSize: '12px', lineHeight: 1.4 }}>{f}</li>
                                                                     ))}
                                                                 </ul>
