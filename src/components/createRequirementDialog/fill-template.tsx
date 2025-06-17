@@ -156,114 +156,108 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 	};
 
 	const handleValidate = async () => {
-	setValidationModalOpen(true);
-	setValidationResult("");
-	setLoading(true);
-	setValidationScore(-1);
+		setValidationModalOpen(true);
+		setValidationResult("");
+		setLoading(true);
+		setValidationScore(-1);
 
-	const rawRequirement = `${renderRequirementContent(requirement.content)}`;
-	const templateUsed = !requirement.custom ? initialRequirement.name : "(custom template)";
-	console.log("📄 Template used:", templateUsed);
-	console.log("🧾 Raw requirement content:\n", rawRequirement);
+		const rawRequirement = `${renderRequirementContent(requirement.content)}`;
+		const templateUsed = !requirement.custom ? initialRequirement.name : "(custom template)";
+		console.log("📄 Template used:", templateUsed);
+		console.log("🧾 Raw requirement content:\n", rawRequirement);
 
-	const payload = {
-		systemDescription,
-		requirement: rawRequirement,
-	};
+		const payload = {
+			systemDescription,
+			requirement: rawRequirement,
+		};
 
-	let response: Response | null = null;
-	let attempts = 0;
-	const maxAttempts = 3;
+		let response: Response | null = null;
+		let attempts = 0;
+		const maxAttempts = 3;
 
-	while (attempts < maxAttempts) {
-		try {
-			attempts++;
-			response = await fetch("/api/validate", {
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(payload),
-			});
+		while (attempts < maxAttempts) {
+			try {
+				attempts++;
+				response = await fetch("/api/validate", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(payload),
+				});
 
-			if (!response.ok) {
-				if (response.status === 500 && attempts < maxAttempts) {
-					console.warn(`Attempt ${attempts} failed with 500. Retrying...`);
-					continue;
-				} else {
-					throw new Error(`Validation failed with status ${response.status}`);
+				if (!response.ok) {
+					if (response.status === 500 && attempts < maxAttempts) {
+						console.warn(`Attempt ${attempts} failed with 500. Retrying...`);
+						continue;
+					} else {
+						throw new Error(`Validation failed with status ${response.status}`);
+					}
+				}
+
+				// Exit loop if successful
+				break;
+			} catch (err) {
+				console.error(`Attempt ${attempts} error:`, err);
+				if (attempts >= maxAttempts) {
+					setValidationResult("Validation failed.");
+					setValidationScore(-1);
+					setLoading(false);
+					return;
 				}
 			}
-
-			// Exit loop if successful
-			break;
-		} catch (err) {
-			console.error(`Attempt ${attempts} error:`, err);
-			if (attempts >= maxAttempts) {
-				setValidationResult("Validation failed.");
-				setValidationScore(-1);
-				setLoading(false);
-				return;
-			}
 		}
-	}
 
-	if (!response) {
-		setValidationResult("No response received.");
-		setValidationScore(-1);
-		setLoading(false);
-		return;
-	}
+		if (!response) {
+			setValidationResult("No response received.");
+			setValidationScore(-1);
+			setLoading(false);
+			return;
+		}
 
-	try {
-		const data = await response.json();
-		console.log("✅ Validation response:", data);
+		try {
+			const data = await response.json();
+			console.log("✅ Validation response:", data);
 
-		const message = data.analysis ?? data.error ?? "No result";
-		const isNonNFRMessage = message.trim().toLowerCase().includes("try better");
+			const message = data.analysis ?? data.error ?? "No result";
 
-		if (isNonNFRMessage) {
-			setValidationResult("Please try better, it is not NFR :(");
-			setValidationScore(3);
-			setRating(0);
-		} else {
 			setValidationResult(message);
 			setValidationScore(data.score ?? -1);
+
+
+			const logRes = await fetch("/api/log-validation", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					userId: user?.id ?? "unknown",
+					systemDescription,
+					rawRequirement: `${name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
+					templateName: !requirement.custom ? initialRequirement.name : undefined,
+					validationResponse: message,
+					validationScore: data.score ?? -1,
+					rating: rating,
+					correctedRequirement: (() => {
+						//if (isNonNFRMessage) return undefined;
+						const match = message.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
+						return match ? match[1].trim() : undefined;
+					})(),
+					unambiguous: data.unambiguous ?? 0,
+					measurable: data.measurable ?? 0,
+					individuallyCompleted: data.individuallyCompleted ?? 0,
+					wasIgnoreClicked: false,
+					wasUseSuggestionClicked: false,
+					feedback,
+					otherFeedback,
+				}),
+			});
+			const logData = await logRes.json();
+			if (logData?.id) setLogId(logData.id);
+		} catch (err) {
+			console.error("❌ Final processing error:", err);
+			setValidationResult("Validation failed.");
+			setValidationScore(-1);
 		}
 
-		const logRes = await fetch("/api/log-validation", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				userId: user?.id ?? "unknown",
-				systemDescription,
-				rawRequirement: `${name ?? "Unnamed Requirement"}:\n${renderRequirementContent(requirement.content)}`,
-				templateName: !requirement.custom ? initialRequirement.name : undefined,
-				validationResponse: message,
-				validationScore: data.score ?? -1,
-				rating: isNonNFRMessage ? 3 : rating,
-				correctedRequirement: (() => {
-					if (isNonNFRMessage) return undefined;
-					const match = message.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
-					return match ? match[1].trim() : undefined;
-				})(),
-				unambiguous: data.unambiguous ?? 0,
-				measurable: data.measurable ?? 0,
-				individuallyCompleted: data.individuallyCompleted ?? 0,
-				wasIgnoreClicked: false,
-				wasUseSuggestionClicked: false,
-				feedback,
-				otherFeedback,
-			}),
-		});
-		const logData = await logRes.json();
-		if (logData?.id) setLogId(logData.id);
-	} catch (err) {
-		console.error("❌ Final processing error:", err);
-		setValidationResult("Validation failed.");
-		setValidationScore(-1);
-	}
-
-	setLoading(false);
-};
+		setLoading(false);
+	};
 
 	const handleModalClose = async ({
 		wasIgnoreClicked,
@@ -373,35 +367,35 @@ const FillTemplate = ({ initialRequirement, subcategoryName }: FillTemplateProps
 				</form>
 
 
-<AiValidationModal
-	open={validationModalOpen}
-	loading={loading}
-	validationId={logId ?? ""}
-	original={renderRequirementContent(requirement.content)}
-	suggestion={(() => {
-		const match = validationResult.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
-		return match ? match[1].trim() : "";
-	})()}
-	explanation={(() => {
-		const match = validationResult.match(/(?:\*\*)?Explanation(?:\*\*)?:([\s\S]*)/i);
-		return match ? match[1].trim() : "";
-	})()}
-	score={validationScore}
-	onClose={(data) => {
-		const wasIgnoreClicked = data?.wasIgnoreClicked ?? false;
-		const feedback = data?.feedback ?? [];
-		const otherFeedback = data?.otherFeedback ?? "";
-		setWasIgnoreClicked(wasIgnoreClicked);
-		handleModalClose({ wasIgnoreClicked, feedback, otherFeedback });
-	}}
-	onUseSuggestion={(data) => {
-		const wasUseSuggestionClicked = data?.wasUseSuggestionClicked ?? false;
-		const feedback = data?.feedback ?? [];
-		const otherFeedback = data?.otherFeedback ?? "";
-		setWasUseSuggestionClicked(wasUseSuggestionClicked);
-		handleCopy({ wasUseSuggestionClicked, feedback, otherFeedback });
-	}}
-/>
+				<AiValidationModal
+					open={validationModalOpen}
+					loading={loading}
+					validationId={logId ?? ""}
+					original={renderRequirementContent(requirement.content)}
+					suggestion={(() => {
+						const match = validationResult.match(/(?:\*\*)?Suggested requirement(?:\*\*)?:\s*(.+)/i);
+						return match ? match[1].trim() : "";
+					})()}
+					explanation={(() => {
+						const match = validationResult.match(/(?:\*\*)?Explanation(?:\*\*)?:([\s\S]*)/i);
+						return match ? match[1].trim() : "";
+					})()}
+					score={validationScore}
+					onClose={(data) => {
+						const wasIgnoreClicked = data?.wasIgnoreClicked ?? false;
+						const feedback = data?.feedback ?? [];
+						const otherFeedback = data?.otherFeedback ?? "";
+						setWasIgnoreClicked(wasIgnoreClicked);
+						handleModalClose({ wasIgnoreClicked, feedback, otherFeedback });
+					}}
+					onUseSuggestion={(data) => {
+						const wasUseSuggestionClicked = data?.wasUseSuggestionClicked ?? false;
+						const feedback = data?.feedback ?? [];
+						const otherFeedback = data?.otherFeedback ?? "";
+						setWasUseSuggestionClicked(wasUseSuggestionClicked);
+						handleCopy({ wasUseSuggestionClicked, feedback, otherFeedback });
+					}}
+				/>
 
 
 				<Snackbar
