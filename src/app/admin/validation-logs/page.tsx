@@ -124,14 +124,19 @@ export default function ValidationLogsPage() {
         triggerDownload(url, "validation-logs.json");
     };
 
- const aggregatedLogs = useMemo(() => {
+    const aggregatedLogs = useMemo(() => {
         const map = new Map<string, { rawRequirement: string; userId: string; count: number }>();
         for (const log of filteredLogs) {
             const key = `${log.rawRequirement}||${log.userId}`;
             if (map.has(key)) {
                 map.get(key)!.count++;
             } else {
-                map.set(key, { rawRequirement: log.rawRequirement, userId: log.userId, count: 1 });
+                map.set(key, {
+                    rawRequirement: log.rawRequirement ?? "",
+                    userId: log.userId ?? "",
+                    count: 1,
+                });
+
             }
         }
         return Array.from(map.values());
@@ -180,82 +185,82 @@ export default function ValidationLogsPage() {
     };
 
 
-  return (
+    return (
         <Box sx={{ maxWidth: "100%", px: 2, py: 4 }}>
-    <Stack spacing={3} alignItems="center" sx={{ my: 3 }}>
-  <Stack
-    direction={{ xs: "column", sm: "row" }}
-    spacing={2}
-    alignItems="center"
-    justifyContent="center"
-    flexWrap="wrap"
-  >
-    <JoyInput
-      placeholder="Filter by User ID"
-      value={filterUserId}
-      onChange={(e) => setFilterUserId(e.target.value)}
-      size="sm"
-      sx={{ minWidth: 220 }}
-    />
-    <JoyInput
-      type="date"
-      value={fromDate}
-      onChange={(e) => setFromDate(e.target.value)}
-      size="sm"
-    />
-    <JoyInput
-      type="date"
-      value={toDate}
-      onChange={(e) => setToDate(e.target.value)}
-      size="sm"
-    />
-    <Checkbox
-      checked={aggregateRequirements}
-      onChange={(e) => setAggregateRequirements(e.target.checked)}
-      label="Aggregate repeated requirements"
-      sx={{ whiteSpace: "nowrap", my: { xs: 1, sm: 0 } }}
-    />
-  </Stack>
+            <Stack spacing={3} alignItems="center" sx={{ my: 3 }}>
+                <Stack
+                    direction={{ xs: "column", sm: "row" }}
+                    spacing={2}
+                    alignItems="center"
+                    justifyContent="center"
+                    flexWrap="wrap"
+                >
+                    <JoyInput
+                        placeholder="Filter by User ID"
+                        value={filterUserId}
+                        onChange={(e) => setFilterUserId(e.target.value)}
+                        size="sm"
+                        sx={{ minWidth: 220 }}
+                    />
+                    <JoyInput
+                        type="date"
+                        value={fromDate}
+                        onChange={(e) => setFromDate(e.target.value)}
+                        size="sm"
+                    />
+                    <JoyInput
+                        type="date"
+                        value={toDate}
+                        onChange={(e) => setToDate(e.target.value)}
+                        size="sm"
+                    />
+                    <Checkbox
+                        checked={aggregateRequirements}
+                        onChange={(e) => setAggregateRequirements(e.target.checked)}
+                        label="Aggregate repeated requirements"
+                        sx={{ whiteSpace: "nowrap", my: { xs: 1, sm: 0 } }}
+                    />
+                </Stack>
 
-  <Button
-    variant="soft"
-    onClick={() => setShowStats((s) => !s)}
-    color="neutral"
-    size="sm"
-  >
-    {showStats ? "Hide Statistics" : "Show Statistics"}
-  </Button>
-</Stack>
+                <Button
+                    variant="soft"
+                    onClick={() => setShowStats((s) => !s)}
+                    color="neutral"
+                    size="sm"
+                >
+                    {showStats ? "Hide Statistics" : "Show Statistics"}
+                </Button>
+            </Stack>
 
 
-      {aggregateRequirements && (
-        <Sheet variant="outlined" sx={{ borderRadius: "md", boxShadow: "md", overflow: "auto", my: 4 }}>
-          <Table size="md" stickyHeader hoverRow>
-            <thead>
-              <tr>
-                <th>Requirement</th>
-                <th>User</th>
-                <th>Repetitions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {aggregatedLogs.map((item, i) => (
-                <tr key={i}>
-                  <td>
-                    <Tooltip title={item.rawRequirement}>
-                      <Typography level="body-sm" sx={{ maxWidth: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                        {item.rawRequirement}
-                      </Typography>
-                    </Tooltip>
-                  </td>
-                  <td>{item.userId}</td>
-                  <td><Chip color="primary" variant="soft">{item.count}</Chip></td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </Sheet>
-      )}
+            {aggregateRequirements && (
+                <Sheet variant="outlined" sx={{ borderRadius: "md", boxShadow: "md", overflow: "auto", my: 4 }}>
+                    <Table size="md" stickyHeader hoverRow>
+                        <thead>
+                            <tr>
+                                <th>Requirement</th>
+                                <th>User</th>
+                                <th>Repetitions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {aggregatedLogs.map((item, i) => (
+                                <tr key={i}>
+                                    <td>
+                                        <Tooltip title={item.rawRequirement}>
+                                            <Typography level="body-sm" sx={{ maxWidth: 500, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                                {item.rawRequirement}
+                                            </Typography>
+                                        </Tooltip>
+                                    </td>
+                                    <td>{item.userId}</td>
+                                    <td><Chip color="primary" variant="soft">{item.count}</Chip></td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </Sheet>
+            )}
             {showStats && (
                 <Box sx={{ my: 2 }}>
                     <Typography level="body-lg" sx={{ mb: 1 }}>Total OpenAI Requests: {filteredLogs.length}</Typography>
@@ -311,7 +316,7 @@ export default function ValidationLogsPage() {
                     </Box>
                 </Box>
             )}
-            
+
             <Stack direction="row" spacing={2} justifyContent="center" sx={{ mb: 4 }}>
                 <Button
                     variant="outlined"
@@ -383,9 +388,10 @@ export default function ValidationLogsPage() {
                                                             <>
                                                                 <Typography level="body-xs" fontWeight="bold">Feedback:</Typography>
                                                                 <ul style={{ paddingLeft: '1rem', margin: 0 }}>
-                                                                    {log.feedback.map((f, i) => (
+                                                                    {log.feedback?.map((f, i) => (
                                                                         <li key={i} style={{ fontSize: '12px', lineHeight: 1.4 }}>{f}</li>
                                                                     ))}
+
                                                                 </ul>
                                                             </>
                                                         )}
